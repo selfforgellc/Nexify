@@ -1,4 +1,4 @@
-"""``jarvis ask`` — send a query to the assistant."""
+"""``Nexify ask`` — send a query to the assistant."""
 
 from __future__ import annotations
 
@@ -381,7 +381,7 @@ def ask(
     tool_names: str | None,
     enable_profile: bool,
 ) -> None:
-    """Ask Jarvis a question."""
+    """Ask Nex a question."""
     console = Console(stderr=True)
     query_text = " ".join(query)
 
