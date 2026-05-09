@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.scheduler.store import SchedulerStore
+from nexify.scheduler.store import SchedulerStore
 
 
 @pytest.fixture()
@@ -162,3 +162,4 @@ class TestRunLogs:
     def test_get_run_logs_empty(self, store):
         logs = store.get_run_logs("nonexistent")
         assert logs == []
+

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.tools.storage.ingest import (
+from nexify.tools.storage.ingest import (
     detect_file_type,
     ingest_path,
     read_document,
@@ -175,3 +175,4 @@ def test_ingest_processes_normal_files(tmp_path: Path):
     sources = {c.source for c in chunks}
     assert any("app.py" in s for s in sources)
     assert any("doc.md" in s for s in sources)
+

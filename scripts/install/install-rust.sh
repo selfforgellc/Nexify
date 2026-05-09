@@ -21,3 +21,4 @@ if ! command -v cargo >/dev/null 2>&1; then
     echo "install-rust.sh: cargo still not on PATH after install; check rustup output" >&2
     exit 1
 fi
+

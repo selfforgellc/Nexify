@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.learning.intelligence.orchestrator.policy_model import (
+from nexify.learning.intelligence.orchestrator.policy_model import (
     OrchestratorPolicyModel,
 )
-from openjarvis.learning.intelligence.orchestrator.types import (
+from nexify.learning.intelligence.orchestrator.types import (
     EpisodeState,
     OrchestratorAction,
     OrchestratorObservation,
@@ -118,3 +118,4 @@ class TestRepr:
         r = repr(m)
         assert "OrchestratorPolicyModel" in r
         assert "None" in r
+

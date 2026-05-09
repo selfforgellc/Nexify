@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from openjarvis.core.registry import ModelRegistry
-from openjarvis.core.types import ModelSpec
-from openjarvis.learning._stubs import RoutingContext
-from openjarvis.learning.routing.router import (
+from nexify.core.registry import ModelRegistry
+from nexify.core.types import ModelSpec
+from nexify.learning._stubs import RoutingContext
+from nexify.learning.routing.router import (
     HeuristicRouter,
     build_routing_context,
 )
@@ -159,3 +159,4 @@ class TestHeuristicRouter:
             has_code=True,
         )
         assert router.select_model(ctx) == "large"
+

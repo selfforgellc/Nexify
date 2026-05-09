@@ -452,3 +452,4 @@ export function AdminPanel({ apiUrl }: { apiUrl: string }) {
     </div>
   );
 }
+

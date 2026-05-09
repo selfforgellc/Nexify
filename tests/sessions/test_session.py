@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import time
 
-from openjarvis.sessions.session import (
+from nexify.sessions.session import (
     Session,
     SessionIdentity,
     SessionStore,
@@ -127,3 +127,4 @@ class TestSessionStore:
         assert reloaded.messages[0].channel == "telegram"
         assert reloaded.messages[1].channel == "discord"
         store.close()
+

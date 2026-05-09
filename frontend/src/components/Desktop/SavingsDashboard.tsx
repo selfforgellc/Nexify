@@ -266,10 +266,10 @@ function isProfane(text: string): boolean {
   return false;
 }
 
-const OPTIN_KEY = 'openjarvis-desktop-optin';
-const OPTIN_NAME_KEY = 'openjarvis-desktop-display-name';
-const OPTIN_EMAIL_KEY = 'openjarvis-desktop-email';
-const OPTIN_ANONID_KEY = 'openjarvis-desktop-anon-id';
+const OPTIN_KEY = 'nexify-desktop-optin';
+const OPTIN_NAME_KEY = 'nexify-desktop-display-name';
+const OPTIN_EMAIL_KEY = 'nexify-desktop-email';
+const OPTIN_ANONID_KEY = 'nexify-desktop-anon-id';
 
 function getOrCreateAnonId(): string {
   const stored = localStorage.getItem(OPTIN_ANONID_KEY);
@@ -544,7 +544,7 @@ export function SavingsDashboard({ apiUrl }: { apiUrl: string }) {
             {optInEnabled ? `Sharing as "${displayName}"` : 'Share Your Savings'}
           </button>
           <a
-            href="https://open-jarvis.github.io/OpenJarvis/leaderboard"
+            href="https://open-jarvis.github.io/nexify/leaderboard"
             target="_blank"
             rel="noopener noreferrer"
             style={{ fontSize: 12, color: colors.accent, textDecoration: 'none' }}
@@ -673,3 +673,4 @@ export function SavingsDashboard({ apiUrl }: { apiUrl: string }) {
     </div>
   );
 }
+

@@ -1,6 +1,6 @@
 # Pearl Mining
 
-OpenJarvis can mine the Pearl Proof-of-Useful-Work chain through local LLM
+nexify can mine the Pearl Proof-of-Useful-Work chain through local LLM
 inference. The primary v1 path supports NVIDIA H100/H200 hosts running vLLM
 with Pearl's Docker miner. The consolidated Pearl integration also includes
 experimental Apple Silicon and CPU providers through the same `MiningProvider`
@@ -39,7 +39,7 @@ uv run jarvis mine status
 
 `mine init` writes a `[mining]` config section and resolves the Pearl Docker
 image. If Pearl has not published a suitable image for the pinned ref,
-OpenJarvis falls back to building from the pinned Pearl source checkout. First
+nexify falls back to building from the pinned Pearl source checkout. First
 builds can take 30-60 minutes.
 
 On a shared NVIDIA host, restrict the miner to idle GPUs:
@@ -75,7 +75,7 @@ Run:
 jarvis mine models
 ```
 
-OpenJarvis only enables models that have Pearl-compatible quantized artifacts
+nexify only enables models that have Pearl-compatible quantized artifacts
 and real hardware validation. Raw Hugging Face models such as
 `Qwen/Qwen3.5-9B` or `google/gemma-4-E4B-it` are not mineable by themselves;
 they need corresponding Pearl-compatible variants.
@@ -90,7 +90,7 @@ ScalingIntelligence/Qwen3.5-9B-pearl
 
 The Gemma 31B and Qwen 3.5 9B artifacts are experimental private staging
 artifacts under the `ScalingIntelligence` Hugging Face org. You need Hugging
-Face access to those repos before OpenJarvis can inspect or run them. They were
+Face access to those repos before nexify can inspect or run them. They were
 validated on H100 with `jarvis mine validate-model`, but the short validation
 runs did not find a reward-bearing block or accepted share.
 
@@ -111,16 +111,16 @@ models.
 
 ## v1 Scope
 
-v1 is solo mining only. OpenJarvis does not take fees, custody funds, generate
+v1 is solo mining only. nexify does not take fees, custody funds, generate
 wallet keys, run pools, or operate `pearld`. Users provide their own Pearl node
 and payout address.
 
 Unsupported in this PR:
 
-- Pool mining and the future 20% OpenJarvis fee model
+- Pool mining and the future 20% nexify fee model
 - AMD GPU mining and non-Pearl backends
 - RTX 4090 or other non-Hopper NVIDIA GPUs
-- Wallet generation or transaction signing inside OpenJarvis
+- Wallet generation or transaction signing inside nexify
 
 ## Troubleshooting
 
@@ -139,3 +139,4 @@ those paths are expected to land as separate providers.
 The NVIDIA path requires one real H100/H200 validation run before it should be
 marketed as a proven earning path. The developer runbook is
 [`../development/mining-nvidia-validation.md`](../development/mining-nvidia-validation.md).
+

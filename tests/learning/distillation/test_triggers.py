@@ -1,18 +1,18 @@
-"""Tests for openjarvis.learning.distillation.triggers module."""
+"""Tests for nexify.learning.distillation.triggers module."""
 
 from __future__ import annotations
 
 
 class TestOnDemandTrigger:
     def test_constructs(self) -> None:
-        from openjarvis.learning.distillation.triggers import OnDemandTrigger
+        from nexify.learning.distillation.triggers import OnDemandTrigger
 
         t = OnDemandTrigger()
         assert t.kind.value == "on_demand"
         assert t.metadata == {}
 
     def test_metadata(self) -> None:
-        from openjarvis.learning.distillation.triggers import OnDemandTrigger
+        from nexify.learning.distillation.triggers import OnDemandTrigger
 
         t = OnDemandTrigger(metadata={"source": "cli"})
         assert t.metadata["source"] == "cli"
@@ -20,7 +20,7 @@ class TestOnDemandTrigger:
 
 class TestUserFlagTrigger:
     def test_constructs_with_trace_id(self) -> None:
-        from openjarvis.learning.distillation.triggers import UserFlagTrigger
+        from nexify.learning.distillation.triggers import UserFlagTrigger
 
         t = UserFlagTrigger(trace_id="trace-001")
         assert t.kind.value == "user_flag"
@@ -30,7 +30,7 @@ class TestUserFlagTrigger:
 
 class TestScheduledTrigger:
     def test_constructs(self) -> None:
-        from openjarvis.learning.distillation.triggers import ScheduledTrigger
+        from nexify.learning.distillation.triggers import ScheduledTrigger
 
         t = ScheduledTrigger(cron="0 3 * * *", new_trace_count=25)
         assert t.kind.value == "scheduled"
@@ -40,7 +40,7 @@ class TestScheduledTrigger:
 
 class TestClusterTrigger:
     def test_constructs(self) -> None:
-        from openjarvis.learning.distillation.triggers import ClusterTrigger
+        from nexify.learning.distillation.triggers import ClusterTrigger
 
         t = ClusterTrigger(
             cluster_description="math failures",
@@ -50,3 +50,4 @@ class TestClusterTrigger:
         assert t.kind.value == "cluster"
         assert len(t.trace_ids) == 3
         assert t.failure_rate == 0.8
+

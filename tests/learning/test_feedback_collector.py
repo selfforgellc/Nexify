@@ -1,12 +1,12 @@
-"""Tests for openjarvis.optimize.feedback.collector module."""
+"""Tests for nexify.optimize.feedback.collector module."""
 
 from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.core.types import Trace
-from openjarvis.learning.optimize.feedback.collector import FeedbackCollector
-from openjarvis.learning.optimize.feedback.judge import TraceJudge
+from nexify.core.types import Trace
+from nexify.learning.optimize.feedback.collector import FeedbackCollector
+from nexify.learning.optimize.feedback.judge import TraceJudge
 
 
 def _make_trace(trace_id: str = "trace-001") -> Trace:
@@ -237,3 +237,4 @@ class TestStats:
         s = fc.stats()
         assert s["count"] == 2
         assert abs(s["mean_score"] - 0.5) < 1e-6
+

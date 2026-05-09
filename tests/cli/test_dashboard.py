@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.cli.dashboard import DashboardApp
+from nexify.cli.dashboard import DashboardApp
 
 
 class TestDashboard:
@@ -29,3 +29,4 @@ class TestDashboard:
         # Just test that DashboardApp is properly importable and constructible
         app = DashboardApp()
         assert hasattr(app, "run")
+

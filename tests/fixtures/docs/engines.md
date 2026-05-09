@@ -1,6 +1,6 @@
 # Inference Engines
 
-OpenJarvis supports several inference backends.
+nexify supports several inference backends.
 
 ## Ollama
 
@@ -17,3 +17,4 @@ Pure C++ inference. Runs on CPU, Metal, CUDA, or ROCm. Ideal for laptops without
 ## Picking an Engine
 
 Run `jarvis init` — it detects your hardware and recommends the best fit. You can override with `--engine <name>`.
+

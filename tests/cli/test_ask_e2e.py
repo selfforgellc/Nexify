@@ -9,11 +9,11 @@ from unittest import mock
 
 from click.testing import CliRunner
 
-from openjarvis.cli import cli
-from openjarvis.core.config import JarvisConfig
+from nexify.cli import cli
+from nexify.core.config import JarvisConfig
 
 # Import the actual module (not the Click command attribute)
-_ask_mod = importlib.import_module("openjarvis.cli.ask")
+_ask_mod = importlib.import_module("nexify.cli.ask")
 
 
 def _mock_engine_response():
@@ -91,3 +91,4 @@ class TestAskCommand:
         CliRunner().invoke(cli, ["ask", "Hello"])
         db_path = tmp_path / "telemetry.db"
         assert db_path.exists()
+

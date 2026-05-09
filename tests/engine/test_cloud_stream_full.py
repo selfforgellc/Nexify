@@ -8,8 +8,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.core.types import Message, Role, ToolCall
-from openjarvis.engine._stubs import StreamChunk
+from nexify.core.types import Message, Role, ToolCall
+from nexify.engine._stubs import StreamChunk
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -18,7 +18,7 @@ from openjarvis.engine._stubs import StreamChunk
 
 def _make_cloud_engine(**overrides: Any) -> Any:
     """Create a CloudEngine without calling __init__ (no env vars needed)."""
-    from openjarvis.engine.cloud import CloudEngine
+    from nexify.engine.cloud import CloudEngine
 
     engine = CloudEngine.__new__(CloudEngine)
     engine._openai_client = overrides.get("openai_client")
@@ -464,3 +464,4 @@ async def test_stream_full_routes_to_openai():
     mock_client.chat.completions.create.assert_called_once()
     assert result[0].content == "hi"
     assert result[1].finish_reason == "stop"
+

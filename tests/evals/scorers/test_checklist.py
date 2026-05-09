@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.evals.scorers._checklist import (
+from nexify.evals.scorers._checklist import (
     ChecklistScorer,
     contains_key_phrases,
     normalize_str,
@@ -87,3 +87,4 @@ def test_checklist_scorer_empty_answer():
         checklist=["Something"],
     )
     assert score == 0.0
+

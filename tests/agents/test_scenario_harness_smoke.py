@@ -20,3 +20,4 @@ def test_harness_creates_and_runs_agent(scenario_harness: ScenarioHarness):
     assert updated["status"] == "idle"
     assert updated["total_runs"] == 1
     assert updated["summary_memory"] != ""
+

@@ -7,8 +7,8 @@ from unittest.mock import MagicMock, patch
 
 from click.testing import CliRunner
 
-from openjarvis.cli import cli
-from openjarvis.cli.daemon_cmd import _read_pid, _write_pid
+from nexify.cli import cli
+from nexify.cli.daemon_cmd import _read_pid, _write_pid
 
 
 class TestDaemonCommands:
@@ -23,14 +23,14 @@ class TestDaemonCommands:
 
     def test_stop_no_server(self) -> None:
         """``jarvis stop`` when no PID file shows 'not running'."""
-        with patch("openjarvis.cli.daemon_cmd._read_pid", return_value=None):
+        with patch("nexify.cli.daemon_cmd._read_pid", return_value=None):
             result = CliRunner().invoke(cli, ["stop"])
         assert result.exit_code != 0
         assert "No running server" in result.output
 
     def test_status_no_server(self) -> None:
         """``jarvis status`` when no PID file shows 'not running'."""
-        with patch("openjarvis.cli.daemon_cmd._read_pid", return_value=None):
+        with patch("nexify.cli.daemon_cmd._read_pid", return_value=None):
             result = CliRunner().invoke(cli, ["status"])
         assert result.exit_code == 0
         assert "not running" in result.output
@@ -38,7 +38,7 @@ class TestDaemonCommands:
     def test_read_pid_no_file(self, tmp_path: Path) -> None:
         """``_read_pid()`` returns None when no PID file exists."""
         with patch(
-            "openjarvis.cli.daemon_cmd._PID_FILE",
+            "nexify.cli.daemon_cmd._PID_FILE",
             tmp_path / "nonexistent.pid",
         ):
             assert _read_pid() is None
@@ -47,8 +47,8 @@ class TestDaemonCommands:
         """Write a PID, then read it back (mock os.kill to succeed)."""
         pid_file = tmp_path / "server.pid"
         with (
-            patch("openjarvis.cli.daemon_cmd._PID_FILE", pid_file),
-            patch("openjarvis.cli.daemon_cmd.DEFAULT_CONFIG_DIR", tmp_path),
+            patch("nexify.cli.daemon_cmd._PID_FILE", pid_file),
+            patch("nexify.cli.daemon_cmd.DEFAULT_CONFIG_DIR", tmp_path),
             patch("os.kill", return_value=None),
         ):
             _write_pid(12345)
@@ -62,9 +62,9 @@ class TestDaemonCommands:
         mock_config.server.port = 8000
 
         with (
-            patch("openjarvis.cli.daemon_cmd._read_pid", return_value=9999),
+            patch("nexify.cli.daemon_cmd._read_pid", return_value=9999),
             patch(
-                "openjarvis.cli.daemon_cmd.load_config",
+                "nexify.cli.daemon_cmd.load_config",
                 return_value=mock_config,
             ),
         ):
@@ -75,7 +75,8 @@ class TestDaemonCommands:
 
     def test_start_already_running(self) -> None:
         """``jarvis start`` exits with error when a server is already running."""
-        with patch("openjarvis.cli.daemon_cmd._read_pid", return_value=42):
+        with patch("nexify.cli.daemon_cmd._read_pid", return_value=42):
             result = CliRunner().invoke(cli, ["start"])
         assert result.exit_code != 0
         assert "already running" in result.output
+

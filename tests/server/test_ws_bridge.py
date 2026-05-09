@@ -6,7 +6,7 @@ import time
 
 import pytest
 
-from openjarvis.core.events import EventBus, EventType
+from nexify.core.events import EventBus, EventType
 
 try:
     from fastapi import FastAPI
@@ -26,7 +26,7 @@ def event_bus():
 
 @pytest.fixture
 def app(event_bus):
-    from openjarvis.server.ws_bridge import create_ws_router
+    from nexify.server.ws_bridge import create_ws_router
 
     app = FastAPI()
     router = create_ws_router(event_bus)
@@ -60,3 +60,4 @@ class TestWSBridge:
             time.sleep(0.05)  # Let call_soon_threadsafe deliver to queue
             data = ws.receive_json()
             assert data["data"]["agent_id"] == "agent-A"
+

@@ -1,10 +1,10 @@
-"""Tests for openjarvis.cli._bootstrap.detect_cloud_keys."""
+"""Tests for nexify.cli._bootstrap.detect_cloud_keys."""
 
 from __future__ import annotations
 
 import pytest
 
-from openjarvis.cli import _bootstrap
+from nexify.cli import _bootstrap
 
 ALL_KEYS = (
     "OPENROUTER_API_KEY",
@@ -99,3 +99,4 @@ def test_cloud_provider_repr_redacts_api_key() -> None:
     assert "openrouter" in r
     assert "OPENROUTER_API_KEY" in r
     assert "redacted" in r.lower() or "***" in r
+

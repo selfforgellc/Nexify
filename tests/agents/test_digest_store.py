@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime
 from pathlib import Path
 
-from openjarvis.agents.digest_store import DigestArtifact, DigestStore
+from nexify.agents.digest_store import DigestArtifact, DigestStore
 
 
 def test_store_and_retrieve(tmp_path):
@@ -75,3 +75,4 @@ def test_history(tmp_path):
     assert len(history) == 2
     assert history[0].text == "Digest 2"  # Most recent first
     store.close()
+

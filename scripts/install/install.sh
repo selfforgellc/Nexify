@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# install.sh — OpenJarvis curl-pipe-bash installer.
+# install.sh — nexify curl-pipe-bash installer.
 #
 # Usage:
-#   curl -fsSL https://openjarvis.ai/install.sh | bash
+#   curl -fsSL https://nexify.ai/install.sh | bash
 #
 # Flags (only used in tests / power users):
 #   --no-bg-orchestrator   Skip the detached background orchestrator
@@ -10,9 +10,9 @@
 #   --force                Re-run all steps even if state file says done
 #
 # Environment overrides:
-#   OPENJARVIS_HOME        Install dir (default: $HOME/.openjarvis)
-#   OPENJARVIS_REPO_URL    git repo URL (default: https://github.com/open-jarvis/OpenJarvis.git)
-#   OPENJARVIS_FORCE_WSL   Set 1 to force WSL detection (testing)
+#   nexify_HOME        Install dir (default: $HOME/.nexify)
+#   nexify_REPO_URL    git repo URL (default: https://github.com/open-jarvis/nexify.git)
+#   nexify_FORCE_WSL   Set 1 to force WSL detection (testing)
 
 set -euo pipefail
 
@@ -34,7 +34,7 @@ if [[ "$(id -u)" -eq 0 ]]; then
     cat >&2 <<'EOF'
 install.sh: don't run as root.
 
-OpenJarvis installs to $HOME/.openjarvis, not /usr/local. Re-run as your
+nexify installs to $HOME/.nexify, not /usr/local. Re-run as your
 regular user (without sudo).
 EOF
     exit 1
@@ -59,19 +59,19 @@ need git
 need curl
 
 # ---- env ----
-OPENJARVIS_HOME="${OPENJARVIS_HOME:-$HOME/.openjarvis}"
-OPENJARVIS_REPO_URL="${OPENJARVIS_REPO_URL:-https://github.com/open-jarvis/OpenJarvis.git}"
-SRC_DIR="$OPENJARVIS_HOME/src"
-VENV_DIR="$OPENJARVIS_HOME/.venv"
-STATE_DIR="$OPENJARVIS_HOME/.state"
-SCRIPTS_DIR="$OPENJARVIS_HOME/.scripts"
+nexify_HOME="${nexify_HOME:-$HOME/.nexify}"
+nexify_REPO_URL="${nexify_REPO_URL:-https://github.com/open-jarvis/nexify.git}"
+SRC_DIR="$nexify_HOME/src"
+VENV_DIR="$nexify_HOME/.venv"
+STATE_DIR="$nexify_HOME/.state"
+SCRIPTS_DIR="$nexify_HOME/.scripts"
 STATE_FILE="$STATE_DIR/install-state.json"
 
-mkdir -p "$OPENJARVIS_HOME" "$STATE_DIR" "$SCRIPTS_DIR"
+mkdir -p "$nexify_HOME" "$STATE_DIR" "$SCRIPTS_DIR"
 
 # ---- WSL detection ----
 WSL=0
-if [[ "${OPENJARVIS_FORCE_WSL:-0}" == "1" ]]; then
+if [[ "${nexify_FORCE_WSL:-0}" == "1" ]]; then
     WSL=1
 elif [[ -f /proc/sys/kernel/osrelease ]] && grep -qi "microsoft" /proc/sys/kernel/osrelease 2>/dev/null; then
     WSL=1
@@ -127,7 +127,7 @@ clone_repo() {
         echo "    repo already at $SRC_DIR"
         return 0
     fi
-    git clone --depth 1 "$OPENJARVIS_REPO_URL" "$SRC_DIR"
+    git clone --depth 1 "$nexify_REPO_URL" "$SRC_DIR"
 }
 
 copy_scripts() {
@@ -196,12 +196,12 @@ ensure_path() {
     else
         rc="$HOME/.bashrc"
     fi
-    if grep -q "OpenJarvis" "$rc" 2>/dev/null; then
+    if grep -q "nexify" "$rc" 2>/dev/null; then
         return 0
     fi
     {
         echo ''
-        echo '# OpenJarvis'
+        echo '# nexify'
         echo 'export PATH="$HOME/.local/bin:$PATH"'
     } >> "$rc"
     echo "    Added ~/.local/bin to PATH in $rc — run: source $rc"
@@ -214,7 +214,7 @@ detach_bg_orchestrator() {
     fi
     local models
     models=$("$VENV_DIR/bin/python" - <<'PYEOF' 2>/dev/null || true
-from openjarvis.core.config import detect_hardware, recommend_model
+from nexify.core.config import detect_hardware, recommend_model
 hw = detect_hardware()
 tier = recommend_model(hw, "ollama")
 TIERS = ["qwen3.5:2b", "qwen3.5:4b", "qwen3.5:9b", "qwen3.5:27b"]
@@ -235,16 +235,16 @@ PYEOF
 }
 
 # ---- run ----
-echo "OpenJarvis installer"
-echo "  install dir: $OPENJARVIS_HOME"
+echo "nexify installer"
+echo "  install dir: $nexify_HOME"
 echo "  WSL2:        $WSL"
 echo
 
 step install_uv         "Install uv"            install_uv
-step clone_repo         "Clone OpenJarvis repo" clone_repo
+step clone_repo         "Clone nexify repo" clone_repo
 step copy_scripts       "Copy install scripts"  copy_scripts
 step create_venv        "Create venv"           create_venv
-step editable_install   "Install OpenJarvis"    editable_install
+step editable_install   "Install nexify"    editable_install
 step install_ollama     "Install Ollama"        install_ollama
 step start_ollama       "Start Ollama daemon"   start_ollama
 step pull_default_model "Pull qwen3.5:2b"       pull_default_model
@@ -262,3 +262,4 @@ Background work continues silently:
   - Bigger model downloads
   Run 'jarvis doctor' to check status anytime.
 EOF
+

@@ -114,3 +114,4 @@ def test_converter_adds_gemma4_preprocessor_compat_file(
 
     assert (out / "processor_config.json").exists()
     assert (out / "preprocessor_config.json").exists()
+

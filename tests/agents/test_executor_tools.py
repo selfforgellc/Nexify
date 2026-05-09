@@ -2,17 +2,17 @@
 
 from __future__ import annotations
 
-from openjarvis.agents.executor import AgentExecutor
-from openjarvis.agents.manager import AgentManager
-from openjarvis.core.events import EventBus
+from nexify.agents.executor import AgentExecutor
+from nexify.agents.manager import AgentManager
+from nexify.core.events import EventBus
 from tests.agents.fake_engine import FakeEngine
 from tests.agents.scenario_harness import FakeSystem
 
 
 def _register_agent():
     """Re-register MonitorOperativeAgent (cleared by autouse fixture)."""
-    from openjarvis.agents.monitor_operative import MonitorOperativeAgent
-    from openjarvis.core.registry import AgentRegistry
+    from nexify.agents.monitor_operative import MonitorOperativeAgent
+    from nexify.core.registry import AgentRegistry
 
     if not AgentRegistry.contains("monitor_operative"):
         AgentRegistry.register("monitor_operative")(MonitorOperativeAgent)
@@ -102,3 +102,4 @@ def test_executor_handles_string_tools(tmp_path):
     result_agent = mgr.get_agent(agent["id"])
     assert result_agent["status"] == "idle"
     mgr.close()
+

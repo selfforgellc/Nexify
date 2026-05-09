@@ -1,6 +1,6 @@
 """Tests for the security_scanner dataset."""
 
-from openjarvis.evals.datasets.security_scanner import SecurityScannerDataset
+from nexify.evals.datasets.security_scanner import SecurityScannerDataset
 
 
 def test_dataset_loads():
@@ -46,3 +46,4 @@ def test_vulnerability_structure():
     assert "type" in vuln
     assert "severity" in vuln
     assert "description" in vuln
+

@@ -9,9 +9,9 @@
 
 set -euo pipefail
 
-OPENJARVIS_HOME="${OPENJARVIS_HOME:-$HOME/.openjarvis}"
-STATE_DIR="$OPENJARVIS_HOME/.state"
-SCRIPTS_DIR="$OPENJARVIS_HOME/.scripts"
+nexify_HOME="${nexify_HOME:-$HOME/.nexify}"
+STATE_DIR="$nexify_HOME/.state"
+SCRIPTS_DIR="$nexify_HOME/.scripts"
 PID_FILE="$STATE_DIR/bg.pid"
 LOG="$STATE_DIR/bg-orchestrator.log"
 
@@ -47,3 +47,4 @@ for pid in "${MODEL_PIDS[@]}"; do
 done
 
 echo "[$(date -u +%FT%TZ)] bg-orchestrator done" >> "$LOG"
+

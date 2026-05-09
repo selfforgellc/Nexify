@@ -11,10 +11,10 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from openjarvis.channels._stubs import ChannelStatus
-from openjarvis.channels.sendblue import SendBlueChannel
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.registry import ChannelRegistry
+from nexify.channels._stubs import ChannelStatus
+from nexify.channels.sendblue import SendBlueChannel
+from nexify.core.events import EventBus, EventType
+from nexify.core.registry import ChannelRegistry
 from tests.channels.channel_test_helpers import make_common_channel_tests
 
 
@@ -264,3 +264,4 @@ class TestProperties:
     def test_from_number(self):
         ch = _make_channel(from_number="+15559876543")
         assert ch.from_number == "+15559876543"
+

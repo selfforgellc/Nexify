@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.connectors.store import KnowledgeStore
+from nexify.connectors.store import KnowledgeStore
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -308,7 +308,7 @@ def test_retrieve_filter_by_until(ks: KnowledgeStore) -> None:
 
 def test_memory_store_event_emitted(tmp_path: Path) -> None:
     """MEMORY_STORE event is published on store()."""
-    from openjarvis.core.events import EventType, get_event_bus, reset_event_bus
+    from nexify.core.events import EventType, get_event_bus, reset_event_bus
 
     reset_event_bus()
     bus = get_event_bus(record_history=True)
@@ -322,7 +322,7 @@ def test_memory_store_event_emitted(tmp_path: Path) -> None:
 
 def test_memory_retrieve_event_emitted(tmp_path: Path) -> None:
     """MEMORY_RETRIEVE event is published on retrieve()."""
-    from openjarvis.core.events import EventType, get_event_bus, reset_event_bus
+    from nexify.core.events import EventType, get_event_bus, reset_event_bus
 
     reset_event_bus()
     bus = get_event_bus(record_history=True)
@@ -357,3 +357,4 @@ def test_context_manager_closes_on_exception(tmp_path: Path) -> None:
 
     with pytest.raises(sqlite3.ProgrammingError):
         ks._conn.execute("SELECT 1")
+

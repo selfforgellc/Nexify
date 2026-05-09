@@ -7,9 +7,9 @@ from unittest.mock import MagicMock, patch
 
 class TestJarvisAgentExtendedFields:
     def test_generate_full_includes_framework_and_commit(self) -> None:
-        from openjarvis.evals.backends.jarvis_agent import JarvisAgentBackend
+        from nexify.evals.backends.jarvis_agent import JarvisAgentBackend
 
-        with patch("openjarvis.system.SystemBuilder") as MockSB:
+        with patch("nexify.system.SystemBuilder") as MockSB:
             mock_system = MagicMock()
             mock_system.ask.return_value = {
                 "content": "answer",
@@ -38,10 +38,11 @@ class TestJarvisAgentExtendedFields:
                 temperature=0.0,
                 max_tokens=2048,
             )
-            assert result["framework"] == "openjarvis"
+            assert result["framework"] == "nexify"
             assert "framework_commit" in result
             assert "energy_joules" in result  # may be None
             assert "peak_power_w" in result
             assert "tool_calls" in result
             assert "turn_count" in result
             assert "error" in result
+

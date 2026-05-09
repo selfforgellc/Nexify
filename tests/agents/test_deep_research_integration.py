@@ -16,12 +16,12 @@ import json
 from pathlib import Path
 from unittest.mock import MagicMock
 
-from openjarvis.agents.deep_research import DeepResearchAgent
-from openjarvis.connectors._stubs import Document
-from openjarvis.connectors.pipeline import IngestionPipeline
-from openjarvis.connectors.retriever import TwoStageRetriever
-from openjarvis.connectors.store import KnowledgeStore
-from openjarvis.tools.knowledge_search import KnowledgeSearchTool
+from nexify.agents.deep_research import DeepResearchAgent
+from nexify.connectors._stubs import Document
+from nexify.connectors.pipeline import IngestionPipeline
+from nexify.connectors.retriever import TwoStageRetriever
+from nexify.connectors.store import KnowledgeStore
+from nexify.tools.knowledge_search import KnowledgeSearchTool
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -219,3 +219,4 @@ def test_search_finds_cross_platform_data(tmp_path):
         f"Expected results from at least 2 different sources, "
         f"but only found: {sources_found}\n\nFull output:\n{content}"
     )
+

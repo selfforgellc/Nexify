@@ -4,14 +4,14 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.agents._stubs import AgentResult, ToolUsingAgent
-from openjarvis.core.config import (
+from nexify.agents._stubs import AgentResult, ToolUsingAgent
+from nexify.core.config import (
     CapabilitiesConfig,
     JarvisConfig,
     SecurityConfig,
 )
-from openjarvis.core.events import EventBus
-from openjarvis.security import setup_security
+from nexify.core.events import EventBus
+from nexify.security import setup_security
 
 
 class _ConcreteAgent(ToolUsingAgent):
@@ -39,7 +39,7 @@ def _make_mock_engine() -> MagicMock:
 
 def _has_rust() -> bool:
     try:
-        import openjarvis_rust  # noqa: F401
+        import nexify_rust  # noqa: F401
 
         return True
     except ImportError:
@@ -80,3 +80,4 @@ class TestCapabilityPolicyReachesExecutor:
         assert agent._executor._capability_policy is None
         # Engine should be the original, unwrapped
         assert sec.engine is engine
+

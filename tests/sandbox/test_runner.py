@@ -8,9 +8,9 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from openjarvis.agents._stubs import AgentResult, BaseAgent
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.sandbox.runner import (
+from nexify.agents._stubs import AgentResult, BaseAgent
+from nexify.core.events import EventBus, EventType
+from nexify.sandbox.runner import (
     _OUTPUT_END,
     _OUTPUT_START,
     ContainerRunner,
@@ -313,3 +313,4 @@ class TestSandboxedAgentRun:
         types = [e.event_type for e in bus.history]
         assert EventType.AGENT_TURN_START in types
         assert EventType.AGENT_TURN_END in types
+

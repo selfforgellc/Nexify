@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.recipes.loader import (
+from nexify.recipes.loader import (
     Recipe,
     discover_recipes,
     load_recipe,
@@ -469,3 +469,4 @@ class TestBuiltinRecipes:
         assert r is not None
         assert r.kind == "operator"
         assert r.schedule_type == "interval"
+

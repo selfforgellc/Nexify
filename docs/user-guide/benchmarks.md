@@ -4,7 +4,7 @@ The benchmarking framework measures inference engine performance with reproducib
 
 ## Overview
 
-OpenJarvis ships with two benchmarks:
+nexify ships with two benchmarks:
 
 | Benchmark     | Registry Key   | Measures                                      |
 |---------------|----------------|-----------------------------------------------|
@@ -19,8 +19,8 @@ All benchmarks implement the `BaseBenchmark` abstract base class.
 
 ```python
 from abc import ABC, abstractmethod
-from openjarvis.bench._stubs import BenchmarkResult
-from openjarvis.engine._stubs import InferenceEngine
+from nexify.bench._stubs import BenchmarkResult
+from nexify.engine._stubs import InferenceEngine
 
 class BaseBenchmark(ABC):
 
@@ -140,9 +140,9 @@ throughput (10 samples, 0 errors)
 The `BenchmarkSuite` class runs a collection of benchmarks and provides aggregation and serialization utilities.
 
 ```python
-from openjarvis.bench._stubs import BenchmarkSuite
-from openjarvis.bench.latency import LatencyBenchmark
-from openjarvis.bench.throughput import ThroughputBenchmark
+from nexify.bench._stubs import BenchmarkSuite
+from nexify.bench.latency import LatencyBenchmark
+from nexify.bench.throughput import ThroughputBenchmark
 
 suite = BenchmarkSuite([LatencyBenchmark(), ThroughputBenchmark()])
 
@@ -248,10 +248,10 @@ Create a custom benchmark by subclassing `BaseBenchmark` and registering it with
 
 ```python
 import time
-from openjarvis.bench._stubs import BaseBenchmark, BenchmarkResult
-from openjarvis.core.registry import BenchmarkRegistry
-from openjarvis.core.types import Message, Role
-from openjarvis.engine._stubs import InferenceEngine
+from nexify.bench._stubs import BaseBenchmark, BenchmarkResult
+from nexify.core.registry import BenchmarkRegistry
+from nexify.core.types import Message, Role
+from nexify.engine._stubs import InferenceEngine
 
 
 class ContextLengthBenchmark(BaseBenchmark):
@@ -329,9 +329,10 @@ jarvis bench run -b context_length
 And through the `BenchmarkSuite`:
 
 ```python
-from openjarvis.core.registry import BenchmarkRegistry
+from nexify.core.registry import BenchmarkRegistry
 
 bench_cls = BenchmarkRegistry.get("context_length")
 bench = bench_cls()
 result = bench.run(engine, model, num_samples=5)
 ```
+

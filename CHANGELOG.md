@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to OpenJarvis are documented in this file.
+All notable changes to nexify are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
@@ -47,13 +47,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - `ToolTranslator` for external tool name translation (Bash -> shell_exec, Read -> file_read, etc.)
   - Source resolvers: `HermesResolver`, `OpenClawResolver`, `GitHubResolver`
   - `SkillImporter` with provenance tracking (`.source` metadata files), optional script import
-  - Sourced subdirectory layout (`~/.openjarvis/skills/<source>/<name>/`)
+  - Sourced subdirectory layout (`~/.nexify/skills/<source>/<name>/`)
 
 - **Skills learning loop** — trace tagging, pattern discovery, DSPy/GEPA optimization.
   - Trace metadata tagging: `skill`, `skill_source`, `skill_kind` flow through ToolExecutor -> TraceCollector -> TraceStep
   - `SkillDiscovery` wired into `SkillManager.discover_from_traces()` with kebab name normalization
   - `SkillOptimizer` — per-skill DSPy/GEPA wrapper that buckets traces and writes sidecar overlays
-  - `SkillOverlay` — sidecar storage at `~/.openjarvis/learning/skills/<name>/optimized.toml`
+  - `SkillOverlay` — sidecar storage at `~/.nexify/learning/skills/<name>/optimized.toml`
   - `SkillManager._load_overlays()` applies optimized descriptions + few-shot examples at discovery time
   - `LearningOrchestrator._maybe_optimize_skills()` — opt-in auto-trigger
 
@@ -97,3 +97,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **LearningOrchestrator skill trigger** — `_maybe_optimize_skills` runs BEFORE the SFT-data short-circuit (skills are tagged via trace metadata, not mined as SFT pairs)
 - **PinchBenchScorer constructor** — `SkillBenchmarkRunner` constructs `PinchBenchScorer(judge_backend, model)` instead of no-args
 - **EvalRunner results access** — reads per-task data from `eval_runner.results` property, not nonexistent `summary.results`
+

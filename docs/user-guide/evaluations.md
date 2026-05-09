@@ -1,14 +1,14 @@
 # Evaluations
 
-The OpenJarvis evaluation framework (`openjarvis-evals`) measures model **correctness and accuracy** on academic datasets. It is a separate package from the main OpenJarvis library and is designed specifically for research workflows where you need reproducible, dataset-driven quality assessments.
+The nexify evaluation framework (`nexify-evals`) measures model **correctness and accuracy** on academic datasets. It is a separate package from the main nexify library and is designed specifically for research workflows where you need reproducible, dataset-driven quality assessments.
 
 !!! info "Evals vs. Benchmarks"
-    OpenJarvis has two distinct measurement systems that complement each other:
+    nexify has two distinct measurement systems that complement each other:
 
     | System | Package | Measures | Entry Point |
     |--------|---------|----------|-------------|
-    | **Evaluations** | `openjarvis-evals` | Correctness on academic datasets (accuracy, pass rate) | `openjarvis-eval` |
-    | **Benchmarks** | `openjarvis` | Engine performance (latency, throughput) | `jarvis bench` |
+    | **Evaluations** | `nexify-evals` | Correctness on academic datasets (accuracy, pass rate) | `nexify-eval` |
+    | **Benchmarks** | `nexify` | Engine performance (latency, throughput) | `jarvis bench` |
 
     Use evaluations to answer "does this model get the right answer?" and benchmarks to answer "how fast does this model respond?". See the [Benchmarks guide](benchmarks.md) for the performance measurement system.
 
@@ -18,13 +18,13 @@ The OpenJarvis evaluation framework (`openjarvis-evals`) measures model **correc
 
 ## Installation
 
-The evaluation framework is a standalone package in the `evals/` directory. Install it alongside OpenJarvis:
+The evaluation framework is a standalone package in the `evals/` directory. Install it alongside nexify:
 
 ```bash
 uv sync --extra eval
 ```
 
-This installs the `openjarvis-eval` CLI entry point and all required dependencies (`datasets`, `huggingface-hub`, `tqdm`, `rich`).
+This installs the `nexify-eval` CLI entry point and all required dependencies (`datasets`, `huggingface-hub`, `tqdm`, `rich`).
 
 !!! note "Python version requirement"
     Python 3.10 requires the `tomli` package for TOML config parsing. The `evals/pyproject.toml` includes this as a conditional dependency, so it is installed automatically.
@@ -37,7 +37,7 @@ The framework ships with **30+ datasets** covering academic reasoning, agentic t
 
 ### Use-Case Benchmarks
 
-These benchmarks evaluate models on practical tasks that mirror real OpenJarvis use cases.
+These benchmarks evaluate models on practical tasks that mirror real nexify use cases.
 
 | Dataset | Key | Description |
 |---------|-----|-------------|
@@ -122,7 +122,7 @@ The framework includes two pre-built configs for evaluating models on the five c
 ### Cloud models
 
 ```bash
-uv run python -m openjarvis.evals --config src/openjarvis/evals/configs/use_case_v2_cloud.toml
+uv run python -m nexify.evals --config src/nexify/evals/configs/use_case_v2_cloud.toml
 ```
 
 This config evaluates **6 cloud models** (Claude Opus 4.6, Claude Haiku 4.5, Gemini 3.1 Pro, Gemini 3.1 Flash Lite, GPT-5.4, GPT-5 Mini) against all 5 use-case benchmarks with 30 samples each, producing a 6x5 = 30-run matrix. Results are written to `results/use-cases-v2-cloud/`.
@@ -130,7 +130,7 @@ This config evaluates **6 cloud models** (Claude Opus 4.6, Claude Haiku 4.5, Gem
 ### Local models
 
 ```bash
-uv run python -m openjarvis.evals --config src/openjarvis/evals/configs/use_case_v2_local.toml
+uv run python -m nexify.evals --config src/nexify/evals/configs/use_case_v2_local.toml
 ```
 
 This config evaluates **5 local models** via Ollama (Qwen3.5 122B-A10B, GPT-OSS 120B, GLM4, Qwen3.5 35B-A3B, GLM-4.7-Flash) against the same 5 benchmarks, producing a 5x5 = 25-run matrix. Uses 2 workers (suitable for single-GPU setups). Results are written to `results/use-cases-v2-local/`.
@@ -158,7 +158,7 @@ Use `jarvis-direct` for most evaluations. Use `jarvis-agent` when the benchmark 
 ### List available benchmarks and backends
 
 ```bash
-openjarvis-eval list
+nexify-eval list
 ```
 
 Output:
@@ -179,18 +179,18 @@ Backends:
 
 ```bash
 # Evaluate qwen3:8b on SuperGPQA (engine-level, 10 samples default)
-openjarvis-eval run -b supergpqa -m qwen3:8b
+nexify-eval run -b supergpqa -m qwen3:8b
 
 # Evaluate GPT-4o on GAIA using the agent backend with tools
-openjarvis-eval run -b gaia -m gpt-4o --backend jarvis-agent \
+nexify-eval run -b gaia -m gpt-4o --backend jarvis-agent \
     --agent orchestrator --tools calculator,file_read -n 50
 
 # Run FRAMES with vLLM engine, write output to a file
-openjarvis-eval run -b frames -m llama3:70b -e vllm \
+nexify-eval run -b frames -m llama3:70b -e vllm \
     -o results/frames_llama70b.jsonl
 
 # Run WildChat with a higher temperature for chat quality
-openjarvis-eval run -b wildchat -m qwen3:8b --temperature 0.7 -n 100
+nexify-eval run -b wildchat -m qwen3:8b --temperature 0.7 -n 100
 ```
 
 #### Full option reference
@@ -221,10 +221,10 @@ openjarvis-eval run -b wildchat -m qwen3:8b --temperature 0.7 -n 100
 The `run-all` command evaluates a single model against all four benchmarks sequentially and writes results to an output directory:
 
 ```bash
-openjarvis-eval run-all -m qwen3:8b
+nexify-eval run-all -m qwen3:8b
 
 # With options
-openjarvis-eval run-all -m gpt-4o -n 100 --output-dir results/gpt4o/
+nexify-eval run-all -m gpt-4o -n 100 --output-dir results/gpt4o/
 ```
 
 Output files are written as `{output_dir}/{benchmark}_{model-slug}.jsonl`. The model slug replaces `/` and `:` with `-`, so `qwen3:8b` becomes `qwen3-8b`.
@@ -234,7 +234,7 @@ Output files are written as `{output_dir}/{benchmark}_{model-slug}.jsonl`. The m
 After a run, inspect a JSONL results file:
 
 ```bash
-openjarvis-eval summarize results/supergpqa_qwen3-8b.jsonl
+nexify-eval summarize results/supergpqa_qwen3-8b.jsonl
 ```
 
 Output:
@@ -259,7 +259,7 @@ For research workflows that compare multiple models across multiple benchmarks, 
 ### Running from a config
 
 ```bash
-openjarvis-eval run --config src/openjarvis/evals/configs/full-suite.toml
+nexify-eval run --config src/nexify/evals/configs/full-suite.toml
 ```
 
 When `--config` is provided, the `-b`/`--benchmark` and `-m`/`--model` options are not required. All settings come from the config file. The CLI expands the matrix, prints a progress table, and writes results to the configured `output_dir`.
@@ -646,7 +646,7 @@ The `EvalRunner` processes samples concurrently using a `ThreadPoolExecutor`. Re
 
 ```bash
 # Use more workers for faster evaluation (if the engine supports concurrent requests)
-openjarvis-eval run -b supergpqa -m qwen3:8b -w 8 -n 500
+nexify-eval run -b supergpqa -m qwen3:8b -w 8 -n 500
 ```
 
 !!! warning "Worker count and engine load"
@@ -660,4 +660,5 @@ openjarvis-eval run -b supergpqa -m qwen3:8b -w 8 -n 500
 - [Telemetry & Traces](telemetry.md) — Record and analyze inference metrics from production use
 - [Agents](agents.md) — Configure the `OrchestratorAgent` used by `jarvis-agent` backend
 - [Tools](tools.md) — Available tools for agent-backed evaluations
-- [Python SDK](python-sdk.md) — Programmatic access to OpenJarvis inference and agents
+- [Python SDK](python-sdk.md) — Programmatic access to nexify inference and agents
+

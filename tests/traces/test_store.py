@@ -5,9 +5,9 @@ from __future__ import annotations
 import time
 from pathlib import Path
 
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import StepType, Trace, TraceStep
-from openjarvis.traces.store import TraceStore
+from nexify.core.events import EventBus, EventType
+from nexify.core.types import StepType, Trace, TraceStep
+from nexify.traces.store import TraceStore
 
 
 def _make_trace(
@@ -189,3 +189,4 @@ class TestTraceStore:
         assert retrieved.metadata["key"] == "value"
         assert retrieved.metadata["nested"] == [1, 2, 3]
         store.close()
+

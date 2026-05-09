@@ -4,11 +4,11 @@ A personalized daily briefing that collects data from your connected services, s
 
 ## Quickstart (5 minutes)
 
-### 1. Install and set up OpenJarvis
+### 1. Install and set up nexify
 
 ```bash
-git clone https://github.com/open-jarvis/OpenJarvis.git
-cd OpenJarvis
+git clone https://github.com/open-jarvis/nexify.git
+cd nexify
 uv sync --extra dev
 ```
 
@@ -21,7 +21,7 @@ ollama pull qwen3.5:9b    # or any model you prefer
 
 ### 3. Configure the digest
 
-Edit `~/.openjarvis/config.toml`:
+Edit `~/.nexify/config.toml`:
 
 ```toml
 [engine]
@@ -76,13 +76,13 @@ For Weather, GitHub, and News — save credential files directly:
 
 ```bash
 # Weather (OpenWeatherMap — free at https://openweathermap.org/api)
-echo '{"api_key": "YOUR_KEY", "location": "San Francisco,CA,US"}' > ~/.openjarvis/connectors/weather.json
+echo '{"api_key": "YOUR_KEY", "location": "San Francisco,CA,US"}' > ~/.nexify/connectors/weather.json
 
 # GitHub notifications (token from https://github.com/settings/tokens)
-echo '{"token": "ghp_YOUR_TOKEN"}' > ~/.openjarvis/connectors/github.json
+echo '{"token": "ghp_YOUR_TOKEN"}' > ~/.nexify/connectors/github.json
 
 # News RSS (no auth needed — configure your feeds)
-cat > ~/.openjarvis/connectors/news_rss.json << 'EOF'
+cat > ~/.nexify/connectors/news_rss.json << 'EOF'
 {"feeds": [
   {"name": "Arxiv CS.AI", "url": "https://rss.arxiv.org/rss/cs.AI"},
   {"name": "TechCrunch", "url": "https://techcrunch.com/feed/"},
@@ -166,13 +166,13 @@ The `sections` list controls what the digest covers, in order of priority:
 
 ### Persona
 
-The `persona` field loads a prompt file from `configs/openjarvis/prompts/personas/{name}.md`. The default `jarvis` persona delivers briefings with dry British wit, prioritizes urgent items, and interprets health data as trends rather than raw numbers.
+The `persona` field loads a prompt file from `configs/nexify/prompts/personas/{name}.md`. The default `jarvis` persona delivers briefings with dry British wit, prioritizes urgent items, and interprets health data as trends rather than raw numbers.
 
 To create a custom persona, add a new `.md` file in the personas directory.
 
 ### News Feeds
 
-Add any RSS or Atom feed to `~/.openjarvis/connectors/news_rss.json`:
+Add any RSS or Atom feed to `~/.nexify/connectors/news_rss.json`:
 
 ```json
 {"feeds": [
@@ -216,3 +216,4 @@ The desktop and browser apps show an inline audio player when a digest is genera
 **GitHub 403** — Your personal access token needs the `notifications` permission under Account permissions (not Repository permissions).
 
 **Audio not playing** — Ensure `CARTESIA_API_KEY` or `OPENAI_API_KEY` is set. Check credits at https://play.cartesia.ai or https://platform.openai.com.
+

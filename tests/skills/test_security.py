@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from openjarvis.skills.security import (
+from nexify.skills.security import (
     TrustTier,
     classify_trust_tier,
     has_dangerous_capabilities,
     validate_capabilities,
 )
-from openjarvis.skills.types import SkillManifest
+from nexify.skills.types import SkillManifest
 
 
 class TestTrustTiers:
@@ -57,3 +57,4 @@ class TestDangerousCapabilities:
             name="test", required_capabilities=["network:fetch", "filesystem:read"]
         )
         assert has_dangerous_capabilities(manifest) == []
+

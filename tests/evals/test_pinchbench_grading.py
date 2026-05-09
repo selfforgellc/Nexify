@@ -1,7 +1,7 @@
 """Tests for PinchBench grading functions."""
 
-from openjarvis.evals.core.types import EvalRecord
-from openjarvis.evals.scorers.pinchbench import (
+from nexify.evals.core.types import EvalRecord
+from nexify.evals.scorers.pinchbench import (
     _grade_automated,
     _parse_judge_response,
     _summarize_transcript,
@@ -159,3 +159,4 @@ class TestGradeRouter:
             record=record, transcript=[], workspace_path=str(tmp_path)
         )
         assert result["score"] == 0.0
+

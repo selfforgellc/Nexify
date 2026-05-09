@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.channels._stubs import ChannelStatus
-from openjarvis.channels.webchat import WebChatChannel
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.registry import ChannelRegistry
+from nexify.channels._stubs import ChannelStatus
+from nexify.channels.webchat import WebChatChannel
+from nexify.core.events import EventBus, EventType
+from nexify.core.registry import ChannelRegistry
 from tests.channels.channel_test_helpers import make_common_channel_tests
 
 
@@ -68,3 +68,4 @@ class TestStatus:
         ch = WebChatChannel()
         ch.connect()
         assert ch.status() == ChannelStatus.CONNECTED
+

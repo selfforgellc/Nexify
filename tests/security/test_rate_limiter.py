@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import time
 
-from openjarvis.security.rate_limiter import (
+from nexify.security.rate_limiter import (
     RateLimitConfig,
     RateLimiter,
     TokenBucket,
@@ -138,3 +138,4 @@ class TestRateLimiter:
         assert limiter.config.requests_per_minute == 60
         assert limiter.config.burst_size == 10
         assert limiter.config.enabled is True
+

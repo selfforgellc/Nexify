@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.learning._stubs import RoutingContext
-from openjarvis.learning.routing.heuristic_reward import HeuristicRewardFunction
+from nexify.learning._stubs import RoutingContext
+from nexify.learning.routing.heuristic_reward import HeuristicRewardFunction
 
 
 class TestHeuristicRewardFunction:
@@ -149,3 +149,4 @@ class TestHeuristicRewardFunction:
             random_extra="ignored",
         )
         assert 0.0 <= score <= 1.0
+

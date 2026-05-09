@@ -54,3 +54,4 @@ echo "  git add frontend/package.json frontend/src-tauri/tauri.conf.json fronten
 echo "  git commit -m \"chore(desktop): bump version to ${VERSION}\""
 echo "  git tag desktop-v${VERSION}"
 echo "  git push origin main --tags"
+

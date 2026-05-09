@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.core.config import validate_config_key
+from nexify.core.config import validate_config_key
 
 
 class TestValidateConfigKey:
@@ -52,3 +52,4 @@ class TestValidateConfigKey:
         """Hardware is auto-detected, not user-settable."""
         with pytest.raises(ValueError, match="Unknown config key"):
             validate_config_key("hardware.cpu_count")
+

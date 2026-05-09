@@ -5,9 +5,9 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, List
 
-from openjarvis.core.events import EventBus
-from openjarvis.core.types import StepType, Trace, TraceStep
-from openjarvis.skills.manager import SkillManager
+from nexify.core.events import EventBus
+from nexify.core.types import StepType, Trace, TraceStep
+from nexify.skills.manager import SkillManager
 
 
 class _FakeTraceStore:
@@ -109,3 +109,4 @@ class TestDiscoverFromTraces:
         # At least one of the discovered skills should be loadable
         names = mgr2.skill_names()
         assert len(names) >= 1
+

@@ -32,7 +32,7 @@ def test_openclaw_runner_parses_real_agent_json_shape(tmp_path: Path) -> None:
 
     runner = (
         Path(__file__).resolve().parents[3]
-        / "src/openjarvis/evals/backends/external/_runners/openclaw_runner.mjs"
+        / "src/nexify/evals/backends/external/_runners/openclaw_runner.mjs"
     )
     out_json = tmp_path / "out.json"
     env = {
@@ -70,3 +70,4 @@ def test_openclaw_runner_parses_real_agent_json_shape(tmp_path: Path) -> None:
         "total_tokens": 18,
     }
     assert data["error"] is None
+

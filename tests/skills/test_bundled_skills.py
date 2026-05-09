@@ -6,11 +6,11 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.skills.loader import load_skill
+from nexify.skills.loader import load_skill
 
 # Resolve the skills/builtin/ directory relative to the project root.
 BUILTIN_DIR = (
-    Path(__file__).resolve().parents[2] / "src" / "openjarvis" / "skills" / "data"
+    Path(__file__).resolve().parents[2] / "src" / "nexify" / "skills" / "data"
 )
 
 # Collect all TOML files once so parametrized IDs are readable.
@@ -95,3 +95,4 @@ class TestStepsHaveToolNames:
         manifest = load_skill(toml_path)
         for i, step in enumerate(manifest.steps):
             assert step.tool_name, f"{toml_path.name} step {i} has empty tool_name"
+

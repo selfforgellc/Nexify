@@ -7,9 +7,9 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.connectors._stubs import Document
-from openjarvis.connectors.pipeline import IngestionPipeline
-from openjarvis.connectors.store import KnowledgeStore
+from nexify.connectors._stubs import Document
+from nexify.connectors.pipeline import IngestionPipeline
+from nexify.connectors.store import KnowledgeStore
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -292,3 +292,4 @@ def test_ingest_chunk_count_return_value(
     assert n2 == 1  # only doc_c is new
 
     assert store.count() == 3
+

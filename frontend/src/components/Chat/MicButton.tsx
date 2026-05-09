@@ -78,3 +78,4 @@ export function MicButton({ state, onClick, disabled, reason }: MicButtonProps) 
     </div>
   );
 }
+

@@ -7,8 +7,8 @@ Manual testing scenarios for persistent agents in the CLI and desktop app.
 | Prerequisite | Command / Check |
 |---|---|
 | Ollama running with model | `ollama list` shows `qwen3:8b` |
-| OpenJarvis initialized | `uv run jarvis doctor` all green |
-| Rust extension built | `uv run maturin develop -m rust/crates/openjarvis-python/Cargo.toml` |
+| nexify initialized | `uv run jarvis doctor` all green |
+| Rust extension built | `uv run maturin develop -m rust/crates/nexify-python/Cargo.toml` |
 | Desktop app running | `uv run jarvis serve` + `cd frontend && npm run dev` |
 | Slack credentials | `SLACK_BOT_TOKEN`, `SLACK_APP_TOKEN` set, bot invited to test channel |
 | Gmail credentials | OAuth credentials.json downloaded, token generated |
@@ -73,3 +73,4 @@ Manual testing scenarios for persistent agents in the CLI and desktop app.
 | 5 | Multi-agent load | 10 agents on daemon, mix of intervals | All fire on schedule, no interference | [ ] |
 | 6 | Large response handling | Agent produces 10k+ char response | summary_memory truncated to 2000 chars, full response in messages | [ ] |
 | 7 | Checkpoint integrity | Kill process mid-tick, restart, recover | Checkpoint restored, agent resumes cleanly | [ ] |
+

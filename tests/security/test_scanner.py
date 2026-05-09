@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from openjarvis.security.scanner import PIIScanner, SecretScanner
-from openjarvis.security.types import ThreatLevel
+from nexify.security.scanner import PIIScanner, SecretScanner
+from nexify.security.types import ThreatLevel
 
 # ---------------------------------------------------------------------------
 # SecretScanner tests
@@ -173,3 +173,4 @@ class TestScanResult:
         text = 'password = "secret123" and key sk-abc123def456ghi789jkl012'
         result = scanner.scan(text)
         assert len(result.findings) >= 2
+

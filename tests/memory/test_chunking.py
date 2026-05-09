@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.tools.storage.chunking import ChunkConfig, chunk_text
+from nexify.tools.storage.chunking import ChunkConfig, chunk_text
 
 
 def test_empty_string_returns_empty():
@@ -90,3 +90,4 @@ def test_chunk_index_sequential():
     chunks = chunk_text(text, config=cfg)
     for i, chunk in enumerate(chunks):
         assert chunk.index == i
+

@@ -434,3 +434,4 @@ export function LearningCurve({ apiUrl }: { apiUrl: string }) {
     </div>
   );
 }
+

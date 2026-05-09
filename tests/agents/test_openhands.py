@@ -6,9 +6,9 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.agents._stubs import BaseAgent
-from openjarvis.agents.openhands import OpenHandsAgent
-from openjarvis.core.registry import AgentRegistry
+from nexify.agents._stubs import BaseAgent
+from nexify.agents.openhands import OpenHandsAgent
+from nexify.core.registry import AgentRegistry
 
 
 class TestOpenHandsAgentRegistration:
@@ -55,3 +55,4 @@ class TestOpenHandsAgentConstructor:
         engine = MagicMock()
         agent = OpenHandsAgent(engine, "test-model", api_key="sk-test")
         assert agent._api_key == "sk-test"
+

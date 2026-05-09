@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from openjarvis.security.injection_scanner import InjectionScanner
-from openjarvis.security.types import ThreatLevel
+from nexify.security.injection_scanner import InjectionScanner
+from nexify.security.types import ThreatLevel
 
 
 class TestInjectionScanner:
@@ -89,3 +89,4 @@ class TestInjectionScanner:
         assert not result.is_clean
         assert any(f.pattern_name == "code_injection" for f in result.findings)
         assert result.threat_level == ThreatLevel.HIGH
+

@@ -1,12 +1,12 @@
 """Tests for structured error_detail in executor traces."""
 
-from openjarvis.agents.errors import EscalateError, FatalError, RetryableError
-from openjarvis.agents.executor import AgentExecutor
-from openjarvis.core.events import EventBus
+from nexify.agents.errors import EscalateError, FatalError, RetryableError
+from nexify.agents.executor import AgentExecutor
+from nexify.core.events import EventBus
 
 
 def test_build_error_detail_fatal(tmp_path):
-    from openjarvis.agents.manager import AgentManager
+    from nexify.agents.manager import AgentManager
 
     mgr = AgentManager(db_path=str(tmp_path / "agents.db"))
     exe = AgentExecutor(manager=mgr, event_bus=EventBus())
@@ -18,7 +18,7 @@ def test_build_error_detail_fatal(tmp_path):
 
 
 def test_build_error_detail_retryable(tmp_path):
-    from openjarvis.agents.manager import AgentManager
+    from nexify.agents.manager import AgentManager
 
     mgr = AgentManager(db_path=str(tmp_path / "agents.db"))
     exe = AgentExecutor(manager=mgr, event_bus=EventBus())
@@ -29,10 +29,11 @@ def test_build_error_detail_retryable(tmp_path):
 
 
 def test_build_error_detail_escalate(tmp_path):
-    from openjarvis.agents.manager import AgentManager
+    from nexify.agents.manager import AgentManager
 
     mgr = AgentManager(db_path=str(tmp_path / "agents.db"))
     exe = AgentExecutor(manager=mgr, event_bus=EventBus())
     error = EscalateError("agent needs help")
     detail = exe._build_error_detail(error)
     assert detail["error_type"] == "escalate"
+

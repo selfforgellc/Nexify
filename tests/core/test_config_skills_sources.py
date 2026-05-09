@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.core.config import SkillsConfig, SkillSourceConfig
+from nexify.core.config import SkillsConfig, SkillSourceConfig
 
 
 class TestSkillSourceConfig:
@@ -41,3 +41,4 @@ class TestSkillsConfigWithSources:
         )
         assert len(cfg.sources) == 2
         assert cfg.sources[0].source == "hermes"
+

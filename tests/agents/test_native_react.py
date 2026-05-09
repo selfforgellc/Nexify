@@ -6,12 +6,12 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.agents._stubs import AgentContext
-from openjarvis.agents.native_react import NativeReActAgent
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.registry import AgentRegistry
-from openjarvis.core.types import Conversation, Message, Role, ToolResult
-from openjarvis.tools._stubs import BaseTool, ToolSpec
+from nexify.agents._stubs import AgentContext
+from nexify.agents.native_react import NativeReActAgent
+from nexify.core.events import EventBus, EventType
+from nexify.core.registry import AgentRegistry
+from nexify.core.types import Conversation, Message, Role, ToolResult
+from nexify.tools._stubs import BaseTool, ToolSpec
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -545,3 +545,4 @@ def test_native_react_with_different_models(model):
     assert result.content == "Hello!"
     call_kwargs = engine.generate.call_args[1]
     assert call_kwargs["model"] == model
+

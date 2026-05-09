@@ -1,7 +1,7 @@
 # macOS Install
 
 ```bash
-curl -fsSL https://openjarvis.ai/install.sh | bash
+curl -fsSL https://nexify.ai/install.sh | bash
 ```
 
 Works on Intel and Apple Silicon. The installer auto-detects your CPU/GPU.
@@ -24,3 +24,4 @@ xcode-select --install
 ## See also
 
 - [Full installer reference](install.md)
+

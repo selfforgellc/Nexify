@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.core.registry import ModelRegistry
-from openjarvis.core.types import ModelSpec
-from openjarvis.intelligence.model_catalog import (
+from nexify.core.registry import ModelRegistry
+from nexify.core.types import ModelSpec
+from nexify.intelligence.model_catalog import (
     BUILTIN_MODELS,
     merge_discovered_models,
     register_builtin_models,
@@ -341,3 +341,4 @@ class TestModelDiscovery:
         register_builtin_models()
         register_builtin_models()  # should not raise
         assert ModelRegistry.contains("qwen3:8b")
+

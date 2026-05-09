@@ -7,10 +7,10 @@ from unittest import mock
 
 import pytest
 
-from openjarvis.core.registry import EngineRegistry
-from openjarvis.core.types import Message, Role
-from openjarvis.engine._base import EngineConnectionError
-from openjarvis.engine.cloud import (
+from nexify.core.registry import EngineRegistry
+from nexify.core.types import Message, Role
+from nexify.engine._base import EngineConnectionError
+from nexify.engine.cloud import (
     _ANTHROPIC_MODELS,
     _GOOGLE_MODELS,
     _OPENAI_MODELS,
@@ -650,3 +650,4 @@ class TestPricingTable:
 
     def test_zero_tokens_zero_cost(self) -> None:
         assert estimate_cost("gpt-5-mini", 0, 0) == 0.0
+

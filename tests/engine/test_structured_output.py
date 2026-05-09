@@ -10,11 +10,11 @@ import httpx
 import pytest
 import respx
 
-from openjarvis.core.registry import EngineRegistry
-from openjarvis.core.types import Message, Role
-from openjarvis.engine._stubs import ResponseFormat
-from openjarvis.engine.cloud import CloudEngine
-from openjarvis.engine.ollama import OllamaEngine
+from nexify.core.registry import EngineRegistry
+from nexify.core.types import Message, Role
+from nexify.engine._stubs import ResponseFormat
+from nexify.engine.cloud import CloudEngine
+from nexify.engine.ollama import OllamaEngine
 
 # ---------------------------------------------------------------------------
 # ResponseFormat dataclass
@@ -252,7 +252,7 @@ class TestGoogleStructuredOutput:
             {"google": mock.MagicMock(), "google.genai": mock.MagicMock()},
         ):
             with mock.patch(
-                "openjarvis.engine.cloud.genai_types", fake_genai_types, create=True
+                "nexify.engine.cloud.genai_types", fake_genai_types, create=True
             ):
                 # We need to actually test the config mutation. The simplest
                 # approach is to observe the config object passed to
@@ -375,3 +375,4 @@ class TestOllamaStructuredOutput:
             )
             sent_payload = json.loads(route.calls[0].request.content)
             assert "format" not in sent_payload
+

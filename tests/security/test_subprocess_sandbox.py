@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 import tempfile
 
-from openjarvis.security.subprocess_sandbox import (
+from nexify.security.subprocess_sandbox import (
     build_safe_env,
     kill_process_tree,
     run_sandboxed,
@@ -119,3 +119,4 @@ class TestKillProcessTree:
     def test_no_crash_on_nonexistent_pid(self) -> None:
         # Should not raise on a PID that doesn't exist
         kill_process_tree(999999999)
+

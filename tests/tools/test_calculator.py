@@ -6,7 +6,7 @@ import math
 
 import pytest
 
-from openjarvis.tools.calculator import CalculatorTool, safe_eval
+from nexify.tools.calculator import CalculatorTool, safe_eval
 
 
 class TestSafeEval:
@@ -110,3 +110,4 @@ class TestCalculatorTool:
         fn = tool.to_openai_function()
         assert fn["function"]["name"] == "calculator"
         assert "expression" in fn["function"]["parameters"]["properties"]
+

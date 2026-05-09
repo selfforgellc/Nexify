@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from typing import Any, Dict
 
-from openjarvis.evals.core.types import MetricStats, RunSummary
-from openjarvis.learning.optimize.optimizer import compute_pareto_frontier
-from openjarvis.learning.optimize.types import (
+from nexify.evals.core.types import MetricStats, RunSummary
+from nexify.learning.optimize.optimizer import compute_pareto_frontier
+from nexify.learning.optimize.types import (
     ObjectiveSpec,
     TrialConfig,
     TrialResult,
@@ -222,3 +222,4 @@ class TestComputeParetoFrontier:
             "A (best accuracy) and B (best energy) form the frontier; "
             "C is dominated by both"
         )
+

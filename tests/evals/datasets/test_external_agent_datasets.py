@@ -19,9 +19,9 @@ import importlib
 import pytest
 
 PROVIDERS = [
-    ("openjarvis.evals.datasets.adp", "ADPDataset"),
-    ("openjarvis.evals.datasets.toolorchestra", "ToolOrchestraDataset"),
-    ("openjarvis.evals.datasets.generalthoughts", "GeneralThoughtsDataset"),
+    ("nexify.evals.datasets.adp", "ADPDataset"),
+    ("nexify.evals.datasets.toolorchestra", "ToolOrchestraDataset"),
+    ("nexify.evals.datasets.generalthoughts", "GeneralThoughtsDataset"),
 ]
 
 
@@ -61,3 +61,4 @@ def test_external_provider_respects_split(mod_name, cls_name):
     if len(train_ids) + len(test_ids) < 10:
         pytest.skip("sample too small to verify disjointness meaningfully")
     assert train_ids.isdisjoint(test_ids)
+

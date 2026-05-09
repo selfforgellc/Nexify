@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.tools.llm_tool import LLMTool
+from nexify.tools.llm_tool import LLMTool
 
 
 def _make_mock_engine(content: str = "response") -> MagicMock:
@@ -65,3 +65,4 @@ class TestLLMTool:
         result = tool.execute(prompt="hello")
         assert result.success is False
         assert "LLM error" in result.content
+

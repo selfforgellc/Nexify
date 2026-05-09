@@ -8,10 +8,10 @@ import httpx
 import pytest
 import respx
 
-from openjarvis.core.registry import EngineRegistry
-from openjarvis.core.types import Message, Role
-from openjarvis.engine._base import EngineConnectionError
-from openjarvis.engine.openai_compat_engines import LlamaCppEngine
+from nexify.core.registry import EngineRegistry
+from nexify.core.types import Message, Role
+from nexify.engine._base import EngineConnectionError
+from nexify.engine.openai_compat_engines import LlamaCppEngine
 
 LLAMACPP_HOST = "http://testhost:8080"
 # Only models with llamacpp in supported_engines
@@ -206,3 +206,4 @@ class TestLlamaCppErrors:
     def test_engine_id(self) -> None:
         engine = LlamaCppEngine()
         assert engine.engine_id == "llamacpp"
+

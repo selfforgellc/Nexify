@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.evals.core.pricing import PRICING, compute_turn_cost, estimate_cost
+from nexify.evals.core.pricing import PRICING, compute_turn_cost, estimate_cost
 
 
 class TestPricing:
@@ -36,3 +36,4 @@ class TestPricing:
         # estimate_cost is the same as engine/cloud.py estimate_cost
         cost = estimate_cost("unknown-model", 100, 50)
         assert cost == 0.0
+

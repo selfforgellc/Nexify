@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.telemetry.session import (
+from nexify.telemetry.session import (
     TelemetrySample,
     TelemetrySession,
     _PythonRingBuffer,
@@ -93,3 +93,4 @@ class TestTelemetrySession:
         session = TelemetrySession(monitor=None)
         session.start()
         session.stop()
+

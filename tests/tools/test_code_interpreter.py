@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from openjarvis.core.registry import ToolRegistry
-from openjarvis.tools.code_interpreter import CodeInterpreterTool
+from nexify.core.registry import ToolRegistry
+from nexify.tools.code_interpreter import CodeInterpreterTool
 
 
 class TestCodeInterpreterTool:
@@ -130,3 +130,4 @@ class TestCodeInterpreterTool:
     def test_registry_registration(self):
         ToolRegistry.register_value("code_interpreter", CodeInterpreterTool)
         assert ToolRegistry.contains("code_interpreter")
+

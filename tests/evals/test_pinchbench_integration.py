@@ -7,8 +7,8 @@ without requiring the actual PinchBench repo or cloud API keys.
 import textwrap
 from pathlib import Path
 
-from openjarvis.evals.core.event_recorder import EventRecorder, EventType
-from openjarvis.evals.datasets.pinchbench import PinchBenchDataset
+from nexify.evals.core.event_recorder import EventRecorder, EventType
+from nexify.evals.datasets.pinchbench import PinchBenchDataset
 
 
 def _create_test_repo(tmp_path: Path) -> Path:
@@ -121,3 +121,4 @@ def test_full_grading_pipeline(tmp_path):
     assert record.metadata["pinchbench_score"] == 1.0
     assert record.metadata["pinchbench_breakdown"]["file_exists"] == 1.0
     assert record.metadata["pinchbench_breakdown"]["has_hello"] == 1.0
+

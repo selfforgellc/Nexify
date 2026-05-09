@@ -90,3 +90,4 @@ export function useSpeech() {
     isTranscribing: state === 'transcribing',
   };
 }
+

@@ -6,10 +6,10 @@ from collections.abc import AsyncIterator, Sequence
 from typing import Any, Dict, List
 from unittest import mock
 
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import Message, Role, TelemetryRecord
-from openjarvis.engine._base import InferenceEngine
-from openjarvis.telemetry.wrapper import instrumented_generate
+from nexify.core.events import EventBus, EventType
+from nexify.core.types import Message, Role, TelemetryRecord
+from nexify.engine._base import InferenceEngine
+from nexify.telemetry.wrapper import instrumented_generate
 
 
 class _StubEngine(InferenceEngine):
@@ -110,3 +110,4 @@ class TestInstrumentedGenerate:
         _, kwargs = engine.generate.call_args
         assert kwargs["temperature"] == 0.1
         assert kwargs["max_tokens"] == 512
+

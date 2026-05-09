@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from openjarvis.core.types import StepType, Trace, TraceStep
-from openjarvis.traces.analyzer import StepTypeStats, TraceAnalyzer
-from openjarvis.traces.store import TraceStore
+from nexify.core.types import StepType, Trace, TraceStep
+from nexify.traces.analyzer import StepTypeStats, TraceAnalyzer
+from nexify.traces.store import TraceStore
 
 
 def _make_trace(steps: list[TraceStep]) -> Trace:
@@ -108,3 +108,4 @@ class TestStepTypeStats:
         s = StepTypeStats(count=5, avg_duration=2.0, total_energy=10.0)
         assert s.count == 5
         assert s.std_duration == 0.0  # default
+

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List
 
-from openjarvis.learning.agents.skill_discovery import SkillDiscovery
+from nexify.learning.agents.skill_discovery import SkillDiscovery
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -209,3 +209,4 @@ class TestSkillDiscovery:
         assert len(result) >= 1
         names = [s.name for s in result]
         assert "tool_a_tool_b" in names
+

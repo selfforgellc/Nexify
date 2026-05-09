@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import threading
 
-from openjarvis.evals.core.event_recorder import AgentEvent, EventRecorder, EventType
+from nexify.evals.core.event_recorder import AgentEvent, EventRecorder, EventType
 
 
 class TestEventType:
@@ -87,3 +87,4 @@ class TestEventRecorder:
         assert len(rec) == 400
         events = rec.get_events()
         assert len(events) == 400
+

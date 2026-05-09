@@ -6,7 +6,7 @@ import json
 
 import pytest
 
-from openjarvis.bench._stubs import BaseBenchmark, BenchmarkResult, BenchmarkSuite
+from nexify.bench._stubs import BaseBenchmark, BenchmarkResult, BenchmarkSuite
 
 
 class TestBenchmarkResult:
@@ -127,3 +127,4 @@ class TestBenchmarkSuite:
         summary = suite.summary(results)
         assert summary["benchmark_count"] == 2
         assert len(summary["benchmarks"]) == 2
+

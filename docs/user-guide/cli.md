@@ -1,17 +1,17 @@
 # CLI Reference
 
-OpenJarvis provides a command-line interface through the `jarvis` command. Built on [Click](https://click.palletsprojects.com/), it offers subcommands for querying models, managing memory, running benchmarks, and serving an OpenAI-compatible API.
+nexify provides a command-line interface through the `jarvis` command. Built on [Click](https://click.palletsprojects.com/), it offers subcommands for querying models, managing memory, running benchmarks, and serving an OpenAI-compatible API.
 
 ## Global Options
 
 ```bash
-jarvis --version   # Print the OpenJarvis version
+jarvis --version   # Print the nexify version
 jarvis --help      # Show top-level help with all subcommands
 ```
 
 ## `jarvis init`
 
-Detect local hardware (CPU, GPU, RAM) and generate a configuration file at `~/.openjarvis/config.toml`.
+Detect local hardware (CPU, GPU, RAM) and generate a configuration file at `~/.nexify/config.toml`.
 
 ```bash
 jarvis init           # Interactive — refuses to overwrite existing config
@@ -201,7 +201,7 @@ jarvis model pull qwen3:8b
 
 ## `jarvis pearl`
 
-Access Pearl's native node, wallet, and RPC tools from the OpenJarvis CLI.
+Access Pearl's native node, wallet, and RPC tools from the nexify CLI.
 
 ```bash
 jarvis pearl doctor
@@ -214,7 +214,7 @@ jarvis pearl address
 All Pearl wrapper commands use the `jarvis pearl <command>` shape. The
 pass-through commands map to Pearl's native binaries:
 
-| OpenJarvis command | Pearl binary | Use |
+| nexify command | Pearl binary | Use |
 |--------------------|--------------|-----|
 | `jarvis pearl doctor` | n/a | Check whether `pearld`, `oyster`, and `prlctl` are discoverable |
 | `jarvis pearl node` | `pearld` | Run the Pearl full node |
@@ -558,3 +558,4 @@ jarvis learning daemon start
 jarvis learning daemon stop
 jarvis learning daemon status
 ```
+

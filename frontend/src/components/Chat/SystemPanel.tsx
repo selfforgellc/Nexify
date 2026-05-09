@@ -254,7 +254,7 @@ export function SystemPanel() {
           </button>
 
           <a
-            href="https://open-jarvis.github.io/OpenJarvis/leaderboard"
+            href="https://open-jarvis.github.io/nexify/leaderboard"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 mt-1.5 px-3 py-1.5 text-[11px] rounded-lg transition-colors"
@@ -310,3 +310,4 @@ function formatNumber(n: number): string {
   if (n >= 1_000) return (n / 1_000).toFixed(1) + 'K';
   return String(n);
 }
+

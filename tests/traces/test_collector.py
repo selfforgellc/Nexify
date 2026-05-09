@@ -6,11 +6,11 @@ import time
 from pathlib import Path
 from typing import Any, Optional
 
-from openjarvis.agents._stubs import AgentContext, AgentResult, BaseAgent
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import StepType
-from openjarvis.traces.collector import TraceCollector
-from openjarvis.traces.store import TraceStore
+from nexify.agents._stubs import AgentContext, AgentResult, BaseAgent
+from nexify.core.events import EventBus, EventType
+from nexify.core.types import StepType
+from nexify.traces.collector import TraceCollector
+from nexify.traces.store import TraceStore
 
 
 class _FakeAgent(BaseAgent):
@@ -248,7 +248,7 @@ class _RichToolAgent(BaseAgent):
         self, input: str, context: Optional[AgentContext] = None,
         **kwargs: Any,
     ) -> AgentResult:
-        from openjarvis.core.types import ToolResult
+        from nexify.core.types import ToolResult
 
         # Turn 1: inference with tool call request
         self._bus.publish(EventType.INFERENCE_START, {
@@ -369,3 +369,4 @@ class TestRichTraceCollector:
         assert trace.query == "What is 2+2?"
         assert len(trace.messages) == 4
         store.close()
+

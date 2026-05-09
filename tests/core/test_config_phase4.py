@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from openjarvis.core.config import (
+from nexify.core.config import (
     HardwareInfo,
     JarvisConfig,
     LearningConfig,
@@ -75,3 +75,4 @@ class TestLearningConfig:
         assert "[learning]" in toml_str
         assert "[learning.routing]" in toml_str
         assert 'policy = "heuristic"' in toml_str
+

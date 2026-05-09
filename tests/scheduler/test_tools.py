@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.scheduler.scheduler import ScheduledTask
-from openjarvis.scheduler.tools import (
+from nexify.scheduler.scheduler import ScheduledTask
+from nexify.scheduler.tools import (
     CancelScheduledTaskTool,
     ListScheduledTasksTool,
     PauseScheduledTaskTool,
@@ -136,3 +136,4 @@ class TestWithScheduler:
         result = tool.execute()  # missing task_id
         assert not result.success
         assert "Missing" in result.content
+

@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.mcp.client import MCPClient
-from openjarvis.mcp.protocol import MCPError
-from openjarvis.mcp.server import MCPServer
-from openjarvis.mcp.transport import InProcessTransport
-from openjarvis.tools._stubs import ToolSpec
-from openjarvis.tools.calculator import CalculatorTool
-from openjarvis.tools.think import ThinkTool
+from nexify.mcp.client import MCPClient
+from nexify.mcp.protocol import MCPError
+from nexify.mcp.server import MCPServer
+from nexify.mcp.transport import InProcessTransport
+from nexify.tools._stubs import ToolSpec
+from nexify.tools.calculator import CalculatorTool
+from nexify.tools.think import ThinkTool
 
 
 @pytest.fixture
@@ -26,7 +26,7 @@ class TestMCPClient:
         result = client.initialize()
         assert "protocolVersion" in result
         assert "serverInfo" in result
-        assert result["serverInfo"]["name"] == "openjarvis"
+        assert result["serverInfo"]["name"] == "nexify"
         assert client._initialized is True
 
     def test_initialize_sets_capabilities(self, client):
@@ -101,3 +101,4 @@ class TestMCPClient:
         result = client.call_tool("think")
         # Think tool echoes empty thought
         assert result["isError"] is False
+

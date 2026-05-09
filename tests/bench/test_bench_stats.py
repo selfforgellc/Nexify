@@ -7,14 +7,14 @@ from unittest.mock import MagicMock
 
 from rich.console import Console
 
-from openjarvis.bench._stubs import BenchmarkResult
-from openjarvis.cli.bench_cmd import _render_stats_table
+from nexify.bench._stubs import BenchmarkResult
+from nexify.cli.bench_cmd import _render_stats_table
 
 
 class TestLatencyBenchmarkStats:
     def test_latency_includes_std(self):
         """LatencyBenchmark should include std_latency in metrics."""
-        from openjarvis.bench.latency import LatencyBenchmark
+        from nexify.bench.latency import LatencyBenchmark
 
         bench = LatencyBenchmark()
         engine = MagicMock()
@@ -67,3 +67,4 @@ class TestRenderStatsTable:
         _render_stats_table(console, result)
         output = console.file.getvalue()
         assert "tokens_per_second" in output or "42.5" in output
+

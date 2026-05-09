@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from openjarvis.core.registry import RouterPolicyRegistry
-from openjarvis.learning.routing.heuristic_policy import ensure_registered
-from openjarvis.learning.routing.router import HeuristicRouter
+from nexify.core.registry import RouterPolicyRegistry
+from nexify.learning.routing.heuristic_policy import ensure_registered
+from nexify.learning.routing.router import HeuristicRouter
 
 
 class TestHeuristicPolicy:
@@ -21,3 +21,4 @@ class TestHeuristicPolicy:
         cls = RouterPolicyRegistry.get("heuristic")
         router = cls(available_models=["model-a"])
         assert router.available_models == ["model-a"]
+

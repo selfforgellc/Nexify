@@ -7,11 +7,11 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.agents._stubs import AgentResult
-from openjarvis.agents.deep_research import DeepResearchAgent
-from openjarvis.connectors.store import KnowledgeStore
-from openjarvis.core.registry import AgentRegistry
-from openjarvis.tools.knowledge_search import KnowledgeSearchTool
+from nexify.agents._stubs import AgentResult
+from nexify.agents.deep_research import DeepResearchAgent
+from nexify.connectors.store import KnowledgeStore
+from nexify.core.registry import AgentRegistry
+from nexify.tools.knowledge_search import KnowledgeSearchTool
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -176,3 +176,4 @@ def test_agent_defaults():
     assert DeepResearchAgent._default_max_turns == 8
     assert DeepResearchAgent._default_temperature == 0.3
     assert DeepResearchAgent._default_max_tokens == 4096
+

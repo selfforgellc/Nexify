@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import time
 
-from openjarvis.core.types import StepType, Trace, TraceStep
+from nexify.core.types import StepType, Trace, TraceStep
 
 
 class TestTraceStep:
@@ -96,3 +96,4 @@ class TestTrace:
         trace = Trace(query="test", outcome="success", feedback=0.9)
         assert trace.outcome == "success"
         assert trace.feedback == 0.9
+

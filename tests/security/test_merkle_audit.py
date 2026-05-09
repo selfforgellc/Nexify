@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import time
 
-from openjarvis.security.audit import AuditLogger
-from openjarvis.security.types import (
+from nexify.security.audit import AuditLogger
+from nexify.security.types import (
     ScanFinding,
     SecurityEvent,
     SecurityEventType,
@@ -115,3 +115,4 @@ class TestMerkleAudit:
         valid, _ = logger2.verify_chain()
         assert valid
         logger2.close()
+

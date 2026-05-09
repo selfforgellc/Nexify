@@ -1,11 +1,11 @@
 # Browser Assistant
 
-A web browsing agent that uses OpenJarvis's orchestrator loop with browser,
+A web browsing agent that uses nexify's orchestrator loop with browser,
 web_search, and think tools to find and synthesize information from the web.
 
 ## Requirements
 
-- OpenJarvis installed (`git clone https://github.com/open-jarvis/OpenJarvis.git && cd OpenJarvis && uv sync` or `uv sync --extra dev`)
+- nexify installed (`git clone https://github.com/open-jarvis/nexify.git && cd nexify && uv sync` or `uv sync --extra dev`)
 - An inference engine running (Ollama, cloud API, vLLM, etc.)
 
 ## Usage
@@ -29,3 +29,4 @@ and three tools:
 The orchestrator runs a multi-turn loop: searching, browsing, reasoning, and
 repeating until it has enough information to produce a comprehensive answer
 with cited sources.
+

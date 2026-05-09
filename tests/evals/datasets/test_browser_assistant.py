@@ -1,6 +1,6 @@
 """Tests for the browser_assistant dataset."""
 
-from openjarvis.evals.datasets.browser_assistant import (
+from nexify.evals.datasets.browser_assistant import (
     BrowserAssistantDataset,
 )
 
@@ -59,3 +59,4 @@ def test_difficulty_tiers():
     assert "easy" in subjects
     assert "medium" in subjects
     assert "hard" in subjects
+

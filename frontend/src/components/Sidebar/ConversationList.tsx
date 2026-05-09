@@ -96,3 +96,4 @@ export function ConversationList({ searchQuery }: Props) {
     </div>
   );
 }
+

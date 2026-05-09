@@ -27,3 +27,4 @@ jobs:
             gh issue edit "$ISSUE" --repo "${{ github.repository }}" --add-assignee "$COMMENTER"
             echo "Assigned $COMMENTER to #$ISSUE"
           fi
+

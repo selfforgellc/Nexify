@@ -9,7 +9,7 @@ from typing import Generator
 
 import pytest
 
-from openjarvis.telemetry.batch import BatchMetrics, EnergyBatch
+from nexify.telemetry.batch import BatchMetrics, EnergyBatch
 
 # ---------------------------------------------------------------------------
 # BatchMetrics defaults
@@ -281,3 +281,4 @@ class TestPerRequestEnergy:
         m = batch.metrics
         assert m is not None
         assert m.per_request_energy == [0.0, 0.0]
+

@@ -53,3 +53,4 @@ def assert_close_sets_uninitialized(monitor):
     """Assert that close() marks the monitor as not initialized."""
     monitor.close()
     assert monitor._initialized is False
+

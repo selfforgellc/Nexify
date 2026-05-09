@@ -141,3 +141,4 @@ export interface LogEntry {
   category: 'server' | 'model' | 'chat' | 'tool';
   message: string;
 }
+

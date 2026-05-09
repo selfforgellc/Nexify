@@ -4,14 +4,14 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.mcp.protocol import (
+from nexify.mcp.protocol import (
     INVALID_PARAMS,
     METHOD_NOT_FOUND,
     MCPRequest,
 )
-from openjarvis.mcp.server import MCPServer
-from openjarvis.tools.calculator import CalculatorTool
-from openjarvis.tools.think import ThinkTool
+from nexify.mcp.server import MCPServer
+from nexify.tools.calculator import CalculatorTool
+from nexify.tools.think import ThinkTool
 
 
 @pytest.fixture
@@ -30,7 +30,7 @@ class TestMCPServer:
         assert "protocolVersion" in result
         assert "capabilities" in result
         assert "serverInfo" in result
-        assert result["serverInfo"]["name"] == "openjarvis"
+        assert result["serverInfo"]["name"] == "nexify"
 
     def test_initialize_capabilities(self, server):
         req = MCPRequest(method="initialize", id=1)
@@ -193,3 +193,4 @@ class TestMCPServer:
         assert resp.error is None
         assert resp.result["isError"] is False
         assert "inf" in resp.result["content"][0]["text"]
+

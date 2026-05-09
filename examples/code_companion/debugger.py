@@ -56,10 +56,10 @@ def main(
     reasons about root causes, and suggests a concrete fix.
     """
     try:
-        from openjarvis import Jarvis
+        from nexify import Jarvis
     except ImportError:
         click.echo(
-            "Error: openjarvis is not installed. "
+            "Error: nexify is not installed. "
             "Install it with:  uv sync --extra dev",
             err=True,
         )
@@ -121,3 +121,4 @@ def main(
 
 if __name__ == "__main__":
     main()
+

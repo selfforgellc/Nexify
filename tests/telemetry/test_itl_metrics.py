@@ -9,15 +9,15 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import Message, Role, TelemetryRecord
-from openjarvis.telemetry.aggregator import TelemetryAggregator
-from openjarvis.telemetry.instrumented_engine import (
+from nexify.core.events import EventBus, EventType
+from nexify.core.types import Message, Role, TelemetryRecord
+from nexify.telemetry.aggregator import TelemetryAggregator
+from nexify.telemetry.instrumented_engine import (
     InstrumentedEngine,
     _compute_itl_stats,
     _percentile,
 )
-from openjarvis.telemetry.store import TelemetryStore
+from nexify.telemetry.store import TelemetryStore
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -353,3 +353,4 @@ class TestItlStorage:
         assert stats[0].avg_p95_itl_ms == pytest.approx(25.0)
         agg.close()
         store.close()
+

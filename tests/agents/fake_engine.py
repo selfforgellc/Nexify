@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any, AsyncIterator, Dict, List
 
-from openjarvis.engine._stubs import InferenceEngine
+from nexify.engine._stubs import InferenceEngine
 
 
 class FakeEngine(InferenceEngine):
@@ -75,3 +75,4 @@ class FakeEngine(InferenceEngine):
 
     def health(self) -> bool:
         return True
+

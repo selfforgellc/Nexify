@@ -5,7 +5,7 @@ from __future__ import annotations
 import tempfile
 from pathlib import Path
 
-from openjarvis.core.config import (
+from nexify.core.config import (
     ChannelConfig,
     DiscordChannelConfig,
     EmailChannelConfig,
@@ -195,3 +195,4 @@ bot_token = "slack-token"
             assert cfg.channel.slack.bot_token == "slack-token"
         finally:
             path.unlink()
+

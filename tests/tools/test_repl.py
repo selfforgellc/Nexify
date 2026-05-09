@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import time
 
-from openjarvis.core.registry import ToolRegistry
-from openjarvis.tools.repl import ReplTool
+from nexify.core.registry import ToolRegistry
+from nexify.tools.repl import ReplTool
 
 
 class TestReplSpec:
@@ -262,3 +262,4 @@ class TestReplRegistration:
         # Re-register after conftest clears all registries
         ToolRegistry.register_value("repl", ReplTool)
         assert ToolRegistry.contains("repl")
+

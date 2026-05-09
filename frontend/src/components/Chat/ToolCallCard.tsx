@@ -166,3 +166,4 @@ function formatJson(raw: string): string {
     return raw;
   }
 }
+

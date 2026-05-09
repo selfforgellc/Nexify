@@ -10,7 +10,7 @@ Use a frontier model as a meta-engineer to automatically improve your local agen
 jarvis learning init
 ```
 
-This creates the distillation directory layout under `~/.openjarvis/learning/` and initializes a git checkpoint repo at `~/.openjarvis/.git` for tracking config changes.
+This creates the distillation directory layout under `~/.nexify/learning/` and initializes a git checkpoint repo at `~/.nexify/.git` for tracking config changes.
 
 ### 2. Run your first session
 
@@ -61,7 +61,7 @@ The session is persisted to `learning.db` (SQLite index) and `session.json` (aut
 
 ## Configuration
 
-Add to `~/.openjarvis/config.toml`:
+Add to `~/.nexify/config.toml`:
 
 ```toml
 [learning.distillation]
@@ -148,7 +148,7 @@ Even approved edits are gated by the benchmark — approval means "try it", not 
 
 ## Rollback and History
 
-Every edit creates a git commit in the checkpoint repo at `~/.openjarvis/.git`. This is separate from your OpenJarvis source repo.
+Every edit creates a git commit in the checkpoint repo at `~/.nexify/.git`. This is separate from your nexify source repo.
 
 ```bash
 # List past sessions
@@ -202,24 +202,24 @@ The system needs real usage data before it can learn:
 - **20+ traces, < 10 high-feedback:** Enough for diagnosis, but no benchmark yet. Sessions will run diagnosis but can't gate edits.
 - **10+ high-feedback traces:** Bootstrap benchmark is created automatically (`personal_v1.json`). Full learning loop is available.
 
-**Getting there faster:** Use OpenJarvis normally and provide feedback on results (thumbs up/down in the UI, or `jarvis feedback` in the CLI).
+**Getting there faster:** Use nexify normally and provide feedback on results (thumbs up/down in the UI, or `jarvis feedback` in the CLI).
 
 ## Troubleshooting
 
 | Error | Cause | Fix |
 |-------|-------|-----|
-| "Not enough traces yet" | Fewer than 20 traces in the store | Use OpenJarvis more, provide feedback |
-| "Working tree dirty, cannot stage" | Manual edits to `~/.openjarvis/config.toml` during a session | Commit or revert manual changes first |
+| "Not enough traces yet" | Fewer than 20 traces in the store | Use nexify more, provide feedback |
+| "Working tree dirty, cannot stage" | Manual edits to `~/.nexify/config.toml` during a session | Commit or revert manual changes first |
 | "All clusters dropped: insufficient evidence" | Teacher diagnosed clusters but couldn't reproduce failures | Check that the student is actually failing on the flagged tasks |
-| "ConfigurationError: distillation root inside source tree" | `OPENJARVIS_HOME` points inside the repo | Set `OPENJARVIS_HOME` to `~/.openjarvis` (default) or another external dir |
+| "ConfigurationError: distillation root inside source tree" | `nexify_HOME` points inside the repo | Set `nexify_HOME` to `~/.nexify` (default) or another external dir |
 | "Personal benchmark is empty" | Not enough high-feedback traces yet | Provide feedback on 10+ traces with score >= 0.7 |
 
 ## Where Artifacts Live
 
-All distillation artifacts live under `~/.openjarvis/` (never inside the source repo):
+All distillation artifacts live under `~/.nexify/` (never inside the source repo):
 
 ```
-~/.openjarvis/
+~/.nexify/
 ├── config.toml              # Your configuration (git-tracked by checkpoint)
 ├── agents/                  # Agent prompts (git-tracked)
 ├── tools/                   # Tool descriptions (git-tracked)
@@ -249,3 +249,4 @@ The daemon runs the scheduled trigger (default: daily at 03:00) and the cluster 
 - [User Guide: Evaluations](evaluations.md) — the eval infrastructure that powers the benchmark gate
 - [User Guide: CLI](cli.md#jarvis-learning) — full CLI reference
 - [Getting Started: Configuration](../getting-started/configuration.md) — all config knobs
+

@@ -8,7 +8,7 @@ from typing import Any, Dict, List
 
 import pytest
 
-from openjarvis.evals.core.agentic_runner import AgenticRunner, _extract_patch
+from nexify.evals.core.agentic_runner import AgenticRunner, _extract_patch
 
 # ---------------------------------------------------------------------------
 # Mock objects
@@ -165,3 +165,4 @@ class TestExtractPatch:
         text = "This is just a regular response with no code changes."
         patch = _extract_patch(text)
         assert patch is None
+

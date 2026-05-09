@@ -8,10 +8,10 @@ from typing import Iterator, List, Optional
 
 import pytest
 
-from openjarvis.connectors._stubs import BaseConnector, Document, SyncStatus
-from openjarvis.connectors.pipeline import IngestionPipeline
-from openjarvis.connectors.store import KnowledgeStore
-from openjarvis.connectors.sync_engine import SyncEngine
+from nexify.connectors._stubs import BaseConnector, Document, SyncStatus
+from nexify.connectors.pipeline import IngestionPipeline
+from nexify.connectors.store import KnowledgeStore
+from nexify.connectors.sync_engine import SyncEngine
 
 # ---------------------------------------------------------------------------
 # StubConnector test helper
@@ -182,3 +182,4 @@ def test_sync_multiple_connectors(
     assert len(results_b) >= 1
     for r in results_b:
         assert r.metadata.get("source") == "source_b"
+

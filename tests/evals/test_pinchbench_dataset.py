@@ -2,7 +2,7 @@
 
 import textwrap
 
-from openjarvis.evals.datasets.pinchbench import _parse_task_markdown
+from nexify.evals.datasets.pinchbench import _parse_task_markdown
 
 
 def test_parse_task_markdown_basic():
@@ -128,3 +128,4 @@ def test_parse_task_markdown_no_automated_checks():
     task = _parse_task_markdown(md, filename="task_03_blog.md")
     assert task["automated_checks"] is None
     assert "Writing" in task["llm_judge_rubric"]
+

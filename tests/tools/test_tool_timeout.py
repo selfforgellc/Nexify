@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import time
 
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import ToolCall, ToolResult
-from openjarvis.tools._stubs import BaseTool, ToolExecutor, ToolSpec
+from nexify.core.events import EventBus, EventType
+from nexify.core.types import ToolCall, ToolResult
+from nexify.tools._stubs import BaseTool, ToolExecutor, ToolSpec
 
 
 class SlowTool(BaseTool):
@@ -110,3 +110,4 @@ class TestToolTimeout:
         result = executor.execute(call)
         assert not result.success
         assert "Unknown tool" in result.content
+

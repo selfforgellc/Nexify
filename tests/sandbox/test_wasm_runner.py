@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.sandbox.wasm_runner import WasmResult, WasmRunner, create_sandbox_runner
+from nexify.sandbox.wasm_runner import WasmResult, WasmRunner, create_sandbox_runner
 
 
 class TestWasmRunner:
@@ -56,3 +56,4 @@ class TestCreateSandboxRunner:
         runner = create_sandbox_runner(FakeConfig())
         if WasmRunner.available():
             assert isinstance(runner, WasmRunner)
+

@@ -15,3 +15,4 @@ Pearl adds gateway metrics later. Re-capture by:
 
 If Pearl renames metrics, update `mining/_metrics.py::PROM_*` constants and
 re-capture.
+

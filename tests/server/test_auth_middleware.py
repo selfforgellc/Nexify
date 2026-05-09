@@ -4,12 +4,12 @@ from __future__ import annotations
 
 import pytest
 
-pytest.importorskip("fastapi", reason="openjarvis[server] not installed")
+pytest.importorskip("fastapi", reason="nexify[server] not installed")
 
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from openjarvis.server.auth_middleware import AuthMiddleware
+from nexify.server.auth_middleware import AuthMiddleware
 
 
 def _make_app(api_key: str) -> FastAPI:
@@ -69,3 +69,4 @@ class TestAuthMiddleware:
         client = TestClient(_make_app(""))
         resp = client.get("/v1/models")
         assert resp.status_code == 200
+

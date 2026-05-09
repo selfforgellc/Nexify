@@ -7,9 +7,9 @@ from unittest import mock
 
 from click.testing import CliRunner
 
-from openjarvis.cli import cli
+from nexify.cli import cli
 
-_ask_mod = importlib.import_module("openjarvis.cli.ask")
+_ask_mod = importlib.import_module("nexify.cli.ask")
 
 
 def _mock_engine():
@@ -129,3 +129,4 @@ class TestAskModelResolution:
             cfg.agent.context_from_memory = False
             result = CliRunner().invoke(cli, ["ask", "Hello"])
         assert result.exit_code == 0
+

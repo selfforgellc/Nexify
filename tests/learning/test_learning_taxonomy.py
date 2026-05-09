@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.learning._stubs import (
+from nexify.learning._stubs import (
     AgentLearningPolicy,
     IntelligenceLearningPolicy,
     LearningPolicy,
@@ -33,3 +33,4 @@ class TestLearningPolicyABC:
     def test_hierarchy(self):
         assert issubclass(IntelligenceLearningPolicy, LearningPolicy)
         assert issubclass(AgentLearningPolicy, LearningPolicy)
+

@@ -6,10 +6,10 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import Message, Role
-from openjarvis.security.guardrails import GuardrailsEngine, SecurityBlockError
-from openjarvis.security.types import RedactionMode
+from nexify.core.events import EventBus, EventType
+from nexify.core.types import Message, Role
+from nexify.security.guardrails import GuardrailsEngine, SecurityBlockError
+from nexify.security.types import RedactionMode
 
 
 def _make_mock_engine(response_content: str = "Hello!") -> MagicMock:
@@ -295,3 +295,4 @@ class TestGuardrailsEngineStream:
 
         alerts = [e for e in bus.history if e.event_type == EventType.SECURITY_ALERT]
         assert len(alerts) == 0
+

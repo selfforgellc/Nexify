@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from openjarvis.skills.importer import SkillImporter
-from openjarvis.skills.parser import SkillParser
-from openjarvis.skills.sources.base import ResolvedSkill
-from openjarvis.skills.tool_translator import ToolTranslator
+from nexify.skills.importer import SkillImporter
+from nexify.skills.parser import SkillParser
+from nexify.skills.sources.base import ResolvedSkill
+from nexify.skills.tool_translator import ToolTranslator
 
 
 def _make_resolved(tmp_path: Path, body: str = "Body") -> ResolvedSkill:
@@ -202,3 +202,4 @@ class TestImportSkill:
 
         installed = target_root / "hermes" / "my-skill" / "SKILL.md"
         assert "Original" in installed.read_text()
+

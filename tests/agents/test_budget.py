@@ -1,7 +1,7 @@
-from openjarvis.agents._stubs import AgentResult
-from openjarvis.agents.executor import AgentExecutor
-from openjarvis.agents.manager import AgentManager
-from openjarvis.core.events import EventBus, EventType
+from nexify.agents._stubs import AgentResult
+from nexify.agents.executor import AgentExecutor
+from nexify.agents.manager import AgentManager
+from nexify.core.events import EventBus, EventType
 
 
 def test_budget_exceeded_sets_status(tmp_path):
@@ -78,3 +78,4 @@ def test_token_budget_exceeded(tmp_path):
     updated = mgr.get_agent(agent["id"])
     assert updated["status"] == "budget_exceeded"
     mgr.close()
+

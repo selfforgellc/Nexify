@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.cli.hints import (
+from nexify.cli.hints import (
     hint_no_config,
     hint_no_engine,
     hint_no_model,
@@ -57,3 +57,4 @@ class TestHintFunctions:
 
     def test_mining_not_running_hint_silent_when_unconfigured(self):
         assert mining_not_running_hint(None, sidecar_present=False) is None
+

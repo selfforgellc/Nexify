@@ -8,10 +8,10 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from openjarvis.channels._stubs import ChannelStatus
-from openjarvis.channels.gmail import GmailChannel
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.registry import ChannelRegistry
+from nexify.channels._stubs import ChannelStatus
+from nexify.channels.gmail import GmailChannel
+from nexify.core.events import EventBus, EventType
+from nexify.core.registry import ChannelRegistry
 from tests.channels.channel_test_helpers import make_common_channel_tests
 
 
@@ -188,8 +188,9 @@ class TestLive:
 
         result = ch.send(
             recipient,
-            "OpenJarvis Gmail channel test message",
-            metadata={"subject": "OpenJarvis Test"},
+            "nexify Gmail channel test message",
+            metadata={"subject": "nexify Test"},
         )
         assert result is True
         ch.disconnect()
+

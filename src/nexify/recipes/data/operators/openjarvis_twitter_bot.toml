@@ -1,0 +1,23 @@
+[recipe]
+name = "nexify-twitter-bot"
+kind = "operator"
+description = "Reactive Twitter bot for @nexifyAI — answers questions, creates GitHub issues from bug/feature mentions"
+version = "0.1.0"
+
+[intelligence]
+model = "qwen3:32b"
+
+[engine]
+key = "ollama"
+
+[agent]
+type = "orchestrator"
+max_turns = 8
+temperature = 0.4
+tools = ["think", "memory_search", "memory_store", "http_request", "channel_send"]
+system_prompt_path = "nexify_twitter_bot_prompt.md"
+
+[channels]
+input = ["twitter"]
+output = ["twitter"]
+

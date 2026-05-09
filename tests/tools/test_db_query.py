@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import sqlite3
 
-from openjarvis.tools.db_query import DatabaseQueryTool
+from nexify.tools.db_query import DatabaseQueryTool
 
 
 class TestDatabaseQueryTool:
@@ -281,3 +281,4 @@ class TestDatabaseQueryTool:
         assert "|" in result.content
         assert "short" in result.content
         assert "longer_column" in result.content
+

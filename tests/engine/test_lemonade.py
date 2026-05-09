@@ -10,10 +10,10 @@ import httpx
 import pytest
 import respx
 
-from openjarvis.core.registry import EngineRegistry
-from openjarvis.core.types import Message, Role
-from openjarvis.engine._base import EngineConnectionError
-from openjarvis.engine.openai_compat_engines import LemonadeEngine
+from nexify.core.registry import EngineRegistry
+from nexify.core.types import Message, Role
+from nexify.engine._base import EngineConnectionError
+from nexify.engine.openai_compat_engines import LemonadeEngine
 
 
 @pytest.fixture()
@@ -108,3 +108,4 @@ class TestLemonadeListModels:
                 )
             )
             assert engine.list_models() == ["Qwen3-4B-Instruct", "Llama-3.1-8B"]
+

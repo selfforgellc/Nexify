@@ -1,4 +1,4 @@
-// Desktop API helpers — thin wrappers around the OpenJarvis REST API.
+// Desktop API helpers — thin wrappers around the nexify REST API.
 // All functions accept an explicit apiUrl so the desktop can be pointed at any server.
 
 // ---------------------------------------------------------------------------
@@ -180,3 +180,4 @@ export async function fetchAgentTraces(apiUrl: string, agentId: string, limit = 
 export async function fetchAgentTrace(apiUrl: string, agentId: string, traceId: string): Promise<AgentTraceDetail> {
   return request<AgentTraceDetail>(apiUrl, `/v1/managed-agents/${agentId}/traces/${traceId}`);
 }
+

@@ -1,6 +1,6 @@
 # Mining Pearl on Apple Silicon (and other CPU hosts)
 
-OpenJarvis can mine the [Pearl](https://github.com/pearl-research-labs/pearl) chain
+nexify can mine the [Pearl](https://github.com/pearl-research-labs/pearl) chain
 on Apple Silicon Macs (M1/M2/M3/M4) using the `cpu-pearl` provider. **This is
 v1**: decoupled CPU mining. Your existing local LLM workflow (Ollama, MLX-LM,
 llama.cpp, vLLM) is untouched; mining runs in the background as a separate
@@ -38,7 +38,7 @@ kernel path.
 ## Install
 
 ```bash
-# from your OpenJarvis repo
+# from your nexify repo
 uv sync --extra mining-pearl-cpu
 ```
 
@@ -56,7 +56,7 @@ uv pip install ../miner/miner-utils ../miner/pearl-gateway ../miner/miner-base
 ## Configure
 
 Create a Pearl wallet and start a synced `pearld` separately using Pearl's
-README. Then write OpenJarvis' mining config:
+README. Then write nexify' mining config:
 
 ```bash
 export PEARLD_RPC_PASSWORD="rpcpass"
@@ -147,12 +147,12 @@ Session
 |---|---|---|
 | `mine doctor` says `Pearl Python packages not installed` | Wheels not built yet | Run `jarvis mine init` |
 | `pearl-gateway` log shows `connection refused` to `http://localhost:44107` | `pearld` not running | Start `pearld` per Pearl's README |
-| `mine status` shows `last_error: gateway metrics unreachable` | `pearl-gateway` crashed | Check `~/.openjarvis/logs/mining/pearl-gateway.log` |
+| `mine status` shows `last_error: gateway metrics unreachable` | `pearl-gateway` crashed | Check `~/.nexify/logs/mining/pearl-gateway.log` |
 | Build fails with `error: linker 'cc' not found` | Xcode CLT not installed | `xcode-select --install` |
 | `maturin build` complains about `tikv-jemallocator` | macOS SDK too old | Update macOS / Xcode |
 
-For anything not on this list, capture `~/.openjarvis/logs/mining/` and open
-an issue at https://github.com/open-jarvis/OpenJarvis/issues.
+For anything not on this list, capture `~/.nexify/logs/mining/` and open
+an issue at https://github.com/open-jarvis/nexify/issues.
 
 ## What changes in v2 / v3
 
@@ -160,3 +160,4 @@ an issue at https://github.com/open-jarvis/OpenJarvis/issues.
   into MLX-LM or `llama-cpp-python` so inference matmuls become mining work.
 - **v3 (only if v2 perf is insufficient):** Native Metal kernel as a Pearl
   upstream contribution. No user-visible change other than higher hashrate.
+

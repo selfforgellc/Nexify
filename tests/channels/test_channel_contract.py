@@ -11,14 +11,14 @@ import importlib
 
 import pytest
 
-import openjarvis.channels  # noqa: F401 — trigger registration
-from openjarvis.channels._stubs import ChannelStatus
-from openjarvis.core.registry import ChannelRegistry
+import nexify.channels  # noqa: F401 — trigger registration
+from nexify.channels._stubs import ChannelStatus
+from nexify.core.registry import ChannelRegistry
 
 # Collect channel classes at import time (before registry gets cleared).
 # We store the actual class objects, not registry keys, so they survive
 # the autouse _clean_registries fixture.
-importlib.reload(openjarvis.channels)
+importlib.reload(nexify.channels)
 _ALL_CHANNELS = [(key, ChannelRegistry.get(key)) for key in ChannelRegistry.keys()]
 
 
@@ -81,3 +81,4 @@ def test_on_message_accepts_handler(channel_entry):
     ch = channel_cls()
     ch.on_message(lambda msg: None)
     # Should not raise
+

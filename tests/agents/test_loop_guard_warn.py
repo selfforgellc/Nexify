@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.agents.loop_guard import LoopGuard, LoopGuardConfig, LoopVerdict
+from nexify.agents.loop_guard import LoopGuard, LoopGuardConfig, LoopVerdict
 
 
 def test_warn_before_block_first_cycle_warns():
@@ -66,3 +66,4 @@ def test_default_behavior_unchanged():
     v = guard.check_call("search", '{"q": "test"}')
     assert v.blocked
     assert not v.warned
+

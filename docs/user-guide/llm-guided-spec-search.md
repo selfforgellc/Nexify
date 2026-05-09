@@ -55,7 +55,7 @@ follow-ups — they're not part of this PR.
 
 ### `splits.py` — deterministic train / test splits
 
-`src/openjarvis/evals/core/splits.py` adds a small helper that takes a
+`src/nexify/evals/core/splits.py` adds a small helper that takes a
 list of records and a benchmark name and returns a deterministic
 train / test partition. The split is keyed off a stable hash of each
 record's id, so the same `(records, train_frac, seed)` always yields the
@@ -63,7 +63,7 @@ same partition. This is the substrate that makes "evaluate on
 `split=test`" and "search over `split=train`" reproducible.
 
 ```python
-from openjarvis.evals.core.splits import apply_split
+from nexify.evals.core.splits import apply_split
 
 train = apply_split(records, split="train", train_frac=0.2, seed=42)
 test  = apply_split(records, split="test",  train_frac=0.2, seed=42)
@@ -71,7 +71,7 @@ all_  = apply_split(records, split="all",   train_frac=0.2, seed=42)  # passthro
 ```
 
 The `split` kwarg is now wired through every dataset provider in
-`openjarvis.evals.datasets` (gaia, livecodebench, liveresearch,
+`nexify.evals.datasets` (gaia, livecodebench, liveresearch,
 liveresearchbench, pinchbench, taubench, toolcall15) so any caller that
 constructs a `BenchmarkConfig` can request a particular split.
 
@@ -95,7 +95,7 @@ they exist purely to feed the proposer's diagnose phase.
 
 ### `external_adapter.py` — corpus records as synthetic traces
 
-`src/openjarvis/learning/distillation/external_adapter.py` adapts records
+`src/nexify/learning/distillation/external_adapter.py` adapts records
 from any external corpus into rows the proposer's existing trace tools
 understand. The proposer reads from the SQLite TraceStore via search /
 get tools; this adapter writes each `EvalRecord` as a synthetic `Trace`
@@ -103,24 +103,24 @@ with `feedback=0.5` (no ground truth) and a `source_name` tag in
 metadata so multi-source diagnose runs can filter downstream.
 
 ```python
-from openjarvis.evals.datasets.adp import ADPDataset
-from openjarvis.learning.distillation.external_adapter import (
+from nexify.evals.datasets.adp import ADPDataset
+from nexify.learning.distillation.external_adapter import (
     write_external_records_as_traces,
 )
-from openjarvis.traces.store import TraceStore
+from nexify.traces.store import TraceStore
 
 records = ADPDataset().load(max_samples=200, seed=42, split="all")
-store = TraceStore("~/.openjarvis/traces.db")
+store = TraceStore("~/.nexify/traces.db")
 n = write_external_records_as_traces(store, records, source_name="adp")
 # proposer's diagnose phase can now search/filter these traces by source="adp"
 ```
 
 ### Bug fix: agent-backend trace toggle
 
-`src/openjarvis/evals/backends/jarvis_agent.py` previously hardcoded
+`src/nexify/evals/backends/jarvis_agent.py` previously hardcoded
 `builder.telemetry(telemetry).traces(True).build()`, ignoring the
 `telemetry` parameter. This silently caused every agent-backend
-evaluation to write to `~/.openjarvis/traces.db` regardless of caller
+evaluation to write to `~/.nexify/traces.db` regardless of caller
 intent. A corrupt traces.db then turned every agent eval into "database
 disk image is malformed" errors that the eval scorer dropped, producing
 fake high accuracies from a handful of successful samples.
@@ -136,7 +136,7 @@ Callers that previously expected traces to always be written should pass
 
 ## Configuration
 
-`jarvis learning` reads its configuration from `~/.openjarvis/config.toml`:
+`jarvis learning` reads its configuration from `~/.nexify/config.toml`:
 
 ```toml
 [learning.distillation]
@@ -194,10 +194,10 @@ space well-defined.
 
 ## Adding a new external corpus
 
-1. Create `src/openjarvis/evals/datasets/<corpus>.py` implementing
+1. Create `src/nexify/evals/datasets/<corpus>.py` implementing
    `DatasetProvider` (look at `adp.py` for a small reference). The
    provider's `load(max_samples, seed, split)` should respect the
-   `split` kwarg via `apply_split` from `openjarvis.evals.core.splits`.
+   `split` kwarg via `apply_split` from `nexify.evals.core.splits`.
 2. Register the new dataset in your local `DatasetRegistry` (typically
    via `@DatasetRegistry.register("<corpus>")` decorator on the class).
 3. Use it the same way as the bundled corpora: load records, then call
@@ -206,3 +206,4 @@ space well-defined.
 
 The proposer can then filter on `metadata["source"] == "<corpus>"` if
 you're feeding multiple corpora into the same search session.
+

@@ -1,7 +1,7 @@
 """Tests for the security_scanner scorer."""
 
-from openjarvis.evals.core.types import EvalRecord
-from openjarvis.evals.scorers.security_scanner import SecurityScannerScorer
+from nexify.evals.core.types import EvalRecord
+from nexify.evals.scorers.security_scanner import SecurityScannerScorer
 
 
 def _make_record(vulnerabilities, safe_patterns=None):
@@ -121,3 +121,4 @@ def test_no_vulnerabilities():
     )
     assert is_correct is None
     assert meta["reason"] == "no_vulnerabilities_in_manifest"
+

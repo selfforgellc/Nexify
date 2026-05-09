@@ -27,3 +27,4 @@ export function StreamingDots({ phase }: Props) {
     </div>
   );
 }
+

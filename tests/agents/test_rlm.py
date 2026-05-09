@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.agents._stubs import AgentContext
-from openjarvis.agents.rlm import RLMAgent
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.registry import AgentRegistry
-from openjarvis.core.types import ToolResult
-from openjarvis.tools._stubs import BaseTool, ToolSpec
+from nexify.agents._stubs import AgentContext
+from nexify.agents.rlm import RLMAgent
+from nexify.core.events import EventBus, EventType
+from nexify.core.registry import AgentRegistry
+from nexify.core.types import ToolResult
+from nexify.tools._stubs import BaseTool, ToolSpec
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -451,3 +451,4 @@ class TestRLMReplResults:
         assert len(result.tool_results) == 1
         assert result.tool_results[0].tool_name == "rlm_repl"
         assert "hello" in result.tool_results[0].content
+

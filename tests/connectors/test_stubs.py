@@ -5,13 +5,13 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Iterator, Optional
 
-from openjarvis.connectors._stubs import (
+from nexify.connectors._stubs import (
     Attachment,
     BaseConnector,
     Document,
     SyncStatus,
 )
-from openjarvis.core.registry import ConnectorRegistry
+from nexify.core.registry import ConnectorRegistry
 
 
 class FakeConnector(BaseConnector):
@@ -100,3 +100,4 @@ def test_connector_registry() -> None:
 def test_mcp_tools_default_empty() -> None:
     conn = FakeConnector()
     assert conn.mcp_tools() == []
+

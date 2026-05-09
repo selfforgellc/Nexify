@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.core.types import Message, Role
+from nexify.core.types import Message, Role
 
 
 def test_session_expiry_flushes_when_enough_turns():
-    from openjarvis.daemon.session_expiry import SessionExpiryHook
+    from nexify.daemon.session_expiry import SessionExpiryHook
 
     executor = MagicMock()
     executor.run_ephemeral.return_value = MagicMock(content="Saved 2 memories.")
@@ -19,7 +19,7 @@ def test_session_expiry_flushes_when_enough_turns():
 
 
 def test_session_expiry_skips_short_sessions():
-    from openjarvis.daemon.session_expiry import SessionExpiryHook
+    from nexify.daemon.session_expiry import SessionExpiryHook
 
     executor = MagicMock()
     hook = SessionExpiryHook(executor=executor, flush_min_turns=6)
@@ -27,3 +27,4 @@ def test_session_expiry_skips_short_sessions():
     hook.on_session_expiry(session_id="test-session", messages=messages)
 
     executor.run_ephemeral.assert_not_called()
+

@@ -404,3 +404,4 @@ export function EnergyDashboard({ apiUrl }: { apiUrl: string }) {
     </div>
   );
 }
+

@@ -7,7 +7,7 @@ import sys
 from subprocess import CompletedProcess
 from unittest.mock import MagicMock, patch
 
-from openjarvis.cli.scan_cmd import PrivacyScanner, ScanResult
+from nexify.cli.scan_cmd import PrivacyScanner, ScanResult
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -446,11 +446,11 @@ class TestJsonOutput:
     def test_json_output_structure(self) -> None:
         from click.testing import CliRunner
 
-        from openjarvis.cli.scan_cmd import scan
+        from nexify.cli.scan_cmd import scan
 
         runner = CliRunner()
         with patch(
-            "openjarvis.cli.scan_cmd.PrivacyScanner.run_all",
+            "nexify.cli.scan_cmd.PrivacyScanner.run_all",
             return_value=[
                 ScanResult("Test", "ok", "all good", "all"),
             ],
@@ -461,3 +461,4 @@ class TestJsonOutput:
         assert isinstance(data, list)
         assert data[0]["name"] == "Test"
         assert data[0]["status"] == "ok"
+

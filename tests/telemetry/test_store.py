@@ -5,9 +5,9 @@ from __future__ import annotations
 import time
 from pathlib import Path
 
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import TelemetryRecord
-from openjarvis.telemetry.store import TelemetryStore
+from nexify.core.events import EventBus, EventType
+from nexify.core.types import TelemetryRecord
+from nexify.telemetry.store import TelemetryStore
 
 
 class TestTelemetryStore:
@@ -120,7 +120,7 @@ class TestTelemetryStore:
         store.close()
 
     def test_record_mining_stats_persists(self, tmp_path: Path) -> None:
-        from openjarvis.mining._stubs import MiningStats
+        from nexify.mining._stubs import MiningStats
 
         store = TelemetryStore(tmp_path / "test.db")
         store.record_mining_stats(
@@ -148,3 +148,4 @@ class TestTelemetryRecordFields:
     def test_tokens_per_joule_set(self):
         rec = TelemetryRecord(timestamp=1.0, model_id="test", tokens_per_joule=80.0)
         assert rec.tokens_per_joule == 80.0
+

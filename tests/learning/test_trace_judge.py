@@ -1,11 +1,11 @@
-"""Tests for openjarvis.optimize.feedback.judge module."""
+"""Tests for nexify.optimize.feedback.judge module."""
 
 from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.core.types import StepType, Trace, TraceStep
-from openjarvis.learning.optimize.feedback.judge import TraceJudge, _parse_score
+from nexify.core.types import StepType, Trace, TraceStep
+from nexify.learning.optimize.feedback.judge import TraceJudge, _parse_score
 
 # ---------------------------------------------------------------------------
 # _parse_score unit tests
@@ -208,3 +208,4 @@ class TestBatchEvaluate:
 
         assert results[0][0] == 0.9
         assert results[1][0] == 0.3
+

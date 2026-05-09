@@ -1,11 +1,11 @@
 <div align="center">
-  <img alt="OpenJarvis" src="assets/OpenJarvis_Horizontal_Logo.png" width="400">
+  <img alt="nexify" src="assets/nexify_Horizontal_Logo.png" width="400">
 
   <p><i>Personal AI, On Personal Devices.</i></p>
 
   <p>
-    <a href="https://scalingintelligence.stanford.edu/blogs/openjarvis/"><img src="https://img.shields.io/badge/project-OpenJarvis-blue" alt="Project"></a>
-    <a href="https://open-jarvis.github.io/OpenJarvis/"><img src="https://img.shields.io/badge/docs-mkdocs-blue" alt="Docs"></a>
+    <a href="https://scalingintelligence.stanford.edu/blogs/nexify/"><img src="https://img.shields.io/badge/project-nexify-blue" alt="Project"></a>
+    <a href="https://open-jarvis.github.io/nexify/"><img src="https://img.shields.io/badge/docs-mkdocs-blue" alt="Docs"></a>
     <img src="https://img.shields.io/badge/python-%3E%3D3.10-blue" alt="Python">
     <img src="https://img.shields.io/badge/license-Apache%202.0-green" alt="License">
     <a href="https://discord.gg/YZZRxCAhmm"><img src="https://img.shields.io/badge/discord-join-7289da?logo=discord&logoColor=white" alt="Discord"></a>
@@ -14,24 +14,24 @@
 
 ---
 
-> **[Documentation](https://open-jarvis.github.io/OpenJarvis/)**
+> **[Documentation](https://open-jarvis.github.io/nexify/)**
 >
-> **[Project Site](https://scalingintelligence.stanford.edu/blogs/openjarvis/)**
+> **[Project Site](https://scalingintelligence.stanford.edu/blogs/nexify/)**
 >
-> **[Leaderboard](https://open-jarvis.github.io/OpenJarvis/leaderboard/)**
+> **[Leaderboard](https://open-jarvis.github.io/nexify/leaderboard/)**
 >
-> **[Roadmap](https://open-jarvis.github.io/OpenJarvis/development/roadmap/)**
+> **[Roadmap](https://open-jarvis.github.io/nexify/development/roadmap/)**
 
-## Why OpenJarvis?
+## Why nexify?
 
 Personal AI agents are exploding in popularity, but nearly all of them still route intelligence through cloud APIs. Your "personal" AI continues to depend on someone else's server. At the same time, our [Intelligence Per Watt](https://www.intelligence-per-watt.ai/) research showed that local language models already handle 88.7% of single-turn chat and reasoning queries, with intelligence efficiency improving 5.3× from 2023 to 2025. The models and hardware are increasingly ready. What has been missing is the software stack to make local-first personal AI practical.
 
-OpenJarvis is that stack. It is an opinionated framework for local-first personal AI, built around three core ideas: shared primitives for building on-device agents; evaluations that treat energy, FLOPs, latency, and dollar cost as first-class constraints alongside accuracy; and a learning loop that improves models using local trace data. The goal is simple: make it possible to build personal AI agents that run locally by default, calling the cloud only when truly necessary. OpenJarvis aims to be both a research platform and a production foundation for local AI, in the spirit of PyTorch.
+nexify is that stack. It is an opinionated framework for local-first personal AI, built around three core ideas: shared primitives for building on-device agents; evaluations that treat energy, FLOPs, latency, and dollar cost as first-class constraints alongside accuracy; and a learning loop that improves models using local trace data. The goal is simple: make it possible to build personal AI agents that run locally by default, calling the cloud only when truly necessary. nexify aims to be both a research platform and a production foundation for local AI, in the spirit of PyTorch.
 
 ## Installation
 
 ```bash
-curl -fsSL https://openjarvis.ai/install.sh | bash
+curl -fsSL https://nexify.ai/install.sh | bash
 ```
 
 That's it. The installer handles everything: uv, the Python venv, Ollama, and pulling a small starter model. About 3 minutes on a typical broadband connection. Then:
@@ -49,7 +49,7 @@ The Rust extension and bigger models continue downloading in the background whil
 ## Quick Start
 
 ```bash
-curl -fsSL https://openjarvis.ai/install.sh | bash
+curl -fsSL https://nexify.ai/install.sh | bash
 jarvis
 ```
 
@@ -108,7 +108,7 @@ jarvis bench skills --max-samples 5 --seeds 42
 
 Import from [Hermes Agent](https://github.com/NousResearch/hermes-agent) (~150 skills), [OpenClaw](https://github.com/openclaw/skills) (~13,700 community skills), or any GitHub repo. Skills follow the [agentskills.io](https://agentskills.io/specification) open standard.
 
-See the [Skills User Guide](https://open-jarvis.github.io/OpenJarvis/user-guide/skills/) and [Skills Tutorial](https://open-jarvis.github.io/OpenJarvis/tutorials/skills-workflow/) for details.
+See the [Skills User Guide](https://open-jarvis.github.io/nexify/user-guide/skills/) and [Skills Tutorial](https://open-jarvis.github.io/nexify/tutorials/skills-workflow/) for details.
 
 ### Built-in Agents
 
@@ -123,9 +123,9 @@ See the [Skills User Guide](https://open-jarvis.github.io/OpenJarvis/user-guide/
 | `native_openhands` | On-demand | CodeAct — generates and executes Python code |
 | `simple` | On-demand | Single-turn chat, no tools |
 
-See the [User Guide](https://open-jarvis.github.io/OpenJarvis/user-guide/morning-digest/) and [Tutorials](https://open-jarvis.github.io/OpenJarvis/tutorials/) for detailed setup instructions.
+See the [User Guide](https://open-jarvis.github.io/nexify/user-guide/morning-digest/) and [Tutorials](https://open-jarvis.github.io/nexify/tutorials/) for detailed setup instructions.
 
-Full documentation — including Docker deployment, cloud engines, development setup, and tutorials — at **[open-jarvis.github.io/OpenJarvis](https://open-jarvis.github.io/OpenJarvis/)**.
+Full documentation — including Docker deployment, cloud engines, development setup, and tutorials — at **[open-jarvis.github.io/nexify](https://open-jarvis.github.io/nexify/)**.
 
 ## Contributing
 
@@ -134,18 +134,18 @@ We welcome contributions! See the [Contributing Guide](CONTRIBUTING.md) for ince
 Quick start for contributors:
 
 ```bash
-git clone https://github.com/open-jarvis/OpenJarvis.git
-cd OpenJarvis
+git clone https://github.com/open-jarvis/nexify.git
+cd nexify
 uv sync --extra dev
 uv run pre-commit install
 uv run pytest tests/ -v
 ```
 
-Browse the [Roadmap](https://open-jarvis.github.io/OpenJarvis/development/roadmap/) for areas where help is needed. Comment **"take"** on any issue to get auto-assigned.
+Browse the [Roadmap](https://open-jarvis.github.io/nexify/development/roadmap/) for areas where help is needed. Comment **"take"** on any issue to get auto-assigned.
 
 ## About
 
-OpenJarvis is part of [Intelligence Per Watt](https://www.intelligence-per-watt.ai/), a research initiative studying the efficiency of on-device AI systems. The project is developed at [Hazy Research](https://hazyresearch.stanford.edu/) and the [Scaling Intelligence Lab](https://scalingintelligence.stanford.edu/) at [Stanford SAIL](https://ai.stanford.edu/).
+nexify is part of [Intelligence Per Watt](https://www.intelligence-per-watt.ai/), a research initiative studying the efficiency of on-device AI systems. The project is developed at [Hazy Research](https://hazyresearch.stanford.edu/) and the [Scaling Intelligence Lab](https://scalingintelligence.stanford.edu/) at [Stanford SAIL](https://ai.stanford.edu/).
 
 ## Sponsors
 
@@ -161,14 +161,15 @@ OpenJarvis is part of [Intelligence Per Watt](https://www.intelligence-per-watt.
 
 ## Citation
 ```bibtex
-@misc{saadfalcon2026openjarvis,
-  title={OpenJarvis: Personal AI, On Personal Devices},
+@misc{saadfalcon2026nexify,
+  title={nexify: Personal AI, On Personal Devices},
   author={Jon Saad-Falcon and Avanika Narayan and Herumb Shandilya and Hakki Orhun Akengin and Robby Manihani and Gabriel Bo and John Hennessy and Christopher R\'{e} and Azalia Mirhoseini},
   year={2026},
-  howpublished={\url{https://scalingintelligence.stanford.edu/blogs/openjarvis/}},
+  howpublished={\url{https://scalingintelligence.stanford.edu/blogs/nexify/}},
 }
 ```
 
 ## License
 
 [Apache 2.0](LICENSE)
+

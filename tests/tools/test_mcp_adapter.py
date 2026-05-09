@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.mcp.client import MCPClient
-from openjarvis.mcp.server import MCPServer
-from openjarvis.mcp.transport import InProcessTransport
-from openjarvis.tools._stubs import ToolSpec
-from openjarvis.tools.calculator import CalculatorTool
-from openjarvis.tools.mcp_adapter import MCPToolAdapter, MCPToolProvider
-from openjarvis.tools.think import ThinkTool
+from nexify.mcp.client import MCPClient
+from nexify.mcp.server import MCPServer
+from nexify.mcp.transport import InProcessTransport
+from nexify.tools._stubs import ToolSpec
+from nexify.tools.calculator import CalculatorTool
+from nexify.tools.mcp_adapter import MCPToolAdapter, MCPToolProvider
+from nexify.tools.think import ThinkTool
 
 
 @pytest.fixture
@@ -103,7 +103,7 @@ class TestMCPToolProvider:
         assert "think" in names
 
     def test_discovered_tools_are_base_tool(self, client):
-        from openjarvis.tools._stubs import BaseTool
+        from nexify.tools._stubs import BaseTool
 
         provider = MCPToolProvider(client)
         tools = provider.discover()
@@ -156,3 +156,4 @@ class TestMCPAdapterRoundTrip:
         provider = MCPToolProvider(client)
         tools = provider.discover()
         assert tools == []
+

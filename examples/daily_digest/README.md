@@ -5,7 +5,7 @@ chosen topics and produces a concise, structured summary.
 
 ## Requirements
 
-- OpenJarvis installed (`git clone https://github.com/open-jarvis/OpenJarvis.git && cd OpenJarvis && uv sync` or `uv sync --extra dev`)
+- nexify installed (`git clone https://github.com/open-jarvis/nexify.git && cd nexify && uv sync` or `uv sync --extra dev`)
 - An inference engine running (Ollama, cloud API, vLLM, etc.)
 
 ## Usage
@@ -28,3 +28,4 @@ and two tools:
 The orchestrator agent searches for each topic, reasons about what is most
 newsworthy, and composes a daily briefing with per-topic bullet points and a
 closing outlook paragraph. Optionally saves the output to a file.
+

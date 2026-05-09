@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from openjarvis.core.types import ToolResult
-from openjarvis.skills.executor import SkillExecutor
-from openjarvis.skills.tool_adapter import SkillTool
-from openjarvis.skills.types import SkillManifest, SkillStep
-from openjarvis.tools._stubs import BaseTool, ToolExecutor, ToolSpec
+from nexify.core.types import ToolResult
+from nexify.skills.executor import SkillExecutor
+from nexify.skills.tool_adapter import SkillTool
+from nexify.skills.types import SkillManifest, SkillStep
+from nexify.tools._stubs import BaseTool, ToolExecutor, ToolSpec
 
 
 class _EchoTool(BaseTool):
@@ -54,7 +54,7 @@ class TestSkillToolMetadataTagging:
             name="apple-notes",
             description="Apple Notes",
             markdown_content="Use memo",
-            metadata={"openjarvis": {"source": "hermes"}},
+            metadata={"nexify": {"source": "hermes"}},
         )
         tool = self._make_tool(manifest)
         result = tool.execute(task="create a note")
@@ -103,3 +103,4 @@ class TestSkillToolMetadataTagging:
         assert result.success is False
         assert result.metadata["skill"] == "broken"
         assert result.metadata["skill_kind"] == "executable"
+

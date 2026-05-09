@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
-from openjarvis.tools.retrieval import RetrievalTool
-from openjarvis.tools.storage._stubs import MemoryBackend, RetrievalResult
+from nexify.tools.retrieval import RetrievalTool
+from nexify.tools.storage._stubs import MemoryBackend, RetrievalResult
 
 
 class _FakeBackend(MemoryBackend):
@@ -108,3 +108,4 @@ class TestRetrievalTool:
         tool = RetrievalTool()
         fn = tool.to_openai_function()
         assert fn["function"]["name"] == "retrieval"
+

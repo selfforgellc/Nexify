@@ -1,8 +1,8 @@
-"""Tests for openjarvis.optimize.types module."""
+"""Tests for nexify.optimize.types module."""
 
 from __future__ import annotations
 
-from openjarvis.learning.optimize.types import (
+from nexify.learning.optimize.types import (
     OptimizationRun,
     SampleScore,
     SearchDimension,
@@ -11,7 +11,7 @@ from openjarvis.learning.optimize.types import (
     TrialFeedback,
     TrialResult,
 )
-from openjarvis.recipes.loader import Recipe
+from nexify.recipes.loader import Recipe
 
 # ---------------------------------------------------------------------------
 # SearchDimension
@@ -574,3 +574,4 @@ class TestTrialFeedback:
         fb2 = TrialFeedback()
         fb1.failure_patterns.append("error")
         assert fb2.failure_patterns == []
+

@@ -6,10 +6,10 @@ import httpx
 import pytest
 import respx
 
-from openjarvis.core.registry import EngineRegistry
-from openjarvis.core.types import Message, Role
-from openjarvis.engine._base import EngineConnectionError
-from openjarvis.engine.openai_compat_engines import VLLMEngine
+from nexify.core.registry import EngineRegistry
+from nexify.core.types import Message, Role
+from nexify.engine._base import EngineConnectionError
+from nexify.engine.openai_compat_engines import VLLMEngine
 
 
 @pytest.fixture()
@@ -129,3 +129,4 @@ class TestOpenAICompatStream:
             ):
                 tokens.append(tok)
         assert tokens == ["Hi", " there"]
+

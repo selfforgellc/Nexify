@@ -185,3 +185,4 @@ const styles: Record<string, React.CSSProperties> = {
     transition: 'width 0.3s ease',
   },
 };
+

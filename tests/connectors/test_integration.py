@@ -6,11 +6,11 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.connectors.obsidian import ObsidianConnector
-from openjarvis.connectors.pipeline import IngestionPipeline
-from openjarvis.connectors.store import KnowledgeStore
-from openjarvis.connectors.sync_engine import SyncEngine
-from openjarvis.tools.knowledge_search import KnowledgeSearchTool
+from nexify.connectors.obsidian import ObsidianConnector
+from nexify.connectors.pipeline import IngestionPipeline
+from nexify.connectors.store import KnowledgeStore
+from nexify.connectors.sync_engine import SyncEngine
+from nexify.tools.knowledge_search import KnowledgeSearchTool
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -73,3 +73,4 @@ def test_full_pipeline_obsidian_to_search(vault: Path, tmp_path: Path) -> None:
 
     result = tool.execute(query="migration", source="gmail")
     assert "No relevant results" in result.content
+

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.learning.routing.complexity import (
+from nexify.learning.routing.complexity import (
     ComplexityQueryAnalyzer,
     ComplexityResult,
     adjust_tokens_for_model,
@@ -181,3 +181,4 @@ class TestComplexityQueryAnalyzer:
         ctx = analyzer.analyze("Hi")
         assert "complexity_tier" in ctx.metadata
         assert "signals" in ctx.metadata
+

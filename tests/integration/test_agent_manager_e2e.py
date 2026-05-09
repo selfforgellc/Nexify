@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.agents.manager import AgentManager
+from nexify.agents.manager import AgentManager
 
 
 @pytest.fixture
@@ -85,3 +85,4 @@ class TestResearchMonitorE2E:
         config = agent["config"]
         assert config["schedule_value"] == "0 */6 * * *"
         assert config["temperature"] == 0.5
+

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.evals.core.splits import apply_split
+from nexify.evals.core.splits import apply_split
 
 
 def test_train_is_first_20_percent():
@@ -70,3 +70,4 @@ def test_does_not_mutate_input():
     snapshot = items[:]
     apply_split(items, split="train", seed=42, train_frac=0.8)
     assert items == snapshot
+

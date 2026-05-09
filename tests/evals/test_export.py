@@ -4,14 +4,14 @@ from __future__ import annotations
 
 import json
 
-from openjarvis.evals.core.export import (
+from nexify.evals.core.export import (
     _compute_efficiency,
     _compute_normalized,
     export_artifacts_manifest,
     export_jsonl,
     export_summary_json,
 )
-from openjarvis.evals.core.trace import QueryTrace, TurnTrace
+from nexify.evals.core.trace import QueryTrace, TurnTrace
 
 
 def _make_traces(n=3):
@@ -428,3 +428,4 @@ class TestHardwareInfo:
         assert "platform" in hw
         assert "cpu_count" in hw
         assert hw["cpu_count"] > 0
+

@@ -210,3 +210,4 @@ jobs:
           prerelease: ${{ steps.release-info.outputs.prerelease }}
           includeUpdaterJson: true
           args: ${{ matrix.args }}
+

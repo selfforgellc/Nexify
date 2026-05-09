@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.core.config import LearningConfig, SkillsLearningConfig
+from nexify.core.config import LearningConfig, SkillsLearningConfig
 
 
 class TestSkillsLearningConfig:
@@ -12,7 +12,7 @@ class TestSkillsLearningConfig:
         assert cfg.optimizer == "dspy"
         assert cfg.min_traces_per_skill == 20
         assert cfg.optimization_interval_seconds == 86400
-        assert cfg.overlay_dir == "~/.openjarvis/learning/skills/"
+        assert cfg.overlay_dir == "~/.nexify/learning/skills/"
 
     def test_can_be_constructed_with_all_fields(self):
         cfg = SkillsLearningConfig(
@@ -38,3 +38,4 @@ class TestLearningConfigSkillsField:
     def test_skills_field_default_disabled(self):
         cfg = LearningConfig()
         assert cfg.skills.auto_optimize is False
+

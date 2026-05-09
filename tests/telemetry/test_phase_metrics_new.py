@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.telemetry.phase_metrics import compute_phase_metrics, split_at_ttft
-from openjarvis.telemetry.session import TelemetrySample, TelemetrySession
+from nexify.telemetry.phase_metrics import compute_phase_metrics, split_at_ttft
+from nexify.telemetry.session import TelemetrySample, TelemetrySession
 
 
 class TestComputePhaseMetrics:
@@ -49,3 +49,4 @@ class TestComputePhaseMetrics:
         assert decode["tokens"] == 100
         assert prefill["duration_s"] == pytest.approx(0.5, abs=1e-6)
         assert decode["duration_s"] == pytest.approx(0.5, abs=1e-6)
+

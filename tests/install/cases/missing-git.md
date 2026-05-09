@@ -21,3 +21,4 @@ Install `git` per the printed hint, then re-run the curl line.
 ## Test
 
 `tests/install/bash/test_install.bats::"fails loudly when git is missing"`
+

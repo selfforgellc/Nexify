@@ -5,8 +5,8 @@ from __future__ import annotations
 import time
 from typing import Any, List
 
-from openjarvis.core.types import StepType, Trace, TraceStep
-from openjarvis.learning.training.data import TrainingDataMiner
+from nexify.core.types import StepType, Trace, TraceStep
+from nexify.learning.training.data import TrainingDataMiner
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -236,3 +236,4 @@ class TestEmptyStore:
         assert miner.extract_sft_pairs() == []
         assert miner.extract_routing_pairs() == {}
         assert miner.extract_agent_config_pairs() == {}
+

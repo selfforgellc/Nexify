@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.tools.file_write import FileWriteTool
+from nexify.tools.file_write import FileWriteTool
 
 
 class TestFileWriteTool:
@@ -133,3 +133,4 @@ class TestFileWriteTool:
         )
         assert result.success is False
         assert "Invalid mode" in result.content
+

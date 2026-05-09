@@ -85,3 +85,4 @@ export function usePolling<T>(
 
   return { data, error, loading, refresh };
 }
+

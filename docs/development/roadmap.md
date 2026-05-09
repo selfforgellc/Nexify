@@ -16,29 +16,29 @@ These are the areas where active development is happening and contributions are 
 ## How to Get Involved
 
 1. Browse the workstreams below for an item that interests you
-2. Check if a [GitHub issue](https://github.com/open-jarvis/OpenJarvis/issues) already exists for it — if not, [open one](https://github.com/open-jarvis/OpenJarvis/issues/new/choose)
+2. Check if a [GitHub issue](https://github.com/open-jarvis/nexify/issues) already exists for it — if not, [open one](https://github.com/open-jarvis/nexify/issues/new/choose)
 3. Comment **"take"** on the issue to get auto-assigned
-4. Read the [Contributing Guide](https://github.com/open-jarvis/OpenJarvis/blob/main/CONTRIBUTING.md) for development setup and PR process
+4. Read the [Contributing Guide](https://github.com/open-jarvis/nexify/blob/main/CONTRIBUTING.md) for development setup and PR process
 
 ---
 
 ## Workstreams
 
-OpenJarvis development is organized into **five independent workstreams**. Contributors can pick any track that matches their skills and interests — workstreams are designed to be worked on in parallel without blocking each other.
+nexify development is organized into **five independent workstreams**. Contributors can pick any track that matches their skills and interests — workstreams are designed to be worked on in parallel without blocking each other.
 
 Every item carries a maturity tag:
 
 | Tag | Meaning | Contributor guidance |
 |-----|---------|---------------------|
-| **Ready** | Well-scoped, implementation path is clear | Pick it up — check [issues](https://github.com/open-jarvis/OpenJarvis/issues) for a spec or write one |
-| **Design Needed** | Concept is clear but needs a spec before code | Start a [design discussion](https://github.com/open-jarvis/OpenJarvis/discussions) or draft an RFC |
+| **Ready** | Well-scoped, implementation path is clear | Pick it up — check [issues](https://github.com/open-jarvis/nexify/issues) for a spec or write one |
+| **Design Needed** | Concept is clear but needs a spec before code | Start a [design discussion](https://github.com/open-jarvis/nexify/discussions) or draft an RFC |
 | **Research-Stage** | Exploratory, needs investigation before designing | Read the relevant papers, prototype, share findings |
 
 ---
 
 ### Workstream 1: Continuous Operators & Agents
 
-Operators are OpenJarvis's key differentiator — persistent, scheduled, stateful agents that run autonomously on personal devices. The current tick-based architecture (OperatorManager → TaskScheduler → AgentExecutor → OperativeAgent) is solid but needs hardening for truly long-horizon autonomy.
+Operators are nexify's key differentiator — persistent, scheduled, stateful agents that run autonomously on personal devices. The current tick-based architecture (OperatorManager → TaskScheduler → AgentExecutor → OperativeAgent) is solid but needs hardening for truly long-horizon autonomy.
 
 #### Where you can help
 
@@ -57,7 +57,7 @@ Operators are OpenJarvis's key differentiator — persistent, scheduled, statefu
 
 ### Workstream 2: Mobile & Messaging Clients
 
-Personal AI must be accessible from the devices people actually carry. OpenJarvis runs on laptops, workstations, and servers — users interact via their phones.
+Personal AI must be accessible from the devices people actually carry. nexify runs on laptops, workstations, and servers — users interact via their phones.
 
 **Currently supported:**
 
@@ -105,7 +105,7 @@ Personal AI's core tension: local models preserve privacy but lack capability; c
 
 ### Workstream 4: Tutorials & Documentation
 
-OpenJarvis has reference docs and four tutorials, but critical gaps remain in continuous agents, LM evaluation, learning approaches, and custom tools. Video tutorials are scoped as a contributor opportunity — written tutorials come first, with video scripts included so anyone can record.
+nexify has reference docs and four tutorials, but critical gaps remain in continuous agents, LM evaluation, learning approaches, and custom tools. Video tutorials are scoped as a contributor opportunity — written tutorials come first, with video scripts included so anyone can record.
 
 #### Where you can help
 
@@ -123,7 +123,7 @@ OpenJarvis has reference docs and four tutorials, but critical gaps remain in co
 
 ### Workstream 5: Hardware Breadth
 
-Personal AI means running on the hardware people actually own. Each new hardware target expands who can use OpenJarvis and generates data for the research agenda (energy, cost, latency tradeoffs across silicon).
+Personal AI means running on the hardware people actually own. Each new hardware target expands who can use nexify and generates data for the research agenda (energy, cost, latency tradeoffs across silicon).
 
 Adding a new hardware target involves up to four components: hardware detection in `core/config.py`, an inference engine adapter in `engine/`, an energy monitor in `telemetry/`, and an entry in the GPU specs database in `telemetry/gpu_monitor.py`.
 
@@ -139,3 +139,4 @@ Adding a new hardware target involves up to four components: hardware detection 
 | Intel Lunar Lake NPU via OpenVINO | **Design Needed** | 48 TOPS — most mature NPU software stack for x86 laptops. New engine wrapping OpenVINO GenAI. |
 | Raspberry Pi 5 | **Design Needed** | CPU-only via llama.cpp ARM NEON for 1-3B models. $100 entry point for hobbyists. |
 | Unified hardware benchmark suite | **Design Needed** | Standardized benchmark that runs the same workloads across all supported hardware, producing comparable energy/latency/throughput/cost numbers. |
+

@@ -6,7 +6,7 @@ from typing import Optional
 
 import pytest
 
-from openjarvis.channels._stubs import (
+from nexify.channels._stubs import (
     BaseChannel,
     ChannelMessage,
     ChannelStatus,
@@ -118,3 +118,4 @@ class TestBaseChannel:
         assert ch.status() == ChannelStatus.DISCONNECTED
         assert ch.send("test", "hello") is True
         assert ch.list_channels() == []
+

@@ -13,10 +13,10 @@ from unittest.mock import MagicMock
 import pytest
 from click.testing import CliRunner
 
-from openjarvis.evals.cli import main as cli_main
-from openjarvis.evals.core.runner import EvalRunner, _extract_continuous_score
-from openjarvis.evals.core.types import EvalRecord, RunConfig
-from openjarvis.evals.scorers.liveresearch import (
+from nexify.evals.cli import main as cli_main
+from nexify.evals.core.runner import EvalRunner, _extract_continuous_score
+from nexify.evals.core.types import EvalRecord, RunConfig
+from nexify.evals.scorers.liveresearch import (
     _escape_newlines_inside_strings,
     _parse_judge_response,
     _safe_json_loads,
@@ -276,5 +276,6 @@ def test_extract_continuous_score_clamps_out_of_range():
 def test_rescore_from_metadata_returns_none_when_unparseable():
     assert rescore_from_metadata({"raw_judge_output": "totally not json"}) is None
     assert rescore_from_metadata({}) is None
+
 
 

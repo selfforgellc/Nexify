@@ -9,16 +9,16 @@ from unittest.mock import MagicMock
 
 import pytest
 
-pytest.importorskip("fastapi", reason="openjarvis[server] not installed")
+pytest.importorskip("fastapi", reason="nexify[server] not installed")
 
-from openjarvis.channels._stubs import (
+from nexify.channels._stubs import (
     BaseChannel,
     ChannelHandler,
     ChannelStatus,
 )
-from openjarvis.core.events import EventBus
-from openjarvis.server.channel_bridge import ChannelBridge
-from openjarvis.server.session_store import SessionStore
+from nexify.core.events import EventBus
+from nexify.server.channel_bridge import ChannelBridge
+from nexify.server.session_store import SessionStore
 
 
 class FakeChannel(BaseChannel):
@@ -186,3 +186,4 @@ class TestResponseFormatting:
         reply = bridge.handle_incoming("user1", "hi", "fake")
         assert reply == "short answer"
         assert "/more" not in reply
+

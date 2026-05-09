@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from click.testing import CliRunner
 
-from openjarvis.cli import cli
+from nexify.cli import cli
 
 
 class TestEvalCLI:
@@ -37,3 +37,4 @@ class TestEvalCLI:
         # Should fail because neither --config nor --benchmark/--model given
         assert result.exit_code != 0
         assert "config" in result.output.lower() or "benchmark" in result.output.lower()
+

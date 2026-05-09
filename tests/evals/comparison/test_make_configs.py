@@ -1,4 +1,4 @@
-"""Tests for openjarvis.evals.comparison.make_configs."""
+"""Tests for nexify.evals.comparison.make_configs."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 import tomllib
 
-from openjarvis.evals.comparison.make_configs import (
+from nexify.evals.comparison.make_configs import (
     BENCHMARKS,  # noqa: F401  (verify export)
     FRAMEWORKS,  # noqa: F401  (verify export)
     MODELS,
@@ -95,3 +95,4 @@ class TestTemplateStripping:
         assert first_non_blank.startswith("[meta]"), (
             f"Expected first line to be [meta], got: {first_non_blank!r}"
         )
+

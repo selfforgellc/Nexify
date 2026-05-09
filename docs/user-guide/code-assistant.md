@@ -7,13 +7,13 @@ An orchestrator agent with code execution, file I/O, and shell access. It can wr
 ### 1. Install and initialize
 
 ```bash
-git clone https://github.com/open-jarvis/OpenJarvis.git
-cd OpenJarvis
+git clone https://github.com/open-jarvis/nexify.git
+cd nexify
 uv sync --extra dev
 jarvis init --preset code-assistant
 ```
 
-This writes a pre-configured `~/.openjarvis/config.toml` for the code assistant.
+This writes a pre-configured `~/.nexify/config.toml` for the code assistant.
 
 ### 2. Start a local LLM via Ollama
 
@@ -54,7 +54,7 @@ jarvis chat
 
 ## Configuration Reference
 
-The preset writes this to `~/.openjarvis/config.toml`:
+The preset writes this to `~/.nexify/config.toml`:
 
 ```toml
 [engine]
@@ -100,7 +100,7 @@ enabled = ["code_interpreter", "file_read", "file_write", "shell_exec", "web_sea
 jarvis ask "Write a Python script that converts YAML to JSON"
 
 # Explain existing code
-jarvis ask "Read src/openjarvis/core/events.py and explain the EventBus pattern"
+jarvis ask "Read src/nexify/core/events.py and explain the EventBus pattern"
 
 # Debug a failing test
 jarvis ask "Run pytest tests/test_memory.py -v and fix any failures"
@@ -109,7 +109,7 @@ jarvis ask "Run pytest tests/test_memory.py -v and fix any failures"
 jarvis ask "Read utils.py and refactor the parse_config function to use dataclasses"
 
 # Generate tests
-jarvis ask "Read src/openjarvis/tools/calculator.py and write unit tests for it"
+jarvis ask "Read src/nexify/tools/calculator.py and write unit tests for it"
 
 # Shell tasks
 jarvis ask "Find all Python files larger than 100KB in this repo"
@@ -135,3 +135,4 @@ The `shell_exec` and `code_interpreter` tools execute real commands on your mach
 **Web search not working** -- Install with `uv sync --extra tools-search` and set `TAVILY_API_KEY`.
 
 **Code execution hangs** -- The `code_interpreter` has a default timeout. Long-running scripts will be terminated. Break large tasks into smaller steps.
+

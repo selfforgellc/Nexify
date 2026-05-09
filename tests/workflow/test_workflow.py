@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.workflow.builder import WorkflowBuilder
-from openjarvis.workflow.engine import WorkflowEngine
-from openjarvis.workflow.graph import WorkflowGraph
-from openjarvis.workflow.types import NodeType, WorkflowEdge, WorkflowNode
+from nexify.core.events import EventBus, EventType
+from nexify.workflow.builder import WorkflowBuilder
+from nexify.workflow.engine import WorkflowEngine
+from nexify.workflow.graph import WorkflowGraph
+from nexify.workflow.types import NodeType, WorkflowEdge, WorkflowNode
 
 
 class TestWorkflowGraph:
@@ -150,3 +150,4 @@ class TestWorkflowEngine:
         event_types = {e.event_type for e in bus.history}
         assert EventType.WORKFLOW_START in event_types
         assert EventType.WORKFLOW_END in event_types
+

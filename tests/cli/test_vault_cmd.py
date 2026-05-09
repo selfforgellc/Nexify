@@ -8,7 +8,7 @@ from unittest import mock
 import pytest
 from click.testing import CliRunner
 
-from openjarvis.cli.vault_cmd import vault
+from nexify.cli.vault_cmd import vault
 
 
 class TestVaultCmd:
@@ -30,7 +30,7 @@ class TestVaultCmd:
 
     def test_vault_list_empty(self) -> None:
         with mock.patch(
-            "openjarvis.cli.vault_cmd._VAULT_FILE",
+            "nexify.cli.vault_cmd._VAULT_FILE",
             Path("/nonexistent/vault.enc"),
         ):
             result = CliRunner().invoke(vault, ["list"])
@@ -44,10 +44,10 @@ class TestVaultCmd:
         key_file = tmp_path / ".vault_key"
 
         with (
-            mock.patch("openjarvis.cli.vault_cmd._VAULT_FILE", vault_file),
-            mock.patch("openjarvis.cli.vault_cmd._VAULT_KEY_FILE", key_file),
+            mock.patch("nexify.cli.vault_cmd._VAULT_FILE", vault_file),
+            mock.patch("nexify.cli.vault_cmd._VAULT_KEY_FILE", key_file),
             mock.patch(
-                "openjarvis.cli.vault_cmd.DEFAULT_CONFIG_DIR",
+                "nexify.cli.vault_cmd.DEFAULT_CONFIG_DIR",
                 tmp_path,
             ),
         ):
@@ -64,9 +64,10 @@ class TestVaultCmd:
 
     def test_vault_remove_not_found(self) -> None:
         with mock.patch(
-            "openjarvis.cli.vault_cmd._VAULT_FILE",
+            "nexify.cli.vault_cmd._VAULT_FILE",
             Path("/nonexistent/vault.enc"),
         ):
             result = CliRunner().invoke(vault, ["remove", "nonexistent"])
             assert result.exit_code == 0
             assert "not found" in result.output.lower()
+

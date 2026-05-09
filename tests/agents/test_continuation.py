@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List
 
-from openjarvis.agents._stubs import AgentResult, BaseAgent
+from nexify.agents._stubs import AgentResult, BaseAgent
 
 
 class MockEngine:
@@ -100,3 +100,4 @@ class TestContinuation:
         agent = ContinuationAgent(engine, "test-model")
         result = agent.run("Hi")
         assert result.content == "Done"
+

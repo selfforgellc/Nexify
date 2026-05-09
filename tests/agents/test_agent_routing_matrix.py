@@ -6,12 +6,12 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.agents._stubs import AgentResult
-from openjarvis.agents.native_openhands import NativeOpenHandsAgent
-from openjarvis.agents.native_react import NativeReActAgent
-from openjarvis.agents.orchestrator import OrchestratorAgent
-from openjarvis.agents.simple import SimpleAgent
-from openjarvis.core.events import EventBus, EventType
+from nexify.agents._stubs import AgentResult
+from nexify.agents.native_openhands import NativeOpenHandsAgent
+from nexify.agents.native_react import NativeReActAgent
+from nexify.agents.orchestrator import OrchestratorAgent
+from nexify.agents.simple import SimpleAgent
+from nexify.core.events import EventBus, EventType
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -183,3 +183,4 @@ def test_no_tool_results_for_simple_query(agent_key):
     agent = AGENT_FACTORIES[agent_key](engine, "test-model", None)
     result = agent.run("Hello")
     assert result.tool_results == []
+

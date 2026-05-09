@@ -121,3 +121,4 @@ export function XRayFooter({ usage, telemetry }: Props) {
     </div>
   );
 }
+

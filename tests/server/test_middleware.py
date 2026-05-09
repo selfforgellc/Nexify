@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from unittest.mock import patch
 
-from openjarvis.server.middleware import SECURITY_HEADERS, create_security_middleware
+from nexify.server.middleware import SECURITY_HEADERS, create_security_middleware
 
 
 class TestSecurityHeaders:
@@ -27,7 +27,7 @@ class TestSecurityHeaders:
         """When starlette is not available, returns None."""
         import importlib
 
-        import openjarvis.server.middleware as mod
+        import nexify.server.middleware as mod
 
         blocked = {
             "starlette": None,
@@ -118,3 +118,4 @@ class TestSecurityHeaders:
         assert "access-control-allow-origin" in resp.headers
         # Security headers should NOT be present on preflight
         assert "X-Frame-Options" not in resp.headers
+

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from openjarvis.skills.overlay import (
+from nexify.skills.overlay import (
     SkillOverlay,
     SkillOverlayLoader,
     write_overlay,
@@ -97,3 +97,4 @@ class TestSkillOverlayLoader:
     def test_load_directory_does_not_exist(self, tmp_path: Path):
         loader = SkillOverlayLoader(tmp_path / "does-not-exist")
         assert loader.load("anything") is None
+

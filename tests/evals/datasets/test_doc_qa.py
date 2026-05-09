@@ -1,6 +1,6 @@
 """Tests for the doc_qa dataset."""
 
-from openjarvis.evals.datasets.doc_qa import DocQADataset
+from nexify.evals.datasets.doc_qa import DocQADataset
 
 
 def test_dataset_loads():
@@ -54,3 +54,4 @@ def test_difficulty_tiers():
     assert "easy" in subjects
     assert "medium" in subjects
     assert "hard" in subjects
+

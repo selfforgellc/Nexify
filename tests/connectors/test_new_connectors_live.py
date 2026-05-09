@@ -9,13 +9,13 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from openjarvis.connectors._stubs import Document
+from nexify.connectors._stubs import Document
 
 
 @pytest.mark.cloud
 class TestOuraLive:
     def test_sync_returns_documents(self):
-        from openjarvis.connectors.oura import OuraConnector
+        from nexify.connectors.oura import OuraConnector
 
         conn = OuraConnector()  # Uses default token path
         docs = list(conn.sync(since=datetime.now() - timedelta(days=1)))
@@ -27,7 +27,7 @@ class TestOuraLive:
 @pytest.mark.cloud
 class TestStravaLive:
     def test_sync_returns_documents(self):
-        from openjarvis.connectors.strava import StravaConnector
+        from nexify.connectors.strava import StravaConnector
 
         conn = StravaConnector()
         docs = list(conn.sync(since=datetime.now() - timedelta(days=7)))
@@ -38,7 +38,7 @@ class TestStravaLive:
 @pytest.mark.cloud
 class TestSpotifyLive:
     def test_sync_returns_documents(self):
-        from openjarvis.connectors.spotify import SpotifyConnector
+        from nexify.connectors.spotify import SpotifyConnector
 
         conn = SpotifyConnector()
         docs = list(conn.sync(since=datetime.now() - timedelta(days=1)))
@@ -49,9 +49,10 @@ class TestSpotifyLive:
 @pytest.mark.cloud
 class TestGoogleTasksLive:
     def test_sync_returns_documents(self):
-        from openjarvis.connectors.google_tasks import GoogleTasksConnector
+        from nexify.connectors.google_tasks import GoogleTasksConnector
 
         conn = GoogleTasksConnector()
         docs = list(conn.sync(since=datetime.now() - timedelta(days=7)))
         assert all(isinstance(d, Document) for d in docs)
         assert all(d.source == "google_tasks" for d in docs)
+

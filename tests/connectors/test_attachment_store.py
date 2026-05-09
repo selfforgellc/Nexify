@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.connectors.attachment_store import AttachmentStore
+from nexify.connectors.attachment_store import AttachmentStore
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -100,3 +100,4 @@ def test_get_content_nonexistent(store: AttachmentStore) -> None:
     """get_content() returns None for an unknown SHA-256."""
     fake_sha = "a" * 64
     assert store.get_content(fake_sha) is None
+

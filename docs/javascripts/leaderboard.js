@@ -176,3 +176,4 @@
     setInterval(loadLeaderboard, 60000);
   }
 })();
+

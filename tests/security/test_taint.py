@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.security.taint import (
+from nexify.security.taint import (
     SINK_POLICY,
     TaintLabel,
     TaintSet,
@@ -140,3 +140,4 @@ class TestPropagate:
         result = propagate_taint(input_taint, "Key: sk-abc123def456ghi789jkl012mno")
         assert result.has(TaintLabel.EXTERNAL)
         assert result.has(TaintLabel.SECRET)
+

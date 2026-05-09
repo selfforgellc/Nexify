@@ -6,7 +6,7 @@ import pytest
 
 pydantic = pytest.importorskip("pydantic")
 
-from openjarvis.server.models import (  # noqa: E402
+from nexify.server.models import (  # noqa: E402
     ChatCompletionChunk,
     ChatCompletionRequest,
     ChatCompletionResponse,
@@ -102,3 +102,4 @@ class TestChatMessage:
     def test_with_tool_call_id(self):
         msg = ChatMessage(role="tool", content="result", tool_call_id="abc")
         assert msg.tool_call_id == "abc"
+

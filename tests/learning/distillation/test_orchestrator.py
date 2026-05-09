@@ -6,13 +6,13 @@ import json
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from openjarvis.learning.distillation.models import (
+from nexify.learning.distillation.models import (
     AutonomyMode,
     BenchmarkSnapshot,
     FailureCluster,
     SessionStatus,
 )
-from openjarvis.learning.distillation.triggers import OnDemandTrigger
+from nexify.learning.distillation.triggers import OnDemandTrigger
 
 
 def _make_snapshot(overall: float = 0.6) -> BenchmarkSnapshot:
@@ -26,7 +26,7 @@ def _make_snapshot(overall: float = 0.6) -> BenchmarkSnapshot:
 
 
 def _make_diagnosis_result():
-    from openjarvis.learning.distillation.diagnose.runner import DiagnosisResult
+    from nexify.learning.distillation.diagnose.runner import DiagnosisResult
 
     return DiagnosisResult(
         diagnosis_md="## Diagnosis\nMath routing is broken.",
@@ -77,7 +77,7 @@ def _make_mock_engine():
 
 class TestDistillationOrchestrator:
     def test_full_session_completes(self, tmp_path: Path) -> None:
-        from openjarvis.learning.distillation.orchestrator import (
+        from nexify.learning.distillation.orchestrator import (
             DistillationOrchestrator,
         )
 
@@ -93,14 +93,14 @@ class TestDistillationOrchestrator:
                 current_sha=MagicMock(return_value="abc123"),
                 begin_stage=MagicMock(return_value=MagicMock(pre_stage_sha="abc123")),
             ),
-            openjarvis_home=tmp_path,
+            nexify_home=tmp_path,
             autonomy_mode=AutonomyMode.AUTO,
             scorer=lambda **kw: _make_snapshot(0.65),
             benchmark_version="personal_v1",
         )
 
         with patch(
-            "openjarvis.learning.distillation.orchestrator.DiagnosisRunner"
+            "nexify.learning.distillation.orchestrator.DiagnosisRunner"
         ) as MockDiag:
             MockDiag.return_value.run.return_value = _make_diagnosis_result()
             session = orch.run(OnDemandTrigger())
@@ -112,7 +112,7 @@ class TestDistillationOrchestrator:
         assert session.teacher_cost_usd >= 0
 
     def test_cold_start_returns_failed(self, tmp_path: Path) -> None:
-        from openjarvis.learning.distillation.orchestrator import (
+        from nexify.learning.distillation.orchestrator import (
             DistillationOrchestrator,
         )
 
@@ -130,7 +130,7 @@ class TestDistillationOrchestrator:
             checkpoint_store=MagicMock(
                 current_sha=MagicMock(return_value="abc123"),
             ),
-            openjarvis_home=tmp_path,
+            nexify_home=tmp_path,
             autonomy_mode=AutonomyMode.TIERED,
             scorer=lambda **kw: _make_snapshot(),
             benchmark_version="personal_v1",
@@ -141,7 +141,7 @@ class TestDistillationOrchestrator:
         assert "not enough traces" in (session.error or "").lower()
 
     def test_session_persisted_to_store(self, tmp_path: Path) -> None:
-        from openjarvis.learning.distillation.orchestrator import (
+        from nexify.learning.distillation.orchestrator import (
             DistillationOrchestrator,
         )
 
@@ -159,16 +159,17 @@ class TestDistillationOrchestrator:
                 current_sha=MagicMock(return_value="abc123"),
                 begin_stage=MagicMock(return_value=MagicMock(pre_stage_sha="abc123")),
             ),
-            openjarvis_home=tmp_path,
+            nexify_home=tmp_path,
             autonomy_mode=AutonomyMode.AUTO,
             scorer=lambda **kw: _make_snapshot(0.65),
             benchmark_version="personal_v1",
         )
 
         with patch(
-            "openjarvis.learning.distillation.orchestrator.DiagnosisRunner"
+            "nexify.learning.distillation.orchestrator.DiagnosisRunner"
         ) as MockDiag:
             MockDiag.return_value.run.return_value = _make_diagnosis_result()
             orch.run(OnDemandTrigger())
 
         assert session_store.save_session.called
+

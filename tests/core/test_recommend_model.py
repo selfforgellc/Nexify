@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.core.config import GpuInfo, HardwareInfo, recommend_model
+from nexify.core.config import GpuInfo, HardwareInfo, recommend_model
 
 
 class TestRecommendModelTiers:
@@ -149,3 +149,4 @@ class TestRecommendModelMlx:
         result = recommend_model(hw, "mlx")
         # available = 64 * 0.9 = 57.6 GB → ≤64 tier → qwen3.5:27b
         assert result == "qwen3.5:27b"
+

@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.agents._stubs import AgentContext
-from openjarvis.agents.native_openhands import NativeOpenHandsAgent
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.registry import AgentRegistry
-from openjarvis.core.types import Conversation, Message, Role, ToolResult
-from openjarvis.tools._stubs import BaseTool, ToolSpec
+from nexify.agents._stubs import AgentContext
+from nexify.agents.native_openhands import NativeOpenHandsAgent
+from nexify.core.events import EventBus, EventType
+from nexify.core.registry import AgentRegistry
+from nexify.core.types import Conversation, Message, Role, ToolResult
+from nexify.tools._stubs import BaseTool, ToolSpec
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -553,3 +553,4 @@ class TestUrlExpansion:
         call_messages = engine.generate.call_args[0][0]
         system_msg = call_messages[0].content
         assert "tool" not in system_msg.lower()
+

@@ -7,7 +7,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from openjarvis.connectors.embedding_store import EmbeddingStore
+from nexify.connectors.embedding_store import EmbeddingStore
 
 torch = pytest.importorskip("torch", reason="torch required for embedding tests")
 
@@ -162,3 +162,4 @@ def test_store_overwrites(emb_store: EmbeddingStore) -> None:
     assert loaded is not None
     assert loaded.shape == (15, 128)
     assert torch.allclose(t2, loaded)
+

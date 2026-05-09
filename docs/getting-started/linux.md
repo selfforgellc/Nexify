@@ -1,7 +1,7 @@
 # Linux Install
 
 ```bash
-curl -fsSL https://openjarvis.ai/install.sh | bash
+curl -fsSL https://nexify.ai/install.sh | bash
 ```
 
 Tested on: Ubuntu 22.04 / 24.04, Fedora 40, Debian 12, Arch.
@@ -28,3 +28,4 @@ The installer auto-detects via `nvidia-smi` / `rocm-smi`. Datacenter cards (A100
 ## See also
 
 - [Full installer reference](install.md)
+

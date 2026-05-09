@@ -1,12 +1,12 @@
 # Multi-Model Router
 
-Route queries to the cheapest capable model using OpenJarvis's learning/routing
+Route queries to the cheapest capable model using nexify's learning/routing
 system. Simple queries go to small fast models; complex code or math queries go
 to larger models.
 
 ## Requirements
 
-- OpenJarvis installed (`git clone https://github.com/open-jarvis/OpenJarvis.git && cd OpenJarvis && uv sync` or `uv sync --extra dev`)
+- nexify installed (`git clone https://github.com/open-jarvis/nexify.git && cd nexify && uv sync` or `uv sync --extra dev`)
 - An inference engine running with multiple models available
 
 ## Usage
@@ -37,7 +37,7 @@ python examples/multi_model_router/multi_model_router.py \
 
 ## How It Works
 
-The script uses OpenJarvis's routing infrastructure from the learning pillar:
+The script uses nexify's routing infrastructure from the learning pillar:
 
 - **HeuristicRouter** (default) -- rule-based routing that analyzes the query
   for code patterns, math keywords, length, and complexity to pick the right
@@ -50,3 +50,4 @@ The script uses OpenJarvis's routing infrastructure from the learning pillar:
 Both routers use `build_routing_context()` to extract query features (length,
 has_code, has_math) and then select from the available model pool. Use
 `--verbose` to see the routing decision details.
+

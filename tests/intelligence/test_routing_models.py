@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from openjarvis.intelligence.model_catalog import register_builtin_models
-from openjarvis.learning._stubs import RoutingContext
-from openjarvis.learning.routing.router import (
+from nexify.intelligence.model_catalog import register_builtin_models
+from nexify.learning._stubs import RoutingContext
+from nexify.learning.routing.router import (
     HeuristicRouter,
     build_routing_context,
 )
@@ -30,3 +30,4 @@ class TestRouterWithModels:
         )
         ctx = build_routing_context("def merge_sort(arr):")
         assert router.select_model(ctx) == "gpt-oss:120b"
+

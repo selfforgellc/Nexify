@@ -10,7 +10,7 @@ import pytest
 fastapi = pytest.importorskip("fastapi")
 from fastapi.testclient import TestClient  # noqa: E402
 
-from openjarvis.server.app import create_app  # noqa: E402
+from nexify.server.app import create_app  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -202,7 +202,7 @@ class TestStreamingResilience:
     def test_stream_without_agent_uses_direct_engine(self):
         """When no tools in request, streaming should use engine.stream directly
         even if an agent is configured (for real token-by-token output)."""
-        from openjarvis.agents._stubs import AgentResult
+        from nexify.agents._stubs import AgentResult
 
         engine = _make_engine()
         agent = MagicMock()
@@ -268,3 +268,4 @@ class TestModelsEndpointExtended:
         assert resp.status_code == 200
         # The endpoint returns whatever list_models() gives
         assert resp.json()["object"] == "list"
+

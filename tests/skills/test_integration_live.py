@@ -8,10 +8,10 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.skills.manager import SkillManager
-from openjarvis.skills.tool_adapter import SkillTool
-from openjarvis.system import SystemBuilder
+from nexify.core.events import EventBus, EventType
+from nexify.skills.manager import SkillManager
+from nexify.skills.tool_adapter import SkillTool
+from nexify.system import SystemBuilder
 
 
 @pytest.mark.live
@@ -44,7 +44,7 @@ class TestSkillSystemIntegration:
         mgr = SkillManager(bus=bus)
         from pathlib import Path
 
-        mgr.discover(paths=[Path("~/.openjarvis/skills/").expanduser()])
+        mgr.discover(paths=[Path("~/.nexify/skills/").expanduser()])
 
         catalog = mgr.get_catalog_xml()
         assert "<available_skills>" in catalog
@@ -59,7 +59,7 @@ class TestSkillSystemIntegration:
         mgr = SkillManager(bus=bus)
         from pathlib import Path
 
-        mgr.discover(paths=[Path("~/.openjarvis/skills/").expanduser()])
+        mgr.discover(paths=[Path("~/.nexify/skills/").expanduser()])
 
         # Test instruction-only skill
         tools = mgr.get_skill_tools()
@@ -126,10 +126,10 @@ class TestSkillEventsAndTracing:
 
     def test_skill_execution_emits_events(self):
         """Running a structured skill emits SKILL_EXECUTE_START/END events."""
-        from openjarvis.core.types import ToolResult
-        from openjarvis.skills.executor import SkillExecutor
-        from openjarvis.skills.types import SkillManifest, SkillStep
-        from openjarvis.tools._stubs import BaseTool, ToolExecutor, ToolSpec
+        from nexify.core.types import ToolResult
+        from nexify.skills.executor import SkillExecutor
+        from nexify.skills.types import SkillManifest, SkillStep
+        from nexify.tools._stubs import BaseTool, ToolExecutor, ToolSpec
 
         class EchoTool(BaseTool):
             tool_id = "echo"
@@ -173,3 +173,4 @@ class TestSkillEventsAndTracing:
         end_event = next(e for e in events if e[0] == EventType.SKILL_EXECUTE_END)
         assert end_event[1]["success"] is True
         print("  Events correctly emitted with skill metadata")
+

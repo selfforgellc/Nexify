@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.tools.think import ThinkTool
+from nexify.tools.think import ThinkTool
 
 
 class TestThinkTool:
@@ -35,3 +35,4 @@ class TestThinkTool:
         fn = tool.to_openai_function()
         assert fn["function"]["name"] == "think"
         assert "thought" in fn["function"]["parameters"]["properties"]
+

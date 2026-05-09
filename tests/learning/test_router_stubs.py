@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.core.types import RoutingContext
-from openjarvis.learning._stubs import QueryAnalyzer, RouterPolicy
-from openjarvis.learning.routing.router import DefaultQueryAnalyzer
+from nexify.core.types import RoutingContext
+from nexify.learning._stubs import QueryAnalyzer, RouterPolicy
+from nexify.learning.routing.router import DefaultQueryAnalyzer
 
 
 class _DummyRouter(RouterPolicy):
@@ -72,3 +72,4 @@ class TestDefaultQueryAnalyzer:
         analyzer = DefaultQueryAnalyzer()
         ctx = analyzer.analyze("quick question", urgency=0.9)
         assert ctx.urgency == 0.9
+

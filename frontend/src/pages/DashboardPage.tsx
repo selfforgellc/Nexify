@@ -33,3 +33,4 @@ export function DashboardPage() {
     </div>
   );
 }
+

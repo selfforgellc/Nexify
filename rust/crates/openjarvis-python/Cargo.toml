@@ -1,32 +1,33 @@
 [package]
-name = "openjarvis-python"
+name = "nexify-python"
 version = "0.1.0"
 edition = "2021"
 
 [lib]
-name = "openjarvis_rust"
+name = "nexify_rust"
 crate-type = ["cdylib"]
 
 [dependencies]
-openjarvis-core = { path = "../openjarvis-core" }
-openjarvis-engine = { path = "../openjarvis-engine" }
-openjarvis-security = { path = "../openjarvis-security" }
-openjarvis-tools = { path = "../openjarvis-tools" }
-openjarvis-agents = { path = "../openjarvis-agents" }
-openjarvis-traces = { path = "../openjarvis-traces" }
-openjarvis-telemetry = { path = "../openjarvis-telemetry" }
-openjarvis-learning = { path = "../openjarvis-learning" }
-openjarvis-mcp = { path = "../openjarvis-mcp" }
-openjarvis-sessions = { path = "../openjarvis-sessions" }
-openjarvis-workflow = { path = "../openjarvis-workflow" }
-openjarvis-skills = { path = "../openjarvis-skills" }
-openjarvis-recipes = { path = "../openjarvis-recipes" }
-openjarvis-templates = { path = "../openjarvis-templates" }
-openjarvis-a2a = { path = "../openjarvis-a2a" }
-openjarvis-scheduler = { path = "../openjarvis-scheduler" }
+nexify-core = { path = "../nexify-core" }
+nexify-engine = { path = "../nexify-engine" }
+nexify-security = { path = "../nexify-security" }
+nexify-tools = { path = "../nexify-tools" }
+nexify-agents = { path = "../nexify-agents" }
+nexify-traces = { path = "../nexify-traces" }
+nexify-telemetry = { path = "../nexify-telemetry" }
+nexify-learning = { path = "../nexify-learning" }
+nexify-mcp = { path = "../nexify-mcp" }
+nexify-sessions = { path = "../nexify-sessions" }
+nexify-workflow = { path = "../nexify-workflow" }
+nexify-skills = { path = "../nexify-skills" }
+nexify-recipes = { path = "../nexify-recipes" }
+nexify-templates = { path = "../nexify-templates" }
+nexify-a2a = { path = "../nexify-a2a" }
+nexify-scheduler = { path = "../nexify-scheduler" }
 pyo3 = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 tokio = { workspace = true }
 once_cell = { workspace = true }
 parking_lot = { workspace = true }
+

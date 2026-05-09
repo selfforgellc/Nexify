@@ -5,10 +5,10 @@ hide:
 
 # Savings Leaderboard
 
-See how the OpenJarvis community saves money, energy, and compute by running AI locally instead of using cloud providers.
+See how the nexify community saves money, energy, and compute by running AI locally instead of using cloud providers.
 
 !!! info "Win a Mac Mini!"
-    Opt in to share your savings from the OpenJarvis browser app or desktop app for a chance to win a Mac Mini. Your data is fully anonymous — no email, no IP, no hardware info.
+    Opt in to share your savings from the nexify browser app or desktop app for a chance to win a Mac Mini. Your data is fully anonymous — no email, no IP, no hardware info.
 
 <div id="leaderboard-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:24px 0;">
   <div class="lb-stat-card">
@@ -57,3 +57,4 @@ See how the OpenJarvis community saves money, energy, and compute by running AI 
 <p style="font-size:12px;opacity:0.6;margin-top:12px">
 *Dollar savings estimated vs. Claude Opus 4.6 API pricing ($5/1M input, $25/1M output tokens). Assumes local open-source models produce roughly the same number of tokens per request as cloud models.
 </p>
+

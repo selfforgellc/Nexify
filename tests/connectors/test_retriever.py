@@ -8,9 +8,9 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.connectors.retriever import ColBERTReranker, Reranker, TwoStageRetriever
-from openjarvis.connectors.store import KnowledgeStore
-from openjarvis.tools.storage._stubs import RetrievalResult
+from nexify.connectors.retriever import ColBERTReranker, Reranker, TwoStageRetriever
+from nexify.connectors.store import KnowledgeStore
+from nexify.tools.storage._stubs import RetrievalResult
 
 
 def _has_torch() -> bool:
@@ -321,3 +321,4 @@ def test_reranker_caches_new_embeddings() -> None:
     assert call_args[0][1].shape == (20, 128)  # squeezed tensor
 
     assert len(results) == 1
+

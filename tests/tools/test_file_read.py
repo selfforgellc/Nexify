@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.tools.file_read import FileReadTool
+from nexify.tools.file_read import FileReadTool
 
 
 class TestFileReadTool:
@@ -93,3 +93,4 @@ class TestFileReadTool:
         tool = FileReadTool()
         result = tool.execute(path=str(f))
         assert result.success is True
+

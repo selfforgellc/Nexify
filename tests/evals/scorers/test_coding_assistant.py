@@ -1,7 +1,7 @@
 """Tests for the coding_assistant scorer."""
 
-from openjarvis.evals.core.types import EvalRecord
-from openjarvis.evals.scorers.coding_assistant import CodingAssistantScorer
+from nexify.evals.core.types import EvalRecord
+from nexify.evals.scorers.coding_assistant import CodingAssistantScorer
 
 
 def _make_record(buggy_code, test_code, originally_failing, originally_passing):
@@ -67,3 +67,4 @@ def test_empty_answer():
     is_correct, meta = scorer.score(record, "")
     assert is_correct is False
     assert meta["reason"] == "empty_response"
+

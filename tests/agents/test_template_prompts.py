@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.agents.manager import AgentManager
+from nexify.agents.manager import AgentManager
 
 
 def test_create_from_template_expands_system_prompt(tmp_path):
@@ -38,3 +38,4 @@ def test_create_from_template_preserves_icon(tmp_path):
     config = agent["config"]
     assert config.get("icon") == "🔬"
     mgr.close()
+

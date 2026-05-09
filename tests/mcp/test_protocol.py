@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 
-from openjarvis.mcp.protocol import (
+from nexify.mcp.protocol import (
     INTERNAL_ERROR,
     INVALID_PARAMS,
     INVALID_REQUEST,
@@ -165,3 +165,4 @@ class TestErrorCodes:
 
     def test_internal_error(self):
         assert INTERNAL_ERROR == -32603
+

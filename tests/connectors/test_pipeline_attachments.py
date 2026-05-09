@@ -7,10 +7,10 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.connectors._stubs import Attachment, Document
-from openjarvis.connectors.attachment_store import AttachmentStore
-from openjarvis.connectors.pipeline import IngestionPipeline
-from openjarvis.connectors.store import KnowledgeStore
+from nexify.connectors._stubs import Attachment, Document
+from nexify.connectors.attachment_store import AttachmentStore
+from nexify.connectors.pipeline import IngestionPipeline
+from nexify.connectors.store import KnowledgeStore
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -161,3 +161,4 @@ def test_no_attachments_no_regression(
     # No blobs should be stored
     rows = att_store._conn.execute("SELECT COUNT(*) FROM attachments").fetchone()
     assert rows[0] == 0
+

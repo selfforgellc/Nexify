@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.tools.apply_patch import ApplyPatchTool
+from nexify.tools.apply_patch import ApplyPatchTool
 
 
 class TestApplyPatchTool:
@@ -194,3 +194,4 @@ class TestApplyPatchTool:
         assert result.success is True
         content = f.read_text(encoding="utf-8")
         assert content == "keep\nkeep_too\n"
+

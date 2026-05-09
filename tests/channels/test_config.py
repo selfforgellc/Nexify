@@ -5,7 +5,7 @@ from __future__ import annotations
 import textwrap
 from pathlib import Path
 
-from openjarvis.core.config import ChannelConfig, JarvisConfig, load_config
+from nexify.core.config import ChannelConfig, JarvisConfig, load_config
 
 
 class TestChannelConfigDefaults:
@@ -76,3 +76,4 @@ class TestLoadConfigWithChannel:
         assert cfg.channel.enabled is True
         # Non-specified fields keep defaults
         assert cfg.channel.default_agent == "simple"
+

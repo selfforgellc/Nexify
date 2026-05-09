@@ -5,7 +5,7 @@ and dependency issues using an AI-powered ReAct agent.
 
 ## Requirements
 
-- OpenJarvis installed (`git clone https://github.com/open-jarvis/OpenJarvis.git && cd OpenJarvis && uv sync` or `uv sync --extra dev`)
+- nexify installed (`git clone https://github.com/open-jarvis/nexify.git && cd nexify && uv sync` or `uv sync --extra dev`)
 - An inference engine running (Ollama, cloud API, vLLM, etc.)
 
 ## Usage
@@ -31,3 +31,4 @@ and four tools:
 The ReAct agent follows a Thought-Action-Observation loop, adaptively exploring
 the project until it can produce a structured security report with risk levels
 and prioritized recommendations.
+

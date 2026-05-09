@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.recipes.loader import (
+from nexify.recipes.loader import (
     Recipe,
     discover_recipes,
     load_recipe,
@@ -157,3 +157,4 @@ class TestResolveRecipe:
     def test_resolve_recipe_not_found(self) -> None:
         result = resolve_recipe("nonexistent_recipe_xyz")
         assert result is None
+

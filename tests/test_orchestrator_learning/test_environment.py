@@ -4,12 +4,12 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.core.types import ToolResult
-from openjarvis.learning.intelligence.orchestrator.environment import (
+from nexify.core.types import ToolResult
+from nexify.learning.intelligence.orchestrator.environment import (
     OrchestratorEnvironment,
 )
-from openjarvis.learning.intelligence.orchestrator.types import OrchestratorAction
-from openjarvis.tools._stubs import BaseTool, ToolSpec
+from nexify.learning.intelligence.orchestrator.types import OrchestratorAction
+from nexify.tools._stubs import BaseTool, ToolSpec
 
 # -- Mock tool ---------------------------------------------------------------
 
@@ -122,3 +122,4 @@ class TestOrchestratorEnvironment:
         env = OrchestratorEnvironment(tools=[_MockCalculator()])
         state = env.reset("q")
         assert env.is_done(state) is False
+

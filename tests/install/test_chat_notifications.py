@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from openjarvis.cli._bg_state import BgStatus
-from openjarvis.cli._chat_notifications import NotificationDispatcher
+from nexify.cli._bg_state import BgStatus
+from nexify.cli._chat_notifications import NotificationDispatcher
 
 
 def test_no_notifications_when_unchanged() -> None:
@@ -48,3 +48,4 @@ def test_does_not_renotify_in_same_session() -> None:
     assert len(msgs1) == 1
     msgs2 = d.diff(BgStatus(rust_extension="ready"))
     assert msgs2 == []
+

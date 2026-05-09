@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.tools.templates.loader import ToolTemplate, discover_templates
+from nexify.tools.templates.loader import ToolTemplate, discover_templates
 
 
 class TestToolTemplate:
@@ -159,3 +159,4 @@ transform = "upper"
         templates = discover_templates(tmp_path)
         assert len(templates) == 1
         assert templates[0].spec.name == "custom"
+

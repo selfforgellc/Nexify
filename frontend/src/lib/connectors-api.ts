@@ -51,3 +51,4 @@ export async function triggerSync(id: string): Promise<{ connector_id: string; c
   }
   return res.json();
 }
+

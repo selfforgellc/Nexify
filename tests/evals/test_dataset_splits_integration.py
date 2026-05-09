@@ -7,13 +7,13 @@ import importlib
 import pytest
 
 PROVIDERS = [
-    ("openjarvis.evals.datasets.pinchbench", "PinchBenchDataset"),
-    ("openjarvis.evals.datasets.liveresearch", "LiveResearchBenchDataset"),
-    ("openjarvis.evals.datasets.gaia", "GAIADataset"),
-    ("openjarvis.evals.datasets.liveresearchbench", "LiveResearchBenchDataset"),
-    ("openjarvis.evals.datasets.taubench", "TauBenchDataset"),
-    ("openjarvis.evals.datasets.toolcall15", "ToolCall15Dataset"),
-    ("openjarvis.evals.datasets.livecodebench", "LiveCodeBenchDataset"),
+    ("nexify.evals.datasets.pinchbench", "PinchBenchDataset"),
+    ("nexify.evals.datasets.liveresearch", "LiveResearchBenchDataset"),
+    ("nexify.evals.datasets.gaia", "GAIADataset"),
+    ("nexify.evals.datasets.liveresearchbench", "LiveResearchBenchDataset"),
+    ("nexify.evals.datasets.taubench", "TauBenchDataset"),
+    ("nexify.evals.datasets.toolcall15", "ToolCall15Dataset"),
+    ("nexify.evals.datasets.livecodebench", "LiveCodeBenchDataset"),
 ]
 
 
@@ -51,7 +51,7 @@ def test_train_and_test_are_disjoint_per_provider(mod_name, cls_name):
 @pytest.mark.slow
 def test_toolcall15_split_is_nonempty():
     """Regression: toolcall15 must not silently return 0 records for split=train."""
-    from openjarvis.evals.datasets.toolcall15 import ToolCall15Dataset
+    from nexify.evals.datasets.toolcall15 import ToolCall15Dataset
 
     ds = ToolCall15Dataset()
     ds.load(split="train", seed=42)
@@ -64,3 +64,4 @@ def test_toolcall15_split_is_nonempty():
     train_ids = {r.record_id for r in ds.iter_records()}
     test_ids = {r.record_id for r in ds_test.iter_records()}
     assert train_ids.isdisjoint(test_ids)
+

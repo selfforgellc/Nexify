@@ -7,18 +7,18 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from openjarvis.channels._stubs import ChannelStatus
-from openjarvis.channels.line_channel import LineChannel
-from openjarvis.channels.mastodon_channel import MastodonChannel
-from openjarvis.channels.messenger_channel import MessengerChannel
-from openjarvis.channels.nostr_channel import NostrChannel
-from openjarvis.channels.reddit_channel import RedditChannel
-from openjarvis.channels.rocketchat_channel import RocketChatChannel
-from openjarvis.channels.twitch_channel import TwitchChannel
-from openjarvis.channels.viber_channel import ViberChannel
-from openjarvis.channels.xmpp_channel import XMPPChannel
-from openjarvis.channels.zulip_channel import ZulipChannel
-from openjarvis.core.registry import ChannelRegistry
+from nexify.channels._stubs import ChannelStatus
+from nexify.channels.line_channel import LineChannel
+from nexify.channels.mastodon_channel import MastodonChannel
+from nexify.channels.messenger_channel import MessengerChannel
+from nexify.channels.nostr_channel import NostrChannel
+from nexify.channels.reddit_channel import RedditChannel
+from nexify.channels.rocketchat_channel import RocketChatChannel
+from nexify.channels.twitch_channel import TwitchChannel
+from nexify.channels.viber_channel import ViberChannel
+from nexify.channels.xmpp_channel import XMPPChannel
+from nexify.channels.zulip_channel import ZulipChannel
+from nexify.core.registry import ChannelRegistry
 
 # (class, registry key, library module name, pip package name)
 CHANNELS = [
@@ -331,3 +331,4 @@ class TestNostrChannel:
     def test_default_relay(self):
         ch = NostrChannel()
         assert "wss://relay.damus.io" in ch._relays
+

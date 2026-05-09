@@ -1,7 +1,7 @@
 """Tests for the daily_digest scorer."""
 
-from openjarvis.evals.core.types import EvalRecord
-from openjarvis.evals.scorers.daily_digest import DailyDigestScorer
+from nexify.evals.core.types import EvalRecord
+from nexify.evals.scorers.daily_digest import DailyDigestScorer
 
 
 def _make_record(must_mention, priority_order=None):
@@ -86,3 +86,4 @@ def test_no_must_mention():
     is_correct, meta = scorer.score(record, "Some digest.")
     assert is_correct is None
     assert meta["reason"] == "no_must_mention_items"
+

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.core.config import (
+from nexify.core.config import (
     AgentConfig,
     HardwareInfo,
     JarvisConfig,
@@ -76,3 +76,4 @@ class TestGenerateDefaultToml:
         toml_str = generate_default_toml(hw)
         assert "[agent]" in toml_str
         assert "default_agent" in toml_str
+

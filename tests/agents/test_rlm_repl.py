@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.agents.rlm_repl import RLMRepl
+from nexify.agents.rlm_repl import RLMRepl
 
 
 class TestRLMReplBasics:
@@ -204,3 +204,4 @@ class TestRLMReplOutput:
         repl = RLMRepl()
         output = repl.execute("x = 1")
         assert output == ""
+

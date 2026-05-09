@@ -48,10 +48,10 @@ def main() -> None:
     args = parser.parse_args()
 
     try:
-        from openjarvis import Jarvis
+        from nexify import Jarvis
     except ImportError:
         print(
-            "Error: openjarvis is not installed. "
+            "Error: nexify is not installed. "
             "Install it with:  uv sync --extra dev",
             file=sys.stderr,
         )
@@ -115,3 +115,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

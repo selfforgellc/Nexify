@@ -15,3 +15,4 @@ When a real-world bug report uncovers a new failure mode, add an entry here at t
 - [missing-git.md](missing-git.md) — installer refuses without `git` on PATH
 
 (Add new entries as the catalog grows.)
+

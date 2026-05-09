@@ -6,9 +6,9 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.evals.core.types import EvalRecord
-from openjarvis.evals.datasets.loghub import LogHubDataset
-from openjarvis.evals.scorers.loghub_scorer import LogHubScorer
+from nexify.evals.core.types import EvalRecord
+from nexify.evals.datasets.loghub import LogHubDataset
+from nexify.evals.scorers.loghub_scorer import LogHubScorer
 
 
 class TestLogHubDataset:
@@ -147,21 +147,22 @@ class TestLogHubScorer:
 
 class TestLogHubCLI:
     def test_in_benchmarks_dict(self) -> None:
-        from openjarvis.evals.cli import BENCHMARKS
+        from nexify.evals.cli import BENCHMARKS
 
         assert "loghub" in BENCHMARKS
         assert BENCHMARKS["loghub"]["category"] == "agentic"
 
     def test_build_dataset(self) -> None:
-        from openjarvis.evals.cli import _build_dataset
+        from nexify.evals.cli import _build_dataset
 
         ds = _build_dataset("loghub")
         assert ds is not None
         assert ds.dataset_id == "loghub"
 
     def test_build_scorer(self) -> None:
-        from openjarvis.evals.cli import _build_scorer
+        from nexify.evals.cli import _build_scorer
 
         s = _build_scorer("loghub", _mock_backend(), "test-model")
         assert s is not None
         assert s.scorer_id == "loghub"
+

@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.agents._stubs import AgentContext, AgentResult
-from openjarvis.agents.simple import SimpleAgent
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import Conversation, Message, Role
+from nexify.agents._stubs import AgentContext, AgentResult
+from nexify.agents.simple import SimpleAgent
+from nexify.core.events import EventBus, EventType
+from nexify.core.types import Conversation, Message, Role
 
 
 def _make_mock_engine(content: str = "Hello there!") -> MagicMock:
@@ -138,3 +138,4 @@ class TestSimpleAgent:
         agent.run("Hello")
         call_kwargs = engine.generate.call_args[1]
         assert call_kwargs["model"] == "qwen3:8b"
+

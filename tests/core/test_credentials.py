@@ -4,7 +4,7 @@ import os
 
 import pytest
 
-from openjarvis.core.credentials import (
+from nexify.core.credentials import (
     get_credential_status,
     load_credentials,
     save_credential,
@@ -54,3 +54,4 @@ def test_file_permissions(cred_path):
     save_credential("web_search", "TAVILY_API_KEY", "tvly-x", path=cred_path)
     mode = oct(cred_path.stat().st_mode & 0o777)
     assert mode == "0o600"
+

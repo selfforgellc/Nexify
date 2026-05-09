@@ -8,8 +8,8 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.channels._stubs import ChannelStatus
-from openjarvis.core.registry import ChannelRegistry
+from nexify.channels._stubs import ChannelStatus
+from nexify.core.registry import ChannelRegistry
 
 
 def make_common_channel_tests(
@@ -63,3 +63,4 @@ def make_common_channel_tests(
     CommonChannelTests.__name__ = f"TestCommon_{channel_key}"
     CommonChannelTests.__qualname__ = f"TestCommon_{channel_key}"
     return CommonChannelTests
+

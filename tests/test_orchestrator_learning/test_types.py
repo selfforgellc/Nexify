@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.learning.intelligence.orchestrator.types import (
+from nexify.learning.intelligence.orchestrator.types import (
     Episode,
     EpisodeState,
     OrchestratorAction,
@@ -240,3 +240,4 @@ class TestPolicyOutput:
         )
         assert po.is_final_answer is False
         assert po.confidence == 1.0
+

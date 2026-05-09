@@ -6,7 +6,7 @@ import pytest
 
 st = pytest.importorskip("sentence_transformers")
 
-from openjarvis.tools.storage.embeddings import (  # noqa: E402
+from nexify.tools.storage.embeddings import (  # noqa: E402
     Embedder,
     SentenceTransformerEmbedder,
 )
@@ -71,3 +71,4 @@ def test_embedder_abc_cannot_instantiate():
     """Embedder ABC cannot be instantiated directly."""
     with pytest.raises(TypeError):
         Embedder()  # type: ignore[abstract]
+

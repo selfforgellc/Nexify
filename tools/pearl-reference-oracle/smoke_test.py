@@ -1,7 +1,7 @@
 """Pearl mining smoke test — runs an end-to-end mine + verify cycle.
 
 Verifies that this host can run Pearl's pure-Rust mining algorithm via the
-`pearl_mining` Python package. Used as Phase 0-B of the OpenJarvis Apple Silicon
+`pearl_mining` Python package. Used as Phase 0-B of the nexify Apple Silicon
 mining spec ([Spec B]).
 
 Exit codes:
@@ -137,3 +137,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

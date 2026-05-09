@@ -17,3 +17,4 @@ type = "cron"
 value = "0 6 * * 1,3,5"
 description = "Gym schedule check (MWF 6am)"
 script = "gym_scheduler.py"
+

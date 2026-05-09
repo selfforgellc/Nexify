@@ -117,3 +117,4 @@ export function SetupWizard({ onComplete }: { onComplete: (firstQuery?: string) 
     </div>
   );
 }
+

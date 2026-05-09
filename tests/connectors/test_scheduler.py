@@ -8,11 +8,11 @@ from typing import Iterator, Optional
 
 import pytest
 
-from openjarvis.connectors._stubs import BaseConnector, Document, SyncStatus
-from openjarvis.connectors.pipeline import IngestionPipeline
-from openjarvis.connectors.scheduler import SyncScheduler
-from openjarvis.connectors.store import KnowledgeStore
-from openjarvis.connectors.sync_engine import SyncEngine
+from nexify.connectors._stubs import BaseConnector, Document, SyncStatus
+from nexify.connectors.pipeline import IngestionPipeline
+from nexify.connectors.scheduler import SyncScheduler
+from nexify.connectors.store import KnowledgeStore
+from nexify.connectors.sync_engine import SyncEngine
 
 # ---------------------------------------------------------------------------
 # Fixtures and helpers
@@ -138,3 +138,4 @@ def test_run_once_returns_chunk_counts(engine: SyncEngine) -> None:
     assert results["conn_a"] == 2
     assert results["conn_b"] == 4
     assert len(results) == 2
+

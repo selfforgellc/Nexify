@@ -10,7 +10,7 @@ starlette = pytest.importorskip("starlette")
 from fastapi import FastAPI  # noqa: E402
 from starlette.testclient import TestClient  # noqa: E402
 
-from openjarvis.server.api_routes import learning_router  # noqa: E402
+from nexify.server.api_routes import learning_router  # noqa: E402
 
 
 def _make_app() -> FastAPI:
@@ -79,3 +79,4 @@ def test_learning_policy_enabled_is_bool():
     client = _client()
     data = client.get("/v1/learning/policy").json()
     assert isinstance(data["enabled"], bool)
+

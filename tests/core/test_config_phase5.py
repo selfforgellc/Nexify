@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.core.config import JarvisConfig, load_config
-from openjarvis.core.registry import BenchmarkRegistry
+from nexify.core.config import JarvisConfig, load_config
+from nexify.core.registry import BenchmarkRegistry
 
 
 class TestBenchmarkRegistry:
@@ -36,13 +36,13 @@ class TestConfigPhase5:
         assert cfg.learning is not None
 
     def test_benchmark_registry_importable(self):
-        from openjarvis.core.registry import BenchmarkRegistry
+        from nexify.core.registry import BenchmarkRegistry
 
         assert BenchmarkRegistry is not None
 
     def test_registry_isolation(self):
         """BenchmarkRegistry entries don't leak into other registries."""
-        from openjarvis.core.registry import ModelRegistry
+        from nexify.core.registry import ModelRegistry
 
         BenchmarkRegistry.register_value("iso-test", "bench-value")
         with pytest.raises(KeyError):
@@ -51,3 +51,4 @@ class TestConfigPhase5:
     def test_load_config_default(self):
         cfg = load_config()
         assert isinstance(cfg, JarvisConfig)
+

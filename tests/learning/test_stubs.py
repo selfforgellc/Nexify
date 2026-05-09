@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.learning._stubs import RoutingContext
+from nexify.learning._stubs import RoutingContext
 
 
 class TestRoutingContext:
@@ -32,3 +32,4 @@ class TestRoutingContext:
         assert ctx.language == "py"
         assert ctx.urgency == 0.9
         assert ctx.metadata == {"key": "val"}
+

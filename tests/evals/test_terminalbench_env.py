@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.evals.execution.terminalbench_env import TerminalBenchTaskEnv
+from nexify.evals.execution.terminalbench_env import TerminalBenchTaskEnv
 
 # terminal_bench is an optional dep — skip all tests if unavailable
 terminal_bench = pytest.importorskip(
@@ -46,3 +46,4 @@ class TestTerminalBenchTaskEnv:
         assert is_resolved is False
         assert results["error"] == "terminal_not_running"
         assert metadata["is_resolved"] is False
+

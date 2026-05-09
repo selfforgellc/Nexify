@@ -1,6 +1,6 @@
 """Tests for speech ABC and data types."""
 
-from openjarvis.speech._stubs import Segment, SpeechBackend, TranscriptionResult
+from nexify.speech._stubs import Segment, SpeechBackend, TranscriptionResult
 
 
 def test_transcription_result():
@@ -30,3 +30,4 @@ def test_speech_backend_is_abstract():
 
     with pytest.raises(TypeError):
         SpeechBackend()
+

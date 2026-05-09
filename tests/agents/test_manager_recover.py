@@ -2,7 +2,7 @@
 
 import pytest
 
-from openjarvis.agents.manager import AgentManager
+from nexify.agents.manager import AgentManager
 
 
 @pytest.fixture
@@ -35,3 +35,4 @@ def test_recover_resets_to_idle_with_checkpoint(manager):
     assert result["tick_id"] == "tick-1"
     refreshed = manager.get_agent(agent["id"])
     assert refreshed["status"] == "idle"
+

@@ -7,13 +7,13 @@ A multi-hop research agent that searches across your indexed documents, cross-re
 ### 1. Install and initialize
 
 ```bash
-git clone https://github.com/open-jarvis/OpenJarvis.git
-cd OpenJarvis
+git clone https://github.com/open-jarvis/nexify.git
+cd nexify
 uv sync --extra dev
 jarvis init --preset deep-research
 ```
 
-This writes a pre-configured `~/.openjarvis/config.toml` for the deep research agent.
+This writes a pre-configured `~/.nexify/config.toml` for the deep research agent.
 
 ### 2. Index your documents
 
@@ -26,7 +26,7 @@ jarvis memory index ./docs/
 jarvis memory index ~/Documents/papers/
 ```
 
-OpenJarvis chunks the content and stores it in a local SQLite/FTS5 database. Supported formats include `.txt`, `.md`, `.pdf`, `.py`, `.json`, `.csv`, and more.
+nexify chunks the content and stores it in a local SQLite/FTS5 database. Supported formats include `.txt`, `.md`, `.pdf`, `.py`, `.json`, `.csv`, and more.
 
 ### 3. Ask a research question
 
@@ -63,7 +63,7 @@ jarvis memory stats
 
 ## Configuration Reference
 
-The preset writes this to `~/.openjarvis/config.toml`:
+The preset writes this to `~/.nexify/config.toml`:
 
 ```toml
 [engine]
@@ -163,3 +163,4 @@ Smaller chunk sizes work better for code, where each function or class is a natu
 **Web search not working** -- The `web_search` tool requires the Tavily API. Install with `uv sync --extra tools-search` and set `TAVILY_API_KEY`.
 
 **Wrong chunks retrieved** -- Try re-indexing with different chunk sizes. For technical documents, smaller chunks (`256`) often retrieve more precisely. For narrative text, larger chunks (`1024`) preserve more context.
+

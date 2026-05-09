@@ -7,12 +7,12 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.core.types import Trace
+from nexify.core.types import Trace
 
 
 @pytest.fixture
 def store():
-    from openjarvis.traces.store import TraceStore
+    from nexify.traces.store import TraceStore
 
     with tempfile.TemporaryDirectory() as tmpdir:
         s = TraceStore(Path(tmpdir) / "traces.db")
@@ -64,3 +64,4 @@ class TestFTS5Search:
     def test_search_empty(self, store):
         results = store.search("nonexistent gibberish xyzzy")
         assert results == []
+

@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from openjarvis.core.registry import ModelRegistry
-from openjarvis.core.types import ModelSpec
-from openjarvis.intelligence.model_catalog import (
+from nexify.core.registry import ModelRegistry
+from nexify.core.types import ModelSpec
+from nexify.intelligence.model_catalog import (
     BUILTIN_MODELS,
     merge_discovered_models,
     register_builtin_models,
@@ -47,3 +47,4 @@ class TestMergeDiscoveredModels:
         original = ModelRegistry.get("qwen3:8b")
         merge_discovered_models("ollama", ["qwen3:8b"])
         assert ModelRegistry.get("qwen3:8b").name == original.name
+

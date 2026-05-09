@@ -25,7 +25,7 @@ def _setup_config_tree(root: Path) -> None:
 
 class TestRollbackIntegration:
     def test_rollback_restores_files(self, tmp_path: Path) -> None:
-        from openjarvis.learning.distillation.checkpoint.store import (
+        from nexify.learning.distillation.checkpoint.store import (
             CheckpointStore,
         )
 
@@ -73,7 +73,7 @@ class TestRollbackIntegration:
         assert log_count >= 5  # baseline + 2 edits + 2 reverts
 
     def test_rollback_nonexistent_session(self, tmp_path: Path) -> None:
-        from openjarvis.learning.distillation.checkpoint.store import (
+        from nexify.learning.distillation.checkpoint.store import (
             CheckpointStore,
         )
 
@@ -85,3 +85,4 @@ class TestRollbackIntegration:
 
         result = store.revert_session("nonexistent-session")
         assert result == []
+

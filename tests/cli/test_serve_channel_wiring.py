@@ -8,11 +8,11 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.channels._stubs import ChannelMessage
-from openjarvis.core.config import JarvisConfig
-from openjarvis.core.events import EventBus
-from openjarvis.sessions.session import SessionStore
-from openjarvis.system import JarvisSystem
+from nexify.channels._stubs import ChannelMessage
+from nexify.core.config import JarvisConfig
+from nexify.core.events import EventBus
+from nexify.sessions.session import SessionStore
+from nexify.system import JarvisSystem
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -199,7 +199,7 @@ class TestChannelToolLoading:
 
     def test_tool_using_agent_receives_tools(self, tmp_path):
         """JarvisSystem built with a tool list passes tools to the agent via ask()."""
-        from openjarvis.tools._stubs import BaseTool, ToolSpec
+        from nexify.tools._stubs import BaseTool, ToolSpec
 
         # Minimal fake tool
         class _FakeTool(BaseTool):
@@ -296,3 +296,4 @@ class TestPerChatSessionIsolation:
             channel_user_id="42",
         )
         assert [m.content for m in reloaded.messages] == ["first", "reply"]
+

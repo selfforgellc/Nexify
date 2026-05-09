@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.connectors.chunker import ChunkResult, SemanticChunker
+from nexify.connectors.chunker import ChunkResult, SemanticChunker
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -262,3 +262,4 @@ def test_document_no_headings_uses_paragraphs() -> None:
     text = f"{para1}\n\n{para2}"
     results = chunker.chunk(text, doc_type="document")
     assert len(results) >= 2
+

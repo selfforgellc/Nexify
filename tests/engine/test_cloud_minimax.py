@@ -7,10 +7,10 @@ from unittest import mock
 
 import pytest
 
-from openjarvis.core.registry import EngineRegistry
-from openjarvis.core.types import Message, Role
-from openjarvis.engine._base import EngineConnectionError
-from openjarvis.engine.cloud import (
+from nexify.core.registry import EngineRegistry
+from nexify.core.types import Message, Role
+from nexify.engine._base import EngineConnectionError
+from nexify.engine.cloud import (
     _MINIMAX_MODELS,
     PRICING,
     CloudEngine,
@@ -323,3 +323,4 @@ class TestMiniMaxClose:
         engine.close()
         assert engine._minimax_client is None
         fake_client.close.assert_called_once()
+

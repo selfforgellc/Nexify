@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.evals.core.trace import QueryTrace, TurnTrace
+from nexify.evals.core.trace import QueryTrace, TurnTrace
 
 
 class TestTurnTrace:
@@ -149,3 +149,4 @@ class TestQueryTrace:
             ]
         )
         assert t.total_tool_calls == 3
+

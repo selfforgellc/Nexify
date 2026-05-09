@@ -1,8 +1,8 @@
 # NVIDIA Pearl Mining Validation Runbook
 
 This runbook is the release gate for the v1 `vllm-pearl` provider. Unit tests
-prove OpenJarvis wiring; this validates that a real H100/H200 host can mine
-through Pearl and serve inference through OpenJarvis.
+prove nexify wiring; this validates that a real H100/H200 host can mine
+through Pearl and serve inference through nexify.
 
 ## Required Host
 
@@ -161,16 +161,16 @@ uv run jarvis mine start
 
 Expected:
 
-- Docker container `openjarvis-pearl-miner` starts.
-- `~/.openjarvis/runtime/mining.json` is written.
+- Docker container `nexify-pearl-miner` starts.
+- `~/.nexify/runtime/mining.json` is written.
 - Sidecar contains `vllm_endpoint`, `gateway_url`, `gateway_metrics_url`, and
   `container_id`.
 
 Inspect:
 
 ```bash
-docker ps --filter name=openjarvis-pearl-miner
-cat ~/.openjarvis/runtime/mining.json
+docker ps --filter name=nexify-pearl-miner
+cat ~/.nexify/runtime/mining.json
 uv run jarvis mine logs --tail 200
 uv run jarvis mine status
 ```
@@ -183,7 +183,7 @@ Expected:
   `8339`.
 - `mine status` exits 0 and prints `provider: vllm-pearl`.
 
-## Verify OpenJarvis Inference Uses Mining Endpoint
+## Verify nexify Inference Uses Mining Endpoint
 
 Run:
 
@@ -216,7 +216,7 @@ Expected:
 - Metrics endpoint returns Prometheus text.
 - If Pearl exposes share counters, `mine status` maps them correctly.
 - If metric names differ, attach `/tmp/pearl-gateway-metrics.txt` to the PR and
-  update `src/openjarvis/mining/_metrics.py`.
+  update `src/nexify/mining/_metrics.py`.
 
 Check `pearld` connectivity using the same RPC configuration used by mining:
 
@@ -246,8 +246,8 @@ smoke test window. Record:
 
 ```bash
 uv run jarvis mine stop
-docker ps --filter name=openjarvis-pearl-miner
-test ! -e ~/.openjarvis/runtime/mining.json
+docker ps --filter name=nexify-pearl-miner
+test ! -e ~/.nexify/runtime/mining.json
 ```
 
 Expected:
@@ -264,7 +264,7 @@ The NVIDIA provider is considered proven when all are true:
 - `mine doctor` reports supported on H100/H200.
 - `mine init` resolves/builds the Pearl image.
 - `mine start` launches the container and writes the sidecar.
-- OpenJarvis inference succeeds through `vllm-pearl-mining`.
+- nexify inference succeeds through `vllm-pearl-mining`.
 - Pearl gateway metrics are reachable and `mine status` parses them.
 - `pearld` accepts the miner's network path.
 - At least one accepted share/block is observed, or a documented Pearl
@@ -279,7 +279,7 @@ For any failure, collect:
 uv run jarvis mine doctor
 uv run jarvis mine status || true
 uv run jarvis mine logs --tail 300 || true
-docker inspect openjarvis-pearl-miner || true
+docker inspect nexify-pearl-miner || true
 curl -fsS http://127.0.0.1:8339/metrics || true
 nvidia-smi
 docker info
@@ -287,3 +287,4 @@ docker info
 
 Attach outputs to the implementation PR or follow-up issue. Do not paste
 `PEARLD_RPC_PASSWORD`, wallet seed material, or Hugging Face tokens.
+

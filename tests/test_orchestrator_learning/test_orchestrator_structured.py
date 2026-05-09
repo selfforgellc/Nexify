@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from openjarvis.agents.orchestrator import OrchestratorAgent
-from openjarvis.core.types import ToolResult
-from openjarvis.engine._stubs import InferenceEngine
-from openjarvis.tools._stubs import BaseTool, ToolSpec
+from nexify.agents.orchestrator import OrchestratorAgent
+from nexify.core.types import ToolResult
+from nexify.engine._stubs import InferenceEngine
+from nexify.tools._stubs import BaseTool, ToolSpec
 
 # -- Mocks -------------------------------------------------------------------
 
@@ -181,3 +181,4 @@ class TestParseStructuredResponse:
         assert parsed["thought"] == ""
         assert parsed["tool"] == ""
         assert parsed["final_answer"] == ""
+

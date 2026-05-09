@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from click.testing import CliRunner
 
-from openjarvis.cli import cli
+from nexify.cli import cli
 
 
 class TestWorkflowCmd:
@@ -26,3 +26,4 @@ class TestWorkflowCmd:
         assert "list" in result.output
         assert "run" in result.output
         assert "status" in result.output
+

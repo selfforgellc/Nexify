@@ -6,8 +6,8 @@ from typing import List
 
 import pytest
 
-from openjarvis.channels._stubs import BaseChannel, ChannelHandler, ChannelStatus
-from openjarvis.core.registry import ChannelRegistry
+from nexify.channels._stubs import BaseChannel, ChannelHandler, ChannelStatus
+from nexify.core.registry import ChannelRegistry
 
 
 class TestChannelRegistry:
@@ -128,3 +128,4 @@ class TestChannelRegistry:
         assert "test-ch" in ChannelRegistry.keys()
         keys_from_items = [k for k, v in ChannelRegistry.items()]
         assert "test-ch" in keys_from_items
+

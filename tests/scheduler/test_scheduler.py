@@ -8,8 +8,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.scheduler.scheduler import ScheduledTask, TaskScheduler
-from openjarvis.scheduler.store import SchedulerStore
+from nexify.scheduler.scheduler import ScheduledTask, TaskScheduler
+from nexify.scheduler.store import SchedulerStore
 
 
 @pytest.fixture()
@@ -318,3 +318,4 @@ class TestLifecycle:
 
         logs = store.get_run_logs(task.id)
         assert len(logs) >= 1
+

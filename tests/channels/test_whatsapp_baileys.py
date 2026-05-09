@@ -9,10 +9,10 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from openjarvis.channels._stubs import ChannelMessage, ChannelStatus
-from openjarvis.channels.whatsapp_baileys import WhatsAppBaileysChannel
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.registry import ChannelRegistry
+from nexify.channels._stubs import ChannelMessage, ChannelStatus
+from nexify.channels.whatsapp_baileys import WhatsAppBaileysChannel
+from nexify.core.events import EventBus, EventType
+from nexify.core.registry import ChannelRegistry
 
 
 @pytest.fixture(autouse=True)
@@ -331,3 +331,4 @@ class TestReaderLoop:
             }
         )
         bad_handler.assert_called_once()
+

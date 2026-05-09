@@ -28,13 +28,13 @@ export interface AgentEvent {
 
 // ── localStorage persistence ──────────────────────────────────────────
 
-const CONVERSATIONS_KEY = 'openjarvis-conversations';
-const SETTINGS_KEY = 'openjarvis-settings';
-const OPTIN_KEY = 'openjarvis-optin';
-const OPTIN_NAME_KEY = 'openjarvis-display-name';
-const OPTIN_EMAIL_KEY = 'openjarvis-email';
-const OPTIN_ANONID_KEY = 'openjarvis-anon-id';
-const OPTIN_SEEN_KEY = 'openjarvis-optin-seen';
+const CONVERSATIONS_KEY = 'nexify-conversations';
+const SETTINGS_KEY = 'nexify-settings';
+const OPTIN_KEY = 'nexify-optin';
+const OPTIN_NAME_KEY = 'nexify-display-name';
+const OPTIN_EMAIL_KEY = 'nexify-email';
+const OPTIN_ANONID_KEY = 'nexify-anon-id';
+const OPTIN_SEEN_KEY = 'nexify-optin-seen';
 
 interface ConversationStore {
   version: 1;
@@ -479,3 +479,4 @@ export const useAppStore = create<AppState>((set, get) => {
 });
 
 export { generateId };
+

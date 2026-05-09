@@ -8,16 +8,16 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.core.types import Trace
-from openjarvis.evals.core.types import EvalRecord
-from openjarvis.learning.optimize.personal.dataset import PersonalBenchmarkDataset
-from openjarvis.learning.optimize.personal.scorer import PersonalBenchmarkScorer
-from openjarvis.learning.optimize.personal.synthesizer import (
+from nexify.core.types import Trace
+from nexify.evals.core.types import EvalRecord
+from nexify.learning.optimize.personal.dataset import PersonalBenchmarkDataset
+from nexify.learning.optimize.personal.scorer import PersonalBenchmarkScorer
+from nexify.learning.optimize.personal.synthesizer import (
     PersonalBenchmark,
     PersonalBenchmarkSample,
     PersonalBenchmarkSynthesizer,
 )
-from openjarvis.traces.store import TraceStore
+from nexify.traces.store import TraceStore
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -390,3 +390,4 @@ class TestPersonalBenchmarkScorer:
         scorer = self._make_scorer("")
         is_correct, _ = scorer.score(self._make_record(), "4")
         assert is_correct is False
+

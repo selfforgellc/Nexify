@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import time
 
-from openjarvis.core.types import (
+from nexify.core.types import (
     Conversation,
     Message,
     ModelSpec,
@@ -101,3 +101,4 @@ class TestTelemetryRecord:
         )
         assert rec.total_tokens == 30
         assert rec.energy_joules == 0.0
+

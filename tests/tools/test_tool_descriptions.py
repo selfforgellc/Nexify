@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from openjarvis.core.types import ToolResult
-from openjarvis.tools._stubs import (
+from nexify.core.types import ToolResult
+from nexify.tools._stubs import (
     BaseTool,
     ToolSpec,
     build_tool_descriptions,
@@ -179,3 +179,4 @@ class TestBuildToolDescriptions:
         assert "Does nothing." in result
         # No Parameters section since no properties
         assert "Parameters:" not in result
+

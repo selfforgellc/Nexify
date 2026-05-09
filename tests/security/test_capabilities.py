@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.security.capabilities import (
+from nexify.security.capabilities import (
     DEFAULT_TOOL_CAPABILITIES,
     Capability,
     CapabilityPolicy,
@@ -112,3 +112,4 @@ class TestCapabilityPolicy:
         assert "file:read" in DEFAULT_TOOL_CAPABILITIES.get("file_read", [])
         assert "network:fetch" in DEFAULT_TOOL_CAPABILITIES.get("web_search", [])
         assert "code:execute" in DEFAULT_TOOL_CAPABILITIES.get("code_interpreter", [])
+

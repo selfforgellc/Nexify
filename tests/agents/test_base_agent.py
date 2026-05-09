@@ -4,15 +4,15 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from openjarvis.agents._stubs import (
+from nexify.agents._stubs import (
     AgentContext,
     AgentResult,
     BaseAgent,
     ToolUsingAgent,
 )
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import Conversation, Message, Role, ToolCall, ToolResult
-from openjarvis.tools._stubs import BaseTool, ToolSpec
+from nexify.core.events import EventBus, EventType
+from nexify.core.types import Conversation, Message, Role, ToolCall, ToolResult
+from nexify.tools._stubs import BaseTool, ToolSpec
 
 # ---------------------------------------------------------------------------
 # Concrete subclass for testing
@@ -163,11 +163,11 @@ class TestBuildMessages:
         assert messages[1].role == Role.USER
 
     def test_empty_config_default_no_system_message(self, monkeypatch):
-        from openjarvis.core.config import JarvisConfig
+        from nexify.core.config import JarvisConfig
 
         empty_cfg = JarvisConfig()
         empty_cfg.agent.default_system_prompt = ""
-        monkeypatch.setattr("openjarvis.agents._stubs.load_config", lambda: empty_cfg)
+        monkeypatch.setattr("nexify.agents._stubs.load_config", lambda: empty_cfg)
 
         engine = MagicMock()
         agent = _ConcreteAgent(engine, "m")
@@ -325,3 +325,4 @@ class TestToolUsingAgent:
 
         assert result.success is True
         confirm.assert_called_once()
+

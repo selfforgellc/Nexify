@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from openjarvis.core.types import ToolCall, ToolResult
-from openjarvis.tools._stubs import BaseTool, ToolExecutor, ToolSpec
+from nexify.core.types import ToolCall, ToolResult
+from nexify.tools._stubs import BaseTool, ToolExecutor, ToolSpec
 
 # ---------------------------------------------------------------------------
 # Test tool helpers
@@ -137,3 +137,4 @@ class TestToolConfirmation:
         assert len(received) == 1
         assert "dangerous" in received[0]
         assert "action" in received[0]
+

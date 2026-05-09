@@ -22,3 +22,4 @@ export function isProfane(text: string): boolean {
   }
   return false;
 }
+

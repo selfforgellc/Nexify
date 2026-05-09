@@ -9,16 +9,16 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from openjarvis.mcp.protocol import MCPRequest
-from openjarvis.mcp.server import MCPServer
-from openjarvis.mcp.transport import (
+from nexify.mcp.protocol import MCPRequest
+from nexify.mcp.server import MCPServer
+from nexify.mcp.transport import (
     InProcessTransport,
     SSETransport,
     StdioTransport,
     StreamableHTTPTransport,
 )
-from openjarvis.tools.calculator import CalculatorTool
-from openjarvis.tools.think import ThinkTool
+from nexify.tools.calculator import CalculatorTool
+from nexify.tools.think import ThinkTool
 
 
 @pytest.fixture
@@ -266,3 +266,4 @@ class TestStreamableHTTPTransport:
     def test_sse_transport_alias(self):
         """SSETransport should be an alias for StreamableHTTPTransport."""
         assert SSETransport is StreamableHTTPTransport
+

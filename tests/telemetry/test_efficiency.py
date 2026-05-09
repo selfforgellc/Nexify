@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.telemetry.efficiency import (
+from nexify.telemetry.efficiency import (
     EfficiencyMetrics,
     compute_efficiency,
     estimate_model_bytes_per_token,
@@ -189,3 +189,4 @@ class TestComputeEfficiency:
             tokens_per_sec=100.0,
         )
         assert m.mfu_pct == pytest.approx(m_fp16.mfu_pct)
+

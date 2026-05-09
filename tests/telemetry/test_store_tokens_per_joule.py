@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from openjarvis.core.types import TelemetryRecord
-from openjarvis.telemetry.aggregator import TelemetryAggregator
-from openjarvis.telemetry.store import TelemetryStore
+from nexify.core.types import TelemetryRecord
+from nexify.telemetry.aggregator import TelemetryAggregator
+from nexify.telemetry.store import TelemetryStore
 
 
 class TestTokensPerJouleStorage:
@@ -63,3 +63,4 @@ class TestTokensPerJouleStorage:
         assert len(stats) == 1
         assert stats[0].avg_tokens_per_joule == pytest.approx(20.0, rel=0.1)
         agg.close()
+

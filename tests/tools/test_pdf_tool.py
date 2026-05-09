@@ -6,7 +6,7 @@ import builtins
 import sys
 from unittest.mock import MagicMock
 
-from openjarvis.tools.pdf_tool import PDFExtractTool, _parse_pages
+from nexify.tools.pdf_tool import PDFExtractTool, _parse_pages
 
 
 class TestPDFExtractTool:
@@ -195,3 +195,4 @@ class TestParsePages:
 
     def test_empty_string(self):
         assert _parse_pages("", 5) == []
+

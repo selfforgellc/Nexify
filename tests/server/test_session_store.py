@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.server.session_store import SessionStore
+from nexify.server.session_store import SessionStore
 
 
 @pytest.fixture
@@ -115,3 +115,4 @@ class TestLastActiveChannel:
 
     def test_returns_none_for_unknown_user(self, store):
         assert store.get_last_active_channel("nobody") is None
+

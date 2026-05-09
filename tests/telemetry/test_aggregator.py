@@ -7,14 +7,14 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.core.types import TelemetryRecord
-from openjarvis.telemetry.aggregator import (
+from nexify.core.types import TelemetryRecord
+from nexify.telemetry.aggregator import (
     AggregatedStats,
     EngineStats,
     ModelStats,
     TelemetryAggregator,
 )
-from openjarvis.telemetry.store import TelemetryStore
+from nexify.telemetry.store import TelemetryStore
 
 
 def _make_record(
@@ -248,3 +248,4 @@ class TestDataclassDefaults:
         assert a.total_calls == 0
         assert a.per_model == []
         assert a.per_engine == []
+

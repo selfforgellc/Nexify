@@ -16,7 +16,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'OpenJarvis',
+        name: 'nexify',
         short_name: 'Jarvis',
         description: 'On-device AI assistant',
         theme_color: '#161618',
@@ -34,7 +34,7 @@ export default defineConfig({
     }),
   ],
   build: {
-    outDir: '../src/openjarvis/server/static',
+    outDir: '../src/nexify/server/static',
     emptyOutDir: true,
     minify: 'esbuild',
     rollupOptions: {
@@ -56,3 +56,4 @@ export default defineConfig({
     },
   },
 });
+

@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 from click.testing import CliRunner
 
-from openjarvis.cli import cli
+from nexify.cli import cli
 
 
 class TestConfigCmd:
@@ -208,3 +208,4 @@ temperature = 0.7
         result = CliRunner().invoke(cli, ["config", "loaded"])
         assert result.exit_code != 0
         assert "no such" in result.output.lower() or "unknown" in result.output.lower()
+

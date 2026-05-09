@@ -8,10 +8,10 @@ from typing import Iterator, List, Optional
 
 import pytest
 
-from openjarvis.connectors._stubs import BaseConnector, Document, SyncStatus
-from openjarvis.connectors.pipeline import IngestionPipeline
-from openjarvis.connectors.store import KnowledgeStore
-from openjarvis.connectors.sync_engine import SyncEngine
+from nexify.connectors._stubs import BaseConnector, Document, SyncStatus
+from nexify.connectors.pipeline import IngestionPipeline
+from nexify.connectors.store import KnowledgeStore
+from nexify.connectors.sync_engine import SyncEngine
 
 # ---------------------------------------------------------------------------
 # TimestampConnector — records the `since` value it receives
@@ -184,3 +184,4 @@ def test_incremental_only_adds_new_items(
     # The second call received a valid since datetime
     assert connector.received_since[1] is not None
     assert isinstance(connector.received_since[1], datetime)
+

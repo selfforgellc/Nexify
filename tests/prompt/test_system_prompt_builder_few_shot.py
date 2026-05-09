@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.prompt.builder import SystemPromptBuilder
+from nexify.prompt.builder import SystemPromptBuilder
 
 
 class TestSystemPromptBuilderFewShot:
@@ -35,3 +35,4 @@ class TestSystemPromptBuilderFewShot:
         )
         prompt = builder.build()
         assert "## Skill Examples" not in prompt
+

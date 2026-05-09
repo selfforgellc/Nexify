@@ -5,10 +5,10 @@ from __future__ import annotations
 import uuid
 from typing import Any, Dict, List, Optional
 
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import Message, Role
-from openjarvis.tools.storage._stubs import MemoryBackend, RetrievalResult
-from openjarvis.tools.storage.context import (
+from nexify.core.events import EventBus, EventType
+from nexify.core.types import Message, Role
+from nexify.tools.storage._stubs import MemoryBackend, RetrievalResult
+from nexify.tools.storage.context import (
     ContextConfig,
     build_context_message,
     format_context,
@@ -175,7 +175,7 @@ def test_inject_context_publishes_event():
     backend = _FakeMemory(results)
     messages = [Message(role=Role.USER, content="hello")]
 
-    import openjarvis.tools.storage.context as mod
+    import nexify.tools.storage.context as mod
 
     original = mod.get_event_bus
     mod.get_event_bus = lambda: bus
@@ -198,3 +198,4 @@ def test_inject_context_does_not_mutate_original():
     augmented = inject_context("query", messages, backend)
     assert len(messages) == original_len
     assert len(augmented) == original_len + 1
+

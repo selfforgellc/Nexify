@@ -1,8 +1,8 @@
-"""Tests for ToolTranslator — translate external tool names to OpenJarvis."""
+"""Tests for ToolTranslator — translate external tool names to nexify."""
 
 from __future__ import annotations
 
-from openjarvis.skills.tool_translator import TOOL_TRANSLATION, ToolTranslator
+from nexify.skills.tool_translator import TOOL_TRANSLATION, ToolTranslator
 
 
 class TestTranslationTable:
@@ -79,3 +79,4 @@ class TestAllowedToolsTranslation:
         translator = ToolTranslator()
         new_field, untranslated = translator.translate_allowed_tools("Bash UnknownTool")
         assert "UnknownTool" in untranslated
+

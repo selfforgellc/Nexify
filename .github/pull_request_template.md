@@ -14,3 +14,4 @@
 - [ ] New/changed public API has docstrings
 - [ ] Follows registry pattern (if adding new component)
 - [ ] Documentation updated (if applicable)
+

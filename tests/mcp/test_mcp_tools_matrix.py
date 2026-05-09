@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.mcp.client import MCPClient
-from openjarvis.mcp.server import MCPServer
-from openjarvis.mcp.transport import InProcessTransport
-from openjarvis.tools.calculator import CalculatorTool
-from openjarvis.tools.think import ThinkTool
+from nexify.mcp.client import MCPClient
+from nexify.mcp.server import MCPServer
+from nexify.mcp.transport import InProcessTransport
+from nexify.tools.calculator import CalculatorTool
+from nexify.tools.think import ThinkTool
 
 # Tool configs: (tool_class, call_arguments, expected_substring)
 _TOOL_CONFIGS = {
@@ -80,3 +80,4 @@ class TestMCPToolsMatrix:
         tools = client.list_tools()
         names = [t.name for t in tools]
         assert tool_name in names
+

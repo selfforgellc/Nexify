@@ -1,6 +1,6 @@
 """Tests for the daily_digest dataset."""
 
-from openjarvis.evals.datasets.daily_digest import DailyDigestDataset
+from nexify.evals.datasets.daily_digest import DailyDigestDataset
 
 
 def test_dataset_loads():
@@ -36,3 +36,4 @@ def test_difficulty_tiers():
     assert "easy" in subjects
     assert "medium" in subjects
     assert "hard" in subjects
+

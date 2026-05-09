@@ -13,9 +13,9 @@ try:
 except ModuleNotFoundError:
     import tomli as tomllib  # type: ignore[no-redef]
 
-from openjarvis.core.types import StepType, Trace, TraceStep
-from openjarvis.learning.agents.agent_evolver import AgentConfigEvolver
-from openjarvis.traces.store import TraceStore
+from nexify.core.types import StepType, Trace, TraceStep
+from nexify.learning.agents.agent_evolver import AgentConfigEvolver
+from nexify.traces.store import TraceStore
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -238,3 +238,4 @@ class TestAgentConfigEvolver:
             evolver.rollback("my_agent", version=999)
 
         store.close()
+

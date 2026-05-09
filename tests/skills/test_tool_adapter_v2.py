@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from openjarvis.core.types import ToolResult
-from openjarvis.skills.executor import SkillExecutor
-from openjarvis.skills.tool_adapter import SkillTool
-from openjarvis.skills.types import SkillManifest, SkillStep
-from openjarvis.tools._stubs import BaseTool, ToolExecutor, ToolSpec
+from nexify.core.types import ToolResult
+from nexify.skills.executor import SkillExecutor
+from nexify.skills.tool_adapter import SkillTool
+from nexify.skills.types import SkillManifest, SkillStep
+from nexify.tools._stubs import BaseTool, ToolExecutor, ToolSpec
 
 
 class EchoTool(BaseTool):
@@ -200,3 +200,4 @@ class TestMarkdownReturn:
         # Should not raise
         skill_tool = SkillTool(manifest, _make_executor(), skill_manager=None)
         assert skill_tool.tool_id == "skill_mgr_skill"
+

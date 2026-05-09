@@ -1,4 +1,4 @@
-"""Tests for openjarvis.learning.distillation.external_adapter."""
+"""Tests for nexify.learning.distillation.external_adapter."""
 
 from __future__ import annotations
 
@@ -6,11 +6,11 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.evals.core.types import EvalRecord
-from openjarvis.learning.distillation.external_adapter import (
+from nexify.evals.core.types import EvalRecord
+from nexify.learning.distillation.external_adapter import (
     write_external_records_as_traces,
 )
-from openjarvis.traces.store import TraceStore
+from nexify.traces.store import TraceStore
 
 
 def _fake_records(n: int) -> list[EvalRecord]:
@@ -136,3 +136,4 @@ def test_duplicate_record_ids_raise(tmp_path: Path):
     ]
     with pytest.raises(sqlite3.IntegrityError):
         write_external_records_as_traces(store, records, source_name="src")
+

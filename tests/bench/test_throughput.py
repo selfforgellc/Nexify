@@ -6,14 +6,14 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.bench.throughput import ThroughputBenchmark
-from openjarvis.core.registry import BenchmarkRegistry
+from nexify.bench.throughput import ThroughputBenchmark
+from nexify.core.registry import BenchmarkRegistry
 
 
 @pytest.fixture(autouse=True)
 def _register_throughput():
     """Re-register throughput benchmark after registry clear."""
-    from openjarvis.bench.throughput import ensure_registered
+    from nexify.bench.throughput import ensure_registered
 
     ensure_registered()
 
@@ -76,3 +76,4 @@ class TestThroughputBenchmark:
         result = b.run(engine, "test-model", num_samples=3)
         assert result.errors == 3
         assert result.metrics.get("mean_tokens_per_second", 0.0) == 0.0
+

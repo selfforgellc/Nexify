@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from openjarvis.a2a.protocol import (
+from nexify.a2a.protocol import (
     A2ARequest,
     A2AResponse,
     A2ATask,
     AgentCard,
     TaskState,
 )
-from openjarvis.a2a.server import A2AServer
-from openjarvis.core.events import EventBus, EventType
+from nexify.a2a.server import A2AServer
+from nexify.core.events import EventBus, EventType
 
 
 class TestAgentCard:
@@ -221,3 +221,4 @@ class TestA2AServer:
             }
         )
         assert response["result"]["state"] == "failed"
+

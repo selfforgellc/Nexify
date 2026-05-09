@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.telemetry.steady_state import (
+from nexify.telemetry.steady_state import (
     SteadyStateConfig,
     SteadyStateDetector,
     SteadyStateResult,
@@ -159,3 +159,4 @@ class TestSteadyStateDetector:
         detector = SteadyStateDetector(None)
         assert detector._config.warmup_samples == 5
         assert detector._config.window_size == 5
+

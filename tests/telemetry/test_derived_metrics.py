@@ -8,11 +8,11 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import Message, Role, TelemetryRecord
-from openjarvis.telemetry.aggregator import TelemetryAggregator
-from openjarvis.telemetry.instrumented_engine import InstrumentedEngine
-from openjarvis.telemetry.store import TelemetryStore
+from nexify.core.events import EventBus, EventType
+from nexify.core.types import Message, Role, TelemetryRecord
+from nexify.telemetry.aggregator import TelemetryAggregator
+from nexify.telemetry.instrumented_engine import InstrumentedEngine
+from nexify.telemetry.store import TelemetryStore
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -191,3 +191,4 @@ class TestDerivedMetricsInStore:
         assert summary.avg_throughput_per_watt > 0
         agg.close()
         store.close()
+

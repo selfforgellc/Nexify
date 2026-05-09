@@ -5,9 +5,9 @@ from __future__ import annotations
 import time
 from pathlib import Path
 
-from openjarvis.core.types import StepType, Trace, TraceStep
-from openjarvis.learning.learning_orchestrator import LearningOrchestrator
-from openjarvis.traces.store import TraceStore
+from nexify.core.types import StepType, Trace, TraceStep
+from nexify.learning.learning_orchestrator import LearningOrchestrator
+from nexify.traces.store import TraceStore
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -192,3 +192,4 @@ class TestLearningOrchestrator:
         assert "timestamp" in result
         assert isinstance(result["timestamp"], (int, float, str))
         store.close()
+

@@ -8,7 +8,7 @@ fastapi = pytest.importorskip("fastapi")
 
 from fastapi.testclient import TestClient  # noqa: E402
 
-from openjarvis.speech._stubs import TranscriptionResult  # noqa: E402
+from nexify.speech._stubs import TranscriptionResult  # noqa: E402
 
 
 @pytest.fixture
@@ -30,7 +30,7 @@ def mock_speech_backend():
 def app_with_speech(mock_speech_backend):
     from fastapi import FastAPI
 
-    from openjarvis.server.api_routes import speech_router
+    from nexify.server.api_routes import speech_router
 
     app = FastAPI()
     app.state.speech_backend = mock_speech_backend
@@ -73,7 +73,7 @@ def test_health_no_backend():
     from fastapi import FastAPI
     from fastapi.testclient import TestClient
 
-    from openjarvis.server.api_routes import speech_router
+    from nexify.server.api_routes import speech_router
 
     app = FastAPI()
     app.state.speech_backend = None
@@ -84,3 +84,4 @@ def test_health_no_backend():
     assert response.status_code == 200
     data = response.json()
     assert data["available"] is False
+

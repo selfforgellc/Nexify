@@ -9,7 +9,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.core.config import GpuInfo, HardwareInfo
+from nexify.core.config import GpuInfo, HardwareInfo
 
 
 @pytest.fixture
@@ -98,3 +98,4 @@ def sidecar_path(tmp_path: Path) -> Path:
 def written_sidecar(sidecar_path: Path, sample_sidecar_payload: dict) -> Path:
     sidecar_path.write_text(json.dumps(sample_sidecar_payload))
     return sidecar_path
+

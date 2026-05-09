@@ -1,12 +1,12 @@
 # Design Principles
 
-OpenJarvis follows a set of design principles that guide every architectural decision. These principles ensure the framework remains extensible, portable, and easy to work with.
+nexify follows a set of design principles that guide every architectural decision. These principles ensure the framework remains extensible, portable, and easy to work with.
 
 ---
 
 ## 1. Pluggable Everything
 
-Every major component in OpenJarvis is defined as an **abstract base class** (ABC) with concrete implementations registered at runtime. This means you can swap, extend, or replace any part of the system without modifying existing code.
+Every major component in nexify is defined as an **abstract base class** (ABC) with concrete implementations registered at runtime. This means you can swap, extend, or replace any part of the system without modifying existing code.
 
 ```mermaid
 graph LR
@@ -50,8 +50,8 @@ Adding a new implementation requires two things: implement the ABC and register 
 All extensible components use the **`@XRegistry.register("name")` decorator** pattern. Registration happens at import time, and no factory function or configuration file needs modification.
 
 ```python
-from openjarvis.core.registry import EngineRegistry
-from openjarvis.engine._stubs import InferenceEngine
+from nexify.core.registry import EngineRegistry
+from nexify.engine._stubs import InferenceEngine
 
 @EngineRegistry.register("my-engine")
 class MyEngine(InferenceEngine):
@@ -83,7 +83,7 @@ The `RegistryBase[T]` generic base class provides:
 
 ## 3. Offline-First
 
-OpenJarvis is designed to work **entirely without network access**. All core functionality -- inference, memory, agents, tools, telemetry -- operates locally. Cloud APIs are optional extensions, never requirements.
+nexify is designed to work **entirely without network access**. All core functionality -- inference, memory, agents, tools, telemetry -- operates locally. Cloud APIs are optional extensions, never requirements.
 
 | Feature | Offline Behavior |
 |---------|-----------------|
@@ -103,7 +103,7 @@ Cloud engines (OpenAI, Anthropic, Google) are available through the optional `cl
 
 ```python
 # This works without any network connection
-from openjarvis import Jarvis
+from nexify import Jarvis
 
 j = Jarvis(engine_key="ollama")  # Local Ollama server
 response = j.ask("Hello")
@@ -113,7 +113,7 @@ response = j.ask("Hello")
 
 ## 4. Hardware-Aware
 
-OpenJarvis **auto-detects system hardware** at startup and recommends the optimal inference engine. The `detect_hardware()` function probes:
+nexify **auto-detects system hardware** at startup and recommends the optimal inference engine. The `detect_hardware()` function probes:
 
 | Hardware | Detection Method |
 |----------|-----------------|
@@ -137,7 +137,7 @@ This recommendation is written to `config.toml` during `jarvis init` and used as
 
 ```bash
 jarvis init --force
-# Detects hardware, writes ~/.openjarvis/config.toml with:
+# Detects hardware, writes ~/.nexify/config.toml with:
 # [engine]
 # default = "vllm"  # (for A100)
 ```
@@ -189,10 +189,10 @@ jarvis telemetry export --json  # Export all records
 
 ## 6. Python-First
 
-OpenJarvis provides a **clean Python API** through the `Jarvis` class. There is no framework lock-in -- the SDK is a standard Python package with dataclass-based types and no required web framework.
+nexify provides a **clean Python API** through the `Jarvis` class. There is no framework lock-in -- the SDK is a standard Python package with dataclass-based types and no required web framework.
 
 ```python
-from openjarvis import Jarvis
+from nexify import Jarvis
 
 j = Jarvis()
 response = j.ask("Hello")
@@ -220,14 +220,14 @@ Design choices that support this principle:
 - **Dataclasses** for all structured types (`Message`, `ModelSpec`, `Trace`, etc.)
 - **Type hints** throughout the codebase
 - **No magic** -- explicit initialization, clear method signatures
-- **Optional dependencies** via extras (`openjarvis[server]`, `openjarvis[memory-colbert]`, etc.)
+- **Optional dependencies** via extras (`nexify[server]`, `nexify[memory-colbert]`, etc.)
 - **Standard packaging** with `hatchling` build backend and `uv` package manager
 
 ---
 
 ## 7. OpenAI-Compatible
 
-The API server (`jarvis serve`) implements the **OpenAI chat completions API format**, making OpenJarvis a drop-in replacement for OpenAI in existing applications.
+The API server (`jarvis serve`) implements the **OpenAI chat completions API format**, making nexify a drop-in replacement for OpenAI in existing applications.
 
 Supported endpoints:
 
@@ -253,7 +253,7 @@ curl http://localhost:8000/v1/chat/completions \
 
 Streaming responses use Server-Sent Events (SSE) with `data: [DONE]` termination, matching the OpenAI streaming protocol.
 
-Any OpenAI client library can connect to OpenJarvis:
+Any OpenAI client library can connect to nexify:
 
 ```python
 from openai import OpenAI
@@ -269,7 +269,7 @@ response = client.chat.completions.create(
 
 ## 8. Standalone
 
-OpenJarvis requires **no external services** for core functionality. Everything needed to run the system is included or uses standard system libraries.
+nexify requires **no external services** for core functionality. Everything needed to run the system is included or uses standard system libraries.
 
 | Component | Dependency |
 |-----------|-----------|
@@ -281,19 +281,20 @@ OpenJarvis requires **no external services** for core functionality. Everything 
 | CLI | `click` + `rich` |
 | Event bus | Built-in `threading` module |
 
-The only external requirement is a running inference engine (Ollama, vLLM, etc.), which is the model server itself -- not a dependency of OpenJarvis.
+The only external requirement is a running inference engine (Ollama, vLLM, etc.), which is the model server itself -- not a dependency of nexify.
 
 Optional features that require additional packages:
 
 | Feature | Extra | Packages |
 |---------|-------|----------|
-| FAISS memory | `openjarvis[memory-faiss]` | `faiss-cpu`, `sentence-transformers` |
-| ColBERT memory | `openjarvis[memory-colbert]` | `colbert-ai`, `torch` |
-| BM25 memory | `openjarvis[memory-bm25]` | `rank-bm25` |
-| API server | `openjarvis[server]` | `fastapi`, `uvicorn` |
-| Cloud inference | `openjarvis[inference-cloud]` | `openai`, `anthropic`, `google-genai` |
-| vLLM engine | `openjarvis[inference-vllm]` | `vllm` |
-| PDF ingestion | `openjarvis[memory-pdf]` | `pdfplumber` |
-| WhatsApp Baileys | `openjarvis[channel-whatsapp-baileys]` | Node.js 22+ |
+| FAISS memory | `nexify[memory-faiss]` | `faiss-cpu`, `sentence-transformers` |
+| ColBERT memory | `nexify[memory-colbert]` | `colbert-ai`, `torch` |
+| BM25 memory | `nexify[memory-bm25]` | `rank-bm25` |
+| API server | `nexify[server]` | `fastapi`, `uvicorn` |
+| Cloud inference | `nexify[inference-cloud]` | `openai`, `anthropic`, `google-genai` |
+| vLLM engine | `nexify[inference-vllm]` | `vllm` |
+| PDF ingestion | `nexify[memory-pdf]` | `pdfplumber` |
+| WhatsApp Baileys | `nexify[channel-whatsapp-baileys]` | Node.js 22+ |
 
 This design ensures that a minimal installation (`uv sync`) gives you a fully functional system with SQLite memory, local inference, and the complete CLI -- no Docker, no external databases, no cloud accounts required.
+

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.tools.storage.knowledge_graph import (
+from nexify.tools.storage.knowledge_graph import (
     Entity,
     KnowledgeGraphMemory,
     Relation,
@@ -133,3 +133,4 @@ class TestKnowledgeGraph:
         kg.add_entity(Entity(entity_id="a", entity_type="test", name="A"))
         assert kg.entity_count() == 1
         kg.close()
+

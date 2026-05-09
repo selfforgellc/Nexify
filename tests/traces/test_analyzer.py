@@ -5,9 +5,9 @@ from __future__ import annotations
 import time
 from pathlib import Path
 
-from openjarvis.core.types import StepType, Trace, TraceStep
-from openjarvis.traces.analyzer import TraceAnalyzer
-from openjarvis.traces.store import TraceStore
+from nexify.core.types import StepType, Trace, TraceStep
+from nexify.traces.analyzer import TraceAnalyzer
+from nexify.traces.store import TraceStore
 
 
 def _make_trace(
@@ -178,3 +178,4 @@ class TestTraceAnalyzer:
         long_traces = analyzer.traces_for_query_type(min_length=100)
         assert len(long_traces) == 1
         store.close()
+

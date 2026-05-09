@@ -1,1 +1,2 @@
-"""Tests for openjarvis.evals.comparison."""
+"""Tests for nexify.evals.comparison."""
+

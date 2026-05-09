@@ -8,9 +8,9 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.connectors.store import KnowledgeStore
-from openjarvis.core.registry import ToolRegistry
-from openjarvis.tools.knowledge_search import KnowledgeSearchTool
+from nexify.connectors.store import KnowledgeStore
+from nexify.core.registry import ToolRegistry
+from nexify.tools.knowledge_search import KnowledgeSearchTool
 
 # ---------------------------------------------------------------------------
 # Fixture
@@ -131,7 +131,7 @@ class TestKnowledgeSearchTool:
         plain import won't re-execute the ``@ToolRegistry.register`` decorator,
         so we explicitly reload the module.
         """
-        mod_name = "openjarvis.tools.knowledge_search"
+        mod_name = "nexify.tools.knowledge_search"
         if mod_name in sys.modules:
             importlib.reload(sys.modules[mod_name])
         else:
@@ -142,7 +142,7 @@ class TestKnowledgeSearchTool:
 
 def test_tool_uses_two_stage_retriever(tmp_path: Path) -> None:
     """KnowledgeSearchTool delegates to TwoStageRetriever when supplied."""
-    from openjarvis.connectors.retriever import TwoStageRetriever
+    from nexify.connectors.retriever import TwoStageRetriever
 
     store = KnowledgeStore(db_path=str(tmp_path / "ts_test.db"))
     store.store(
@@ -153,3 +153,4 @@ def test_tool_uses_two_stage_retriever(tmp_path: Path) -> None:
     result = tool.execute(query="deep learning")
     assert result.success
     assert result.metadata["num_results"] > 0
+

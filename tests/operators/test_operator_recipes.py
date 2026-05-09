@@ -4,12 +4,12 @@ from pathlib import Path
 
 import pytest
 
-from openjarvis.operators.loader import load_operator
+from nexify.operators.loader import load_operator
 
 _OPERATORS_DIR = (
     Path(__file__).parent.parent.parent
     / "src"
-    / "openjarvis"
+    / "nexify"
     / "recipes"
     / "data"
     / "operators"
@@ -96,3 +96,4 @@ class TestAllOperators:
         assert manifest.name
         assert manifest.tools
         assert manifest.system_prompt
+

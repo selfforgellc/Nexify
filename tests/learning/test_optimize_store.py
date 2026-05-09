@@ -1,9 +1,9 @@
-"""Tests for openjarvis.optimize.store module."""
+"""Tests for nexify.optimize.store module."""
 
 from __future__ import annotations
 
-from openjarvis.learning.optimize.store import OptimizationStore
-from openjarvis.learning.optimize.types import (
+from nexify.learning.optimize.store import OptimizationStore
+from nexify.learning.optimize.types import (
     OptimizationRun,
     SampleScore,
     SearchDimension,
@@ -466,3 +466,4 @@ class TestNewFieldsPersistence:
         assert loaded[0].sample_scores == []
         assert loaded[0].structured_feedback is None
         store.close()
+

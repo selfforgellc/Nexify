@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.learning.intelligence.orchestrator.prompt_registry import (
+from nexify.learning.intelligence.orchestrator.prompt_registry import (
     TOOL_DESCRIPTIONS,
     build_system_prompt,
 )
@@ -67,3 +67,4 @@ class TestBuildSystemPrompt:
         prompt = build_system_prompt(["calculator", "llm"])
         assert "llm" in prompt.lower()
         assert "REASONING" in prompt
+

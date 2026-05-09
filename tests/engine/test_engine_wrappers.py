@@ -8,12 +8,12 @@ from typing import Any, Dict, List
 
 import pytest
 
-from openjarvis.core.events import EventBus
-from openjarvis.core.types import Message, Role
-from openjarvis.engine._stubs import InferenceEngine, StreamChunk
-from openjarvis.engine.multi import MultiEngine
-from openjarvis.security.guardrails import GuardrailsEngine
-from openjarvis.telemetry.instrumented_engine import InstrumentedEngine
+from nexify.core.events import EventBus
+from nexify.core.types import Message, Role
+from nexify.engine._stubs import InferenceEngine, StreamChunk
+from nexify.engine.multi import MultiEngine
+from nexify.security.guardrails import GuardrailsEngine
+from nexify.telemetry.instrumented_engine import InstrumentedEngine
 
 # ---------------------------------------------------------------------------
 # Fake engine that yields predetermined StreamChunks via stream_full
@@ -140,3 +140,4 @@ async def test_multi_routes_stream_full_by_model():
         result_b.append(chunk)
 
     assert result_b[0].content == "from B"
+

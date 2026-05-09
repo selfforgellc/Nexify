@@ -6,7 +6,7 @@ import builtins
 import sys
 from unittest.mock import MagicMock
 
-from openjarvis.tools.image_tool import ImageGenerateTool
+from nexify.tools.image_tool import ImageGenerateTool
 
 
 class TestImageGenerateTool:
@@ -148,3 +148,4 @@ class TestImageGenerateTool:
         fn = tool.to_openai_function()
         assert fn["type"] == "function"
         assert fn["function"]["name"] == "image_generate"
+

@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import pytest
 
-from openjarvis.intelligence.model_catalog import register_builtin_models
-from openjarvis.learning._stubs import RoutingContext
-from openjarvis.learning.routing.router import (
+from nexify.intelligence.model_catalog import register_builtin_models
+from nexify.learning._stubs import RoutingContext
+from nexify.learning.routing.router import (
     HeuristicRouter,
     build_routing_context,
 )
@@ -225,3 +225,4 @@ class TestRouterParameterized:
             urgency=urgency,
         )
         assert router.select_model(ctx) == "qwen3:8b"
+

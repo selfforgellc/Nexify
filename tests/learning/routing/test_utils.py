@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from openjarvis.learning.routing._utils import classify_query
+from nexify.learning.routing._utils import classify_query
 
 
 class TestClassifyQuery:
@@ -25,3 +25,4 @@ class TestClassifyQuery:
     def test_general(self) -> None:
         q = "Tell me about the history of artificial intelligence research"
         assert classify_query(q) == "general"
+

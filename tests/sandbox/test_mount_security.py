@@ -6,7 +6,7 @@ import json
 
 import pytest
 
-from openjarvis.sandbox.mount_security import (
+from nexify.sandbox.mount_security import (
     DEFAULT_BLOCKED_PATTERNS,
     AllowedRoot,
     MountAllowlist,
@@ -168,3 +168,4 @@ class TestLoadMountAllowlist:
 
         al = load_mount_allowlist(str(f))
         assert al.blocked_patterns == DEFAULT_BLOCKED_PATTERNS
+

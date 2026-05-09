@@ -1,9 +1,9 @@
 # Installation
 
-OpenJarvis ships a one-line installer for macOS, Linux, and WSL2.
+nexify ships a one-line installer for macOS, Linux, and WSL2.
 
 ```bash
-curl -fsSL https://openjarvis.ai/install.sh | bash
+curl -fsSL https://nexify.ai/install.sh | bash
 ```
 
 About 3 minutes on a typical broadband connection. Type `jarvis` to start chatting.
@@ -13,13 +13,13 @@ About 3 minutes on a typical broadband connection. Type `jarvis` to start chatti
 | Phase | Step | Where |
 |---|---|---|
 | Foreground | Install `uv` (Python package manager) | `~/.cargo/bin/` or `~/.local/bin/` |
-| Foreground | Clone OpenJarvis repo | `~/.openjarvis/src/` |
-| Foreground | Create Python 3.11 venv | `~/.openjarvis/.venv/` |
+| Foreground | Clone nexify repo | `~/.nexify/src/` |
+| Foreground | Create Python 3.11 venv | `~/.nexify/.venv/` |
 | Foreground | `uv pip install -e .` (editable install) | venv |
 | Foreground | Install Ollama | system default |
 | Foreground | Start `ollama serve` | systemd-user / launchd / nohup |
 | Foreground | Pull `qwen3.5:2b` (~1.5 GB) | Ollama's model store |
-| Foreground | Write `config.toml` (auto-detected hardware + engine + model) | `~/.openjarvis/config.toml` |
+| Foreground | Write `config.toml` (auto-detected hardware + engine + model) | `~/.nexify/config.toml` |
 | Foreground | Symlink `jarvis` and `jarvis-uninstall` | `~/.local/bin/` |
 | Foreground | Add `~/.local/bin` to PATH if missing (with on-screen notice) | `~/.bashrc` or `~/.zshrc` |
 | Background | Install Rust toolchain via rustup | `~/.cargo/` |
@@ -35,7 +35,7 @@ About 3 minutes on a typical broadband connection. Type `jarvis` to start chatti
 
 ## Idempotent re-runs
 
-Re-running the curl line is safe. The installer reads `~/.openjarvis/.state/install-state.json` and skips completed steps. If your venv got nuked, re-running heals it.
+Re-running the curl line is safe. The installer reads `~/.nexify/.state/install-state.json` and skips completed steps. If your venv got nuked, re-running heals it.
 
 ## Cloud quick-path
 
@@ -60,8 +60,8 @@ Local-first remains the default when no key is in env. Precedence is OpenRouter 
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `OPENJARVIS_HOME` | `$HOME/.openjarvis` | Install location. |
-| `OPENJARVIS_REPO_URL` | `https://github.com/open-jarvis/OpenJarvis.git` | Source repo for the clone step. |
+| `nexify_HOME` | `$HOME/.nexify` | Install location. |
+| `nexify_REPO_URL` | `https://github.com/open-jarvis/nexify.git` | Source repo for the clone step. |
 
 ## Uninstall
 
@@ -69,7 +69,7 @@ Local-first remains the default when no key is in env. Precedence is OpenRouter 
 jarvis-uninstall
 ```
 
-Removes `~/.openjarvis/`, `~/.local/bin/jarvis`, and `~/.local/bin/jarvis-uninstall`. Leaves Ollama, uv, and the Rust toolchain in place (they may be used by other tools); the script prints removal hints.
+Removes `~/.nexify/`, `~/.local/bin/jarvis`, and `~/.local/bin/jarvis-uninstall`. Leaves Ollama, uv, and the Rust toolchain in place (they may be used by other tools); the script prints removal hints.
 
 ## Updating
 
@@ -96,7 +96,7 @@ jarvis doctor
 Manually retry:
 
 ```bash
-~/.openjarvis/.scripts/install-rust.sh && ~/.openjarvis/.scripts/build-extension.sh
+~/.nexify/.scripts/install-rust.sh && ~/.nexify/.scripts/build-extension.sh
 ```
 
 ### A bigger model failed to download
@@ -105,9 +105,10 @@ Check status and retry:
 
 ```bash
 jarvis doctor
-~/.openjarvis/.scripts/pull-model.sh qwen3.5:9b
+~/.nexify/.scripts/pull-model.sh qwen3.5:9b
 ```
 
 ### Behind a corporate proxy
 
 Set `HTTPS_PROXY` and `CURL_CA_BUNDLE` in your environment before running the installer.
+

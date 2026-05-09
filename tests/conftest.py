@@ -9,9 +9,9 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from openjarvis.core.config import GpuInfo, HardwareInfo
-from openjarvis.core.events import EventBus, reset_event_bus
-from openjarvis.core.registry import (
+from nexify.core.config import GpuInfo, HardwareInfo
+from nexify.core.events import EventBus, reset_event_bus
+from nexify.core.registry import (
     AgentRegistry,
     BenchmarkRegistry,
     ChannelRegistry,
@@ -285,3 +285,4 @@ def written_sidecar(sidecar_path: Path, sample_sidecar_payload: dict) -> Path:
     """A written mining sidecar JSON file; returns the path."""
     sidecar_path.write_text(json.dumps(sample_sidecar_payload))
     return sidecar_path
+

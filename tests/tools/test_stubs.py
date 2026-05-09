@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from openjarvis.core.events import EventBus, EventType
-from openjarvis.core.types import ToolCall, ToolResult
-from openjarvis.tools._stubs import BaseTool, ToolExecutor, ToolSpec
+from nexify.core.events import EventBus, EventType
+from nexify.core.types import ToolCall, ToolResult
+from nexify.tools._stubs import BaseTool, ToolExecutor, ToolSpec
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -196,3 +196,4 @@ class TestToolExecutor:
         executor = ToolExecutor([])
         assert executor.available_tools() == []
         assert executor.get_openai_tools() == []
+

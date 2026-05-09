@@ -5,10 +5,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from openjarvis.agents.executor import AgentExecutor
-from openjarvis.agents.manager import AgentManager
-from openjarvis.agents.scheduler import AgentScheduler
-from openjarvis.core.events import EventBus
+from nexify.agents.executor import AgentExecutor
+from nexify.agents.manager import AgentManager
+from nexify.agents.scheduler import AgentScheduler
+from nexify.core.events import EventBus
 from tests.agents.fake_engine import FakeEngine
 
 
@@ -36,3 +36,4 @@ class ScenarioHarness:
     engine: FakeEngine
     system: FakeSystem
     db_path: str
+

@@ -10,9 +10,9 @@ import os
 
 import pytest
 
-from openjarvis.core.registry import EngineRegistry
-from openjarvis.core.types import Message, Role
-from openjarvis.engine.cloud import CloudEngine
+from nexify.core.registry import EngineRegistry
+from nexify.core.types import Message, Role
+from nexify.engine.cloud import CloudEngine
 
 _MINIMAX_KEY = os.environ.get("MINIMAX_API_KEY", "")
 _skip_no_key = pytest.mark.skipif(
@@ -61,3 +61,4 @@ class TestMiniMaxCloudIntegration:
         assert "MiniMax-M2.7-highspeed" in models
         assert "MiniMax-M2.5" in models
         assert "MiniMax-M2.5-highspeed" in models
+
