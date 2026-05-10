@@ -12,23 +12,35 @@ import {
   Loader2,
   Rocket,
   ShieldCheck,
+  X,
 } from 'lucide-react'
 
 import {
   fetchProjectFiles,
   fetchWorkspaceProject,
+  readProjectFile,
   type NexifyProjectProfile,
   type WorkspaceFileEntry,
 } from '../lib/workspace-api'
+
+type SelectedFile = {
+  name: string
+  relativePath: string
+  sizeBytes: number
+  content: string
+}
 
 export function ProjectDetailPage() {
   const { projectId } = useParams()
   const [project, setProject] = useState<NexifyProjectProfile | null>(null)
   const [files, setFiles] = useState<WorkspaceFileEntry[]>([])
+  const [selectedFile, setSelectedFile] = useState<SelectedFile | null>(null)
   const [currentPath, setCurrentPath] = useState('.')
   const [loading, setLoading] = useState(true)
   const [filesLoading, setFilesLoading] = useState(true)
+  const [fileLoading, setFileLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [fileError, setFileError] = useState<string | null>(null)
 
   useEffect(() => {
     async function loadProject() {
@@ -61,6 +73,29 @@ export function ProjectDetailPage() {
 
     loadProject()
   }, [projectId, currentPath])
+
+  async function openFile(file: WorkspaceFileEntry) {
+    if (!projectId || file.type !== 'file') return
+
+    try {
+      setFileLoading(true)
+      setFileError(null)
+
+      const result = await readProjectFile(projectId, file.relativePath)
+
+      setSelectedFile({
+        name: result.file.name,
+        relativePath: result.file.relativePath,
+        sizeBytes: result.file.sizeBytes,
+        content: result.file.content,
+      })
+    } catch (err) {
+      console.error(err)
+      setFileError('Failed to read file safely.')
+    } finally {
+      setFileLoading(false)
+    }
+  }
 
   function goUp() {
     const parts = currentPath.split('/').filter(Boolean)
@@ -165,68 +200,132 @@ export function ProjectDetailPage() {
         </Panel>
       </div>
 
-      <div className="mt-6 rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5">
-        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-3">
-            <FileCode2 className="h-5 w-5 text-cyan-300" />
-            <h2 className="font-semibold text-white">Project Files</h2>
+      <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(420px,0.9fr)]">
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5">
+          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <FileCode2 className="h-5 w-5 text-cyan-300" />
+              <h2 className="font-semibold text-white">Project Files</h2>
+            </div>
+
+            <div className="flex items-center gap-3 text-sm">
+              <span className="text-zinc-500">Current Path:</span>
+              <span className="rounded-lg bg-zinc-900 px-2 py-1 text-zinc-300">
+                {currentPath}
+              </span>
+              {currentPath !== '.' && (
+                <button
+                  type="button"
+                  onClick={goUp}
+                  className="rounded-lg border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs text-zinc-300 transition-colors hover:border-zinc-700 hover:text-white"
+                >
+                  Up
+                </button>
+              )}
+            </div>
           </div>
 
-          <div className="flex items-center gap-3 text-sm">
-            <span className="text-zinc-500">Current Path:</span>
-            <span className="rounded-lg bg-zinc-900 px-2 py-1 text-zinc-300">
-              {currentPath}
-            </span>
-            {currentPath !== '.' && (
+          {filesLoading ? (
+            <div className="flex items-center gap-3 text-zinc-400">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Loading files...
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {files.map((file) => (
+                <button
+                  type="button"
+                  key={file.relativePath}
+                  onClick={() => {
+                    if (file.type === 'directory') {
+                      setCurrentPath(file.relativePath)
+                      setSelectedFile(null)
+                      setFileError(null)
+                    } else {
+                      openFile(file)
+                    }
+                  }}
+                  className="flex w-full items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3 text-left transition-all hover:border-zinc-700"
+                >
+                  <div className="flex items-center gap-3">
+                    {file.type === 'directory' ? (
+                      <Folder className="h-4 w-4 text-cyan-300" />
+                    ) : (
+                      <FileCode2 className="h-4 w-4 text-zinc-400" />
+                    )}
+                    <div>
+                      <div className="text-sm font-medium text-white">{file.name}</div>
+                      <div className="text-xs text-zinc-500">{file.relativePath}</div>
+                    </div>
+                  </div>
+
+                  <div className="text-right text-xs text-zinc-500">
+                    <div>{file.type}</div>
+                    {file.type === 'file' && (
+                      <div>{(file.sizeBytes / 1024).toFixed(1)} KB</div>
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5">
+          <div className="mb-4 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <Code2 className="h-5 w-5 text-cyan-300" />
+              <h2 className="font-semibold text-white">File Preview</h2>
+            </div>
+
+            {selectedFile && (
               <button
                 type="button"
-                onClick={goUp}
-                className="rounded-lg border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs text-zinc-300 transition-colors hover:border-zinc-700 hover:text-white"
+                onClick={() => {
+                  setSelectedFile(null)
+                  setFileError(null)
+                }}
+                className="rounded-lg border border-zinc-800 bg-zinc-900 p-2 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-white"
               >
-                Up
+                <X className="h-4 w-4" />
               </button>
             )}
           </div>
+
+          {fileLoading && (
+            <div className="flex items-center gap-3 text-zinc-400">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Reading file safely...
+            </div>
+          )}
+
+          {fileError && (
+            <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300">
+              {fileError}
+            </div>
+          )}
+
+          {!fileLoading && !fileError && !selectedFile && (
+            <div className="rounded-xl border border-dashed border-zinc-800 bg-zinc-900/40 p-6 text-sm text-zinc-500">
+              Select a readable file to preview it safely. Editing remains locked until approval workflows are added.
+            </div>
+          )}
+
+          {selectedFile && !fileLoading && (
+            <div>
+              <div className="mb-3 rounded-xl border border-zinc-800 bg-zinc-900/60 p-3">
+                <div className="text-sm font-medium text-white">{selectedFile.name}</div>
+                <div className="mt-1 text-xs text-zinc-500">
+                  {selectedFile.relativePath} • {(selectedFile.sizeBytes / 1024).toFixed(1)} KB
+                </div>
+              </div>
+
+              <pre className="max-h-[520px] overflow-auto rounded-xl border border-zinc-800 bg-black/40 p-4 text-xs leading-5 text-zinc-200">
+                <code>{selectedFile.content}</code>
+              </pre>
+            </div>
+          )}
         </div>
-
-        {filesLoading ? (
-          <div className="flex items-center gap-3 text-zinc-400">
-            <Loader2 className="h-4 w-4 animate-spin" />
-            Loading files...
-          </div>
-        ) : (
-          <div className="space-y-2">
-            {files.map((file) => (
-              <button
-                type="button"
-                key={file.relativePath}
-                onClick={() => {
-                  if (file.type === 'directory') setCurrentPath(file.relativePath)
-                }}
-                className="flex w-full items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3 text-left transition-all hover:border-zinc-700"
-              >
-                <div className="flex items-center gap-3">
-                  {file.type === 'directory' ? (
-                    <Folder className="h-4 w-4 text-cyan-300" />
-                  ) : (
-                    <FileCode2 className="h-4 w-4 text-zinc-400" />
-                  )}
-                  <div>
-                    <div className="text-sm font-medium text-white">{file.name}</div>
-                    <div className="text-xs text-zinc-500">{file.relativePath}</div>
-                  </div>
-                </div>
-
-                <div className="text-right text-xs text-zinc-500">
-                  <div>{file.type}</div>
-                  {file.type === 'file' && (
-                    <div>{(file.sizeBytes / 1024).toFixed(1)} KB</div>
-                  )}
-                </div>
-              </button>
-            ))}
-          </div>
-        )}
       </div>
 
       <div className="mt-6 rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5">
@@ -236,7 +335,7 @@ export function ProjectDetailPage() {
         </div>
 
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          <ActionCard title="Inspect Files" description="Browse project files safely." />
+          <ActionCard title="Inspect Files" description="Browse and preview files safely." />
           <ActionCard title="Run Build" description="Execute approved build commands." />
           <ActionCard title="Review Logs" description="Analyze errors and runtime output." />
           <ActionCard title="Deploy" description="Prepare Vercel/Render deployment flow." />
