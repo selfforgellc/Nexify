@@ -78,3 +78,22 @@ def list_project_files(project_id: str, path: str = ".") -> dict[str, Any]:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except WorkspaceError as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+
+@workspace_router.get("/projects/{project_id}/files/read")
+def read_project_file(project_id: str, path: str) -> dict[str, Any]:
+    try:
+        registry = WorkspaceRegistry()
+        project = registry.load_project(project_id)
+        browser = WorkspaceFileBrowser(project.local_path)
+
+        return {
+            "projectId": project.id,
+            "file": browser.read_file(path),
+        }
+    except ProjectNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except WorkspaceFileBrowserError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except WorkspaceError as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc

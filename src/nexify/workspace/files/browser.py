@@ -17,6 +17,24 @@ IGNORED_DIRS = {
 }
 
 MAX_FILES = 500
+MAX_READ_BYTES = 250_000
+
+ALLOWED_TEXT_EXTENSIONS = {
+    ".py",
+    ".ts",
+    ".tsx",
+    ".js",
+    ".jsx",
+    ".json",
+    ".toml",
+    ".md",
+    ".txt",
+    ".css",
+    ".html",
+    ".yml",
+    ".yaml",
+    ".env.example",
+}
 
 
 @dataclass(frozen=True)
@@ -81,9 +99,43 @@ class WorkspaceFileBrowser:
 
         return entries
 
+    def read_file(self, relative_path: str) -> dict[str, object]:
+        target = (self.project_root / relative_path).resolve()
+
+        if not self._is_inside_project(target):
+            raise WorkspaceFileBrowserError("Requested file escapes project root.")
+
+        if not target.exists():
+            raise WorkspaceFileBrowserError(f"File does not exist: {relative_path}")
+
+        if not target.is_file():
+            raise WorkspaceFileBrowserError(f"Path is not a file: {relative_path}")
+
+        if target.name in IGNORED_DIRS:
+            raise WorkspaceFileBrowserError("Requested file is ignored.")
+
+        suffix = target.suffix.lower()
+        if suffix not in ALLOWED_TEXT_EXTENSIONS and target.name not in ALLOWED_TEXT_EXTENSIONS:
+            raise WorkspaceFileBrowserError(f"File type is not allowed for reading: {suffix or target.name}")
+
+        size_bytes = target.stat().st_size
+        if size_bytes > MAX_READ_BYTES:
+            raise WorkspaceFileBrowserError(
+                f"File is too large to read safely: {size_bytes} bytes"
+            )
+
+        return {
+            "name": target.name,
+            "path": str(target),
+            "relativePath": target.relative_to(self.project_root).as_posix(),
+            "sizeBytes": size_bytes,
+            "content": target.read_text(encoding="utf-8", errors="replace"),
+        }
+
     def _is_inside_project(self, path: Path) -> bool:
         try:
             path.relative_to(self.project_root)
             return True
         except ValueError:
             return False
+
