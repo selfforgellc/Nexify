@@ -1,0 +1,31 @@
+{
+  "id": "nexify",
+  "name": "Nexify",
+  "type": "ai_software_operator",
+  "description": "SelfForge AI software operator and builder platform.",
+  "localPath": "C:\\dev\\Nexify",
+  "repoUrl": "https://github.com/selfforgellc/Nexify",
+  "branch": "frontend-rebrand",
+  "frontend": {
+    "path": "C:\\dev\\Nexify\\frontend",
+    "framework": "React + Vite + TypeScript",
+    "deployTarget": "Vercel"
+  },
+  "backend": {
+    "path": "C:\\dev\\Nexify",
+    "framework": "Python package / Nexify API server",
+    "deployTarget": "Render"
+  },
+  "ai": {
+    "provider": "Ollama",
+    "defaultModel": "nexify-coder",
+    "baseModel": "qwen2.5-coder:7b"
+  },
+  "rules": {
+    "requireApprovalBeforeWrite": true,
+    "requireApprovalBeforeShell": true,
+    "requireGitCheckpointBeforeMajorChange": true,
+    "neverExposeOllamaPublicly": true
+  },
+  "status": "active"
+}
