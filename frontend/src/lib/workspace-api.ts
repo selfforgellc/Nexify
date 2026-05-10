@@ -73,3 +73,25 @@ export async function fetchProjectFiles(
     `/api/workspace/projects/${encodeURIComponent(projectId)}/files?${query.toString()}`,
   )
 }
+
+export type WorkspaceFileReadResponse = {
+  projectId: string
+  file: {
+    name: string
+    path: string
+    relativePath: string
+    sizeBytes: number
+    content: string
+  }
+}
+
+export async function readProjectFile(
+  projectId: string,
+  path: string,
+): Promise<WorkspaceFileReadResponse> {
+  const query = new URLSearchParams({ path })
+
+  return requestJson<WorkspaceFileReadResponse>(
+    `/api/workspace/projects/${encodeURIComponent(projectId)}/files/read?${query.toString()}`,
+  )
+}
