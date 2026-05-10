@@ -48,3 +48,16 @@ export async function fetchWorkspaceProject(projectId: string): Promise<NexifyPr
 
   return data.project
 }
+export type WorkspaceFileEntry = {
+  name: string
+  path: string
+  relativePath: string
+  type: 'file' | 'directory'
+  sizeBytes: number
+}
+
+export type WorkspaceFilesResponse = {
+  projectId: string
+  path: string
+  files: WorkspaceFileEntry[]
+}
