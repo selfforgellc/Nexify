@@ -32,6 +32,7 @@
                      "frontendBuild":  "cd frontend \u0026\u0026 npm run build",
                      "frontendDev":  "cd frontend \u0026\u0026 npm run dev",
                      "backendDoctor":  "uv run nex doctor",
-                     "backendServe":  "uv run nex serve"
+                     "backendServe":  "uv run nex serve",
+                     "listRoot":  "dir"
                  }
 }
