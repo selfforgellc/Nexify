@@ -6,6 +6,8 @@ from fastapi import APIRouter, HTTPException
 
 from nexify.workspace import ProjectNotFoundError, WorkspaceError, WorkspaceRegistry
 
+from nexify.workspace.files import WorkspaceFileBrowser, WorkspaceFileBrowserError
+
 workspace_router = APIRouter(prefix="/api/workspace", tags=["workspace"])
 
 
@@ -43,5 +45,36 @@ def get_project(project_id: str) -> dict[str, Any]:
         return {"project": _project_to_response(registry.load_project(project_id))}
     except ProjectNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except WorkspaceError as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+
+@workspace_router.get("/projects/{project_id}/files")
+def list_project_files(project_id: str, path: str = ".") -> dict[str, Any]:
+    try:
+        registry = WorkspaceRegistry()
+        project = registry.load_project(project_id)
+        browser = WorkspaceFileBrowser(project.local_path)
+
+        files = [
+            {
+                "name": file.name,
+                "path": file.path,
+                "relativePath": file.relative_path,
+                "type": file.type,
+                "sizeBytes": file.size_bytes,
+            }
+            for file in browser.list_files(path)
+        ]
+
+        return {
+            "projectId": project.id,
+            "path": path,
+            "files": files,
+        }
+    except ProjectNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    except WorkspaceFileBrowserError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
     except WorkspaceError as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
