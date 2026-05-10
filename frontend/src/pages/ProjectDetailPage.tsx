@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router'
 import {
   ArrowLeft,
   Bot,
+  CheckCircle2,
   Code2,
   ExternalLink,
   FileCode2,
@@ -19,6 +20,7 @@ import {
   fetchProjectFiles,
   fetchWorkspaceProject,
   readProjectFile,
+  writeProjectFile,
   type NexifyProjectProfile,
   type WorkspaceFileEntry,
 } from '../lib/workspace-api'
@@ -35,12 +37,17 @@ export function ProjectDetailPage() {
   const [project, setProject] = useState<NexifyProjectProfile | null>(null)
   const [files, setFiles] = useState<WorkspaceFileEntry[]>([])
   const [selectedFile, setSelectedFile] = useState<SelectedFile | null>(null)
+  const [draftContent, setDraftContent] = useState('')
   const [currentPath, setCurrentPath] = useState('.')
   const [loading, setLoading] = useState(true)
   const [filesLoading, setFilesLoading] = useState(true)
   const [fileLoading, setFileLoading] = useState(false)
+  const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [fileError, setFileError] = useState<string | null>(null)
+  const [saveMessage, setSaveMessage] = useState<string | null>(null)
+
+  const hasUnsavedChanges = selectedFile !== null && draftContent !== selectedFile.content
 
   useEffect(() => {
     async function loadProject() {
@@ -80,20 +87,58 @@ export function ProjectDetailPage() {
     try {
       setFileLoading(true)
       setFileError(null)
+      setSaveMessage(null)
 
       const result = await readProjectFile(projectId, file.relativePath)
-
-      setSelectedFile({
+      const loadedFile = {
         name: result.file.name,
         relativePath: result.file.relativePath,
         sizeBytes: result.file.sizeBytes,
         content: result.file.content,
-      })
+      }
+
+      setSelectedFile(loadedFile)
+      setDraftContent(loadedFile.content)
     } catch (err) {
       console.error(err)
       setFileError('Failed to read file safely.')
     } finally {
       setFileLoading(false)
+    }
+  }
+
+  async function saveSelectedFile() {
+    if (!projectId || !selectedFile || !hasUnsavedChanges) return
+
+    const confirmed = window.confirm(
+      `Approve writing changes to ${selectedFile.relativePath}?`,
+    )
+
+    if (!confirmed) return
+
+    try {
+      setSaving(true)
+      setFileError(null)
+      setSaveMessage(null)
+
+      const result = await writeProjectFile(
+        projectId,
+        selectedFile.relativePath,
+        draftContent,
+      )
+
+      setSelectedFile({
+        ...selectedFile,
+        content: draftContent,
+        sizeBytes: result.file.sizeBytes,
+      })
+
+      setSaveMessage('File saved after explicit approval.')
+    } catch (err) {
+      console.error(err)
+      setFileError('Failed to save file safely.')
+    } finally {
+      setSaving(false)
     }
   }
 
@@ -103,6 +148,7 @@ export function ProjectDetailPage() {
       setCurrentPath('.')
       return
     }
+
     parts.pop()
     setCurrentPath(parts.join('/'))
   }
@@ -145,11 +191,13 @@ export function ProjectDetailPage() {
               <div className="rounded-2xl bg-cyan-500/10 p-3 text-cyan-300">
                 <FolderKanban className="h-6 w-6" />
               </div>
+
               <div>
                 <h1 className="text-3xl font-bold text-white">{project.name}</h1>
                 <p className="text-sm text-zinc-500">{project.type}</p>
               </div>
             </div>
+
             <p className="max-w-3xl text-zinc-300">{project.description}</p>
           </div>
 
@@ -157,6 +205,7 @@ export function ProjectDetailPage() {
             <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-300">
               {project.status}
             </span>
+
             <a
               href={project.repoUrl}
               target="_blank"
@@ -200,7 +249,7 @@ export function ProjectDetailPage() {
         </Panel>
       </div>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(420px,0.9fr)]">
+      <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(480px,0.95fr)]">
         <div className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5">
           <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
@@ -240,7 +289,9 @@ export function ProjectDetailPage() {
                     if (file.type === 'directory') {
                       setCurrentPath(file.relativePath)
                       setSelectedFile(null)
+                      setDraftContent('')
                       setFileError(null)
+                      setSaveMessage(null)
                     } else {
                       openFile(file)
                     }
@@ -275,7 +326,7 @@ export function ProjectDetailPage() {
           <div className="mb-4 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <Code2 className="h-5 w-5 text-cyan-300" />
-              <h2 className="font-semibold text-white">File Preview</h2>
+              <h2 className="font-semibold text-white">File Editor</h2>
             </div>
 
             {selectedFile && (
@@ -283,7 +334,9 @@ export function ProjectDetailPage() {
                 type="button"
                 onClick={() => {
                   setSelectedFile(null)
+                  setDraftContent('')
                   setFileError(null)
+                  setSaveMessage(null)
                 }}
                 className="rounded-lg border border-zinc-800 bg-zinc-900 p-2 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-white"
               >
@@ -300,14 +353,21 @@ export function ProjectDetailPage() {
           )}
 
           {fileError && (
-            <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300">
+            <div className="mb-4 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300">
               {fileError}
             </div>
           )}
 
-          {!fileLoading && !fileError && !selectedFile && (
+          {saveMessage && (
+            <div className="mb-4 flex items-center gap-2 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-300">
+              <CheckCircle2 className="h-4 w-4" />
+              {saveMessage}
+            </div>
+          )}
+
+          {!fileLoading && !selectedFile && (
             <div className="rounded-xl border border-dashed border-zinc-800 bg-zinc-900/40 p-6 text-sm text-zinc-500">
-              Select a readable file to preview it safely. Editing remains locked until approval workflows are added.
+              Select a readable file. Edits require explicit approval before writing.
             </div>
           )}
 
@@ -320,9 +380,44 @@ export function ProjectDetailPage() {
                 </div>
               </div>
 
-              <pre className="max-h-[520px] overflow-auto rounded-xl border border-zinc-800 bg-black/40 p-4 text-xs leading-5 text-zinc-200">
-                <code>{selectedFile.content}</code>
-              </pre>
+              <textarea
+                value={draftContent}
+                onChange={(event) => {
+                  setDraftContent(event.target.value)
+                  setSaveMessage(null)
+                }}
+                spellCheck={false}
+                className="min-h-[520px] w-full resize-y rounded-xl border border-zinc-800 bg-black/40 p-4 font-mono text-xs leading-5 text-zinc-200 outline-none transition-colors focus:border-cyan-500/40"
+              />
+
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <div className="text-xs text-zinc-500">
+                  {hasUnsavedChanges
+                    ? 'Unsaved changes pending approval.'
+                    : 'No unsaved changes.'}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    disabled={!hasUnsavedChanges || saving}
+                    onClick={() => selectedFile && setDraftContent(selectedFile.content)}
+                    className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-2 text-sm text-zinc-300 transition-colors hover:border-zinc-700 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Reset
+                  </button>
+
+                  <button
+                    type="button"
+                    disabled={!hasUnsavedChanges || saving}
+                    onClick={saveSelectedFile}
+                    className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-200 transition-colors hover:bg-cyan-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {saving && <Loader2 className="h-4 w-4 animate-spin" />}
+                    Approve Save
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>
@@ -335,7 +430,7 @@ export function ProjectDetailPage() {
         </div>
 
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          <ActionCard title="Inspect Files" description="Browse and preview files safely." />
+          <ActionCard title="Inspect Files" description="Browse, preview, and edit files safely." />
           <ActionCard title="Run Build" description="Execute approved build commands." />
           <ActionCard title="Review Logs" description="Analyze errors and runtime output." />
           <ActionCard title="Deploy" description="Prepare Vercel/Render deployment flow." />
