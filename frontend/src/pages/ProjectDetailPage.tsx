@@ -5,6 +5,8 @@ import {
   Bot,
   Code2,
   ExternalLink,
+  FileCode2,
+  Folder,
   FolderKanban,
   Github,
   Loader2,
@@ -13,14 +15,21 @@ import {
 } from 'lucide-react'
 
 import {
+  fetchProjectFiles,
   fetchWorkspaceProject,
   type NexifyProjectProfile,
+  type WorkspaceFileEntry,
 } from '../lib/workspace-api'
 
 export function ProjectDetailPage() {
   const { projectId } = useParams()
+
   const [project, setProject] = useState<NexifyProjectProfile | null>(null)
+  const [files, setFiles] = useState<WorkspaceFileEntry[]>([])
+
   const [loading, setLoading] = useState(true)
+  const [filesLoading, setFilesLoading] = useState(true)
+
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -35,13 +44,19 @@ export function ProjectDetailPage() {
         setLoading(true)
         setError(null)
 
-        const data = await fetchWorkspaceProject(projectId)
-        setProject(data)
+        const [projectData, filesData] = await Promise.all([
+          fetchWorkspaceProject(projectId),
+          fetchProjectFiles(projectId),
+        ])
+
+        setProject(projectData)
+        setFiles(filesData.files)
       } catch (err) {
         console.error(err)
-        setError('Failed to load project.')
+        setError('Failed to load project workspace.')
       } finally {
         setLoading(false)
+        setFilesLoading(false)
       }
     }
 
@@ -88,12 +103,19 @@ export function ProjectDetailPage() {
               </div>
 
               <div>
-                <h1 className="text-3xl font-bold text-white">{project.name}</h1>
-                <p className="text-sm text-zinc-500">{project.type}</p>
+                <h1 className="text-3xl font-bold text-white">
+                  {project.name}
+                </h1>
+
+                <p className="text-sm text-zinc-500">
+                  {project.type}
+                </p>
               </div>
             </div>
 
-            <p className="max-w-3xl text-zinc-300">{project.description}</p>
+            <p className="max-w-3xl text-zinc-300">
+              {project.description}
+            </p>
           </div>
 
           <div className="flex items-center gap-3">
@@ -123,11 +145,30 @@ export function ProjectDetailPage() {
           </div>
 
           <div className="space-y-4 text-sm">
-            <InfoRow label="Frontend" value={String(project.frontend.framework || 'Unknown')} />
-            <InfoRow label="Frontend Path" value={String(project.frontend.path || 'Unknown')} />
-            <InfoRow label="Backend" value={String(project.backend.framework || 'Unknown')} />
-            <InfoRow label="Backend Path" value={String(project.backend.path || 'Unknown')} />
-            <InfoRow label="Branch" value={project.branch} />
+            <InfoRow
+              label="Frontend"
+              value={String(project.frontend.framework || 'Unknown')}
+            />
+
+            <InfoRow
+              label="Frontend Path"
+              value={String(project.frontend.path || 'Unknown')}
+            />
+
+            <InfoRow
+              label="Backend"
+              value={String(project.backend.framework || 'Unknown')}
+            />
+
+            <InfoRow
+              label="Backend Path"
+              value={String(project.backend.path || 'Unknown')}
+            />
+
+            <InfoRow
+              label="Branch"
+              value={project.branch}
+            />
           </div>
         </section>
 
@@ -138,9 +179,20 @@ export function ProjectDetailPage() {
           </div>
 
           <div className="space-y-4 text-sm">
-            <InfoRow label="Provider" value={String(project.ai.provider || 'Unknown')} />
-            <InfoRow label="Default Model" value={String(project.ai.defaultModel || 'Unknown')} />
-            <InfoRow label="Base Model" value={String(project.ai.baseModel || 'Unknown')} />
+            <InfoRow
+              label="Provider"
+              value={String(project.ai.provider || 'Unknown')}
+            />
+
+            <InfoRow
+              label="Default Model"
+              value={String(project.ai.defaultModel || 'Unknown')}
+            />
+
+            <InfoRow
+              label="Base Model"
+              value={String(project.ai.baseModel || 'Unknown')}
+            />
           </div>
         </section>
 
@@ -152,9 +204,17 @@ export function ProjectDetailPage() {
 
           <div className="space-y-3 text-sm text-zinc-300">
             {Object.entries(project.rules).map(([key, value]) => (
-              <div key={key} className="flex items-center justify-between gap-4">
+              <div
+                key={key}
+                className="flex items-center justify-between gap-4"
+              >
                 <span className="text-zinc-500">{key}</span>
-                <span className={value ? 'text-emerald-300' : 'text-zinc-400'}>
+
+                <span
+                  className={
+                    value ? 'text-emerald-300' : 'text-zinc-400'
+                  }
+                >
                   {String(value)}
                 </span>
               </div>
@@ -165,38 +225,118 @@ export function ProjectDetailPage() {
 
       <div className="mt-6 rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5">
         <div className="mb-4 flex items-center gap-3">
+          <FileCode2 className="h-5 w-5 text-cyan-300" />
+          <h2 className="font-semibold text-white">Project Files</h2>
+        </div>
+
+        {filesLoading ? (
+          <div className="flex items-center gap-3 text-zinc-400">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Loading files...
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {files.map((file) => (
+              <div
+                key={file.relativePath}
+                className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3 transition-all hover:border-zinc-700"
+              >
+                <div className="flex items-center gap-3">
+                  {file.type === 'directory' ? (
+                    <Folder className="h-4 w-4 text-cyan-300" />
+                  ) : (
+                    <FileCode2 className="h-4 w-4 text-zinc-400" />
+                  )}
+
+                  <div>
+                    <div className="text-sm font-medium text-white">
+                      {file.name}
+                    </div>
+
+                    <div className="text-xs text-zinc-500">
+                      {file.relativePath}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-xs text-zinc-500">
+                  {file.type}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5">
+        <div className="mb-4 flex items-center gap-3">
           <Rocket className="h-5 w-5 text-cyan-300" />
           <h2 className="font-semibold text-white">Next Actions</h2>
         </div>
 
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          <ActionCard title="Inspect Files" description="Browse project files safely." />
-          <ActionCard title="Run Build" description="Execute approved build commands." />
-          <ActionCard title="Review Logs" description="Analyze errors and runtime output." />
-          <ActionCard title="Deploy" description="Prepare Vercel/Render deployment flow." />
+          <ActionCard
+            title="Inspect Files"
+            description="Browse project files safely."
+          />
+
+          <ActionCard
+            title="Run Build"
+            description="Execute approved build commands."
+          />
+
+          <ActionCard
+            title="Review Logs"
+            description="Analyze errors and runtime output."
+          />
+
+          <ActionCard
+            title="Deploy"
+            description="Prepare Vercel/Render deployment flow."
+          />
         </div>
       </div>
     </div>
   )
 }
 
-function InfoRow({ label, value }: { label: string; value: string }) {
+function InfoRow({
+  label,
+  value,
+}: {
+  label: string
+  value: string
+}) {
   return (
     <div>
       <div className="mb-1 text-zinc-500">{label}</div>
-      <div className="break-words text-zinc-200">{value}</div>
+
+      <div className="break-words text-zinc-200">
+        {value}
+      </div>
     </div>
   )
 }
 
-function ActionCard({ title, description }: { title: string; description: string }) {
+function ActionCard({
+  title,
+  description,
+}: {
+  title: string
+  description: string
+}) {
   return (
     <button
       type="button"
       className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-4 text-left transition-all hover:border-cyan-500/40 hover:bg-zinc-900"
     >
-      <div className="font-medium text-white">{title}</div>
-      <div className="mt-1 text-sm text-zinc-500">{description}</div>
+      <div className="font-medium text-white">
+        {title}
+      </div>
+
+      <div className="mt-1 text-sm text-zinc-500">
+        {description}
+      </div>
     </button>
   )
 }

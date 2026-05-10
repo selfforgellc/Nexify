@@ -61,3 +61,15 @@ export type WorkspaceFilesResponse = {
   path: string
   files: WorkspaceFileEntry[]
 }
+
+
+export async function fetchProjectFiles(
+  projectId: string,
+  path = '.',
+): Promise<WorkspaceFilesResponse> {
+  const query = new URLSearchParams({ path })
+
+  return requestJson<WorkspaceFilesResponse>(
+    `/api/workspace/projects/${encodeURIComponent(projectId)}/files?${query.toString()}`,
+  )
+}
