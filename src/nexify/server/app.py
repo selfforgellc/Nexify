@@ -17,6 +17,7 @@ from nexify.server.dashboard import dashboard_router
 from nexify.server.digest_routes import create_digest_router
 from nexify.server.routes import router
 from nexify.server.upload_router import router as upload_router
+from nexify.server.workspace_routes import workspace_router
 
 logger = logging.getLogger(__name__)
 
@@ -245,6 +246,7 @@ def create_app(
     app.include_router(create_digest_router())
     app.include_router(upload_router)
     include_all_routes(app)
+    app.include_router(workspace_router)
 
     # Restore SendBlue channel bindings from database on startup
     _restore_sendblue_bindings(app)
