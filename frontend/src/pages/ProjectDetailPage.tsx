@@ -23,13 +23,11 @@ import {
 
 export function ProjectDetailPage() {
   const { projectId } = useParams()
-
   const [project, setProject] = useState<NexifyProjectProfile | null>(null)
   const [files, setFiles] = useState<WorkspaceFileEntry[]>([])
-
+  const [currentPath, setCurrentPath] = useState('.')
   const [loading, setLoading] = useState(true)
   const [filesLoading, setFilesLoading] = useState(true)
-
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -42,11 +40,12 @@ export function ProjectDetailPage() {
 
       try {
         setLoading(true)
+        setFilesLoading(true)
         setError(null)
 
         const [projectData, filesData] = await Promise.all([
           fetchWorkspaceProject(projectId),
-          fetchProjectFiles(projectId),
+          fetchProjectFiles(projectId, currentPath),
         ])
 
         setProject(projectData)
@@ -61,7 +60,17 @@ export function ProjectDetailPage() {
     }
 
     loadProject()
-  }, [projectId])
+  }, [projectId, currentPath])
+
+  function goUp() {
+    const parts = currentPath.split('/').filter(Boolean)
+    if (parts.length <= 1) {
+      setCurrentPath('.')
+      return
+    }
+    parts.pop()
+    setCurrentPath(parts.join('/'))
+  }
 
   if (loading) {
     return (
@@ -101,28 +110,18 @@ export function ProjectDetailPage() {
               <div className="rounded-2xl bg-cyan-500/10 p-3 text-cyan-300">
                 <FolderKanban className="h-6 w-6" />
               </div>
-
               <div>
-                <h1 className="text-3xl font-bold text-white">
-                  {project.name}
-                </h1>
-
-                <p className="text-sm text-zinc-500">
-                  {project.type}
-                </p>
+                <h1 className="text-3xl font-bold text-white">{project.name}</h1>
+                <p className="text-sm text-zinc-500">{project.type}</p>
               </div>
             </div>
-
-            <p className="max-w-3xl text-zinc-300">
-              {project.description}
-            </p>
+            <p className="max-w-3xl text-zinc-300">{project.description}</p>
           </div>
 
           <div className="flex items-center gap-3">
             <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-300">
               {project.status}
             </span>
-
             <a
               href={project.repoUrl}
               target="_blank"
@@ -138,95 +137,56 @@ export function ProjectDetailPage() {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-3">
-        <section className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5">
-          <div className="mb-4 flex items-center gap-3">
-            <Code2 className="h-5 w-5 text-cyan-300" />
-            <h2 className="font-semibold text-white">Architecture</h2>
-          </div>
+        <Panel title="Architecture" icon={<Code2 className="h-5 w-5 text-cyan-300" />}>
+          <InfoRow label="Frontend" value={String(project.frontend.framework || 'Unknown')} />
+          <InfoRow label="Frontend Path" value={String(project.frontend.path || 'Unknown')} />
+          <InfoRow label="Backend" value={String(project.backend.framework || 'Unknown')} />
+          <InfoRow label="Backend Path" value={String(project.backend.path || 'Unknown')} />
+          <InfoRow label="Branch" value={project.branch} />
+        </Panel>
 
-          <div className="space-y-4 text-sm">
-            <InfoRow
-              label="Frontend"
-              value={String(project.frontend.framework || 'Unknown')}
-            />
+        <Panel title="AI Runtime" icon={<Bot className="h-5 w-5 text-cyan-300" />}>
+          <InfoRow label="Provider" value={String(project.ai.provider || 'Unknown')} />
+          <InfoRow label="Default Model" value={String(project.ai.defaultModel || 'Unknown')} />
+          <InfoRow label="Base Model" value={String(project.ai.baseModel || 'Unknown')} />
+        </Panel>
 
-            <InfoRow
-              label="Frontend Path"
-              value={String(project.frontend.path || 'Unknown')}
-            />
-
-            <InfoRow
-              label="Backend"
-              value={String(project.backend.framework || 'Unknown')}
-            />
-
-            <InfoRow
-              label="Backend Path"
-              value={String(project.backend.path || 'Unknown')}
-            />
-
-            <InfoRow
-              label="Branch"
-              value={project.branch}
-            />
-          </div>
-        </section>
-
-        <section className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5">
-          <div className="mb-4 flex items-center gap-3">
-            <Bot className="h-5 w-5 text-cyan-300" />
-            <h2 className="font-semibold text-white">AI Runtime</h2>
-          </div>
-
-          <div className="space-y-4 text-sm">
-            <InfoRow
-              label="Provider"
-              value={String(project.ai.provider || 'Unknown')}
-            />
-
-            <InfoRow
-              label="Default Model"
-              value={String(project.ai.defaultModel || 'Unknown')}
-            />
-
-            <InfoRow
-              label="Base Model"
-              value={String(project.ai.baseModel || 'Unknown')}
-            />
-          </div>
-        </section>
-
-        <section className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5">
-          <div className="mb-4 flex items-center gap-3">
-            <ShieldCheck className="h-5 w-5 text-cyan-300" />
-            <h2 className="font-semibold text-white">Safety Rules</h2>
-          </div>
-
+        <Panel title="Safety Rules" icon={<ShieldCheck className="h-5 w-5 text-cyan-300" />}>
           <div className="space-y-3 text-sm text-zinc-300">
             {Object.entries(project.rules).map(([key, value]) => (
-              <div
-                key={key}
-                className="flex items-center justify-between gap-4"
-              >
+              <div key={key} className="flex items-center justify-between gap-4">
                 <span className="text-zinc-500">{key}</span>
-
-                <span
-                  className={
-                    value ? 'text-emerald-300' : 'text-zinc-400'
-                  }
-                >
+                <span className={value ? 'text-emerald-300' : 'text-zinc-400'}>
                   {String(value)}
                 </span>
               </div>
             ))}
           </div>
-        </section>
+        </Panel>
       </div>
 
       <div className="mt-6 rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5">
-        <div className="mb-4 flex items-center gap-3">
-          <FileCode2 className="h-5 w-5 text-cyan-300" />
-          <h2 className="font-semibold text-white">Project Files</h2>
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
+            <FileCode2 className="h-5 w-5 text-cyan-300" />
+            <h2 className="font-semibold text-white">Project Files</h2>
+          </div>
+
+          <div className="flex items-center gap-3 text-sm">
+            <span className="text-zinc-500">Current Path:</span>
+            <span className="rounded-lg bg-zinc-900 px-2 py-1 text-zinc-300">
+              {currentPath}
+            </span>
+            {currentPath !== '.' && (
+              <button
+                type="button"
+                onClick={goUp}
+                className="rounded-lg border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs text-zinc-300 transition-colors hover:border-zinc-700 hover:text-white"
+              >
+                Up
+              </button>
+            )}
+          </div>
         </div>
 
         {filesLoading ? (
@@ -237,9 +197,13 @@ export function ProjectDetailPage() {
         ) : (
           <div className="space-y-2">
             {files.map((file) => (
-              <div
+              <button
+                type="button"
                 key={file.relativePath}
-                className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3 transition-all hover:border-zinc-700"
+                onClick={() => {
+                  if (file.type === 'directory') setCurrentPath(file.relativePath)
+                }}
+                className="flex w-full items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3 text-left transition-all hover:border-zinc-700"
               >
                 <div className="flex items-center gap-3">
                   {file.type === 'directory' ? (
@@ -247,22 +211,19 @@ export function ProjectDetailPage() {
                   ) : (
                     <FileCode2 className="h-4 w-4 text-zinc-400" />
                   )}
-
                   <div>
-                    <div className="text-sm font-medium text-white">
-                      {file.name}
-                    </div>
-
-                    <div className="text-xs text-zinc-500">
-                      {file.relativePath}
-                    </div>
+                    <div className="text-sm font-medium text-white">{file.name}</div>
+                    <div className="text-xs text-zinc-500">{file.relativePath}</div>
                   </div>
                 </div>
 
-                <div className="text-xs text-zinc-500">
-                  {file.type}
+                <div className="text-right text-xs text-zinc-500">
+                  <div>{file.type}</div>
+                  {file.type === 'file' && (
+                    <div>{(file.sizeBytes / 1024).toFixed(1)} KB</div>
+                  )}
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         )}
@@ -275,68 +236,53 @@ export function ProjectDetailPage() {
         </div>
 
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          <ActionCard
-            title="Inspect Files"
-            description="Browse project files safely."
-          />
-
-          <ActionCard
-            title="Run Build"
-            description="Execute approved build commands."
-          />
-
-          <ActionCard
-            title="Review Logs"
-            description="Analyze errors and runtime output."
-          />
-
-          <ActionCard
-            title="Deploy"
-            description="Prepare Vercel/Render deployment flow."
-          />
+          <ActionCard title="Inspect Files" description="Browse project files safely." />
+          <ActionCard title="Run Build" description="Execute approved build commands." />
+          <ActionCard title="Review Logs" description="Analyze errors and runtime output." />
+          <ActionCard title="Deploy" description="Prepare Vercel/Render deployment flow." />
         </div>
       </div>
     </div>
   )
 }
 
-function InfoRow({
-  label,
-  value,
+function Panel({
+  title,
+  icon,
+  children,
 }: {
-  label: string
-  value: string
+  title: string
+  icon: React.ReactNode
+  children: React.ReactNode
 }) {
+  return (
+    <section className="rounded-2xl border border-zinc-800 bg-zinc-950/70 p-5">
+      <div className="mb-4 flex items-center gap-3">
+        {icon}
+        <h2 className="font-semibold text-white">{title}</h2>
+      </div>
+      <div className="space-y-4 text-sm">{children}</div>
+    </section>
+  )
+}
+
+function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
       <div className="mb-1 text-zinc-500">{label}</div>
-
-      <div className="break-words text-zinc-200">
-        {value}
-      </div>
+      <div className="break-words text-zinc-200">{value}</div>
     </div>
   )
 }
 
-function ActionCard({
-  title,
-  description,
-}: {
-  title: string
-  description: string
-}) {
+function ActionCard({ title, description }: { title: string; description: string }) {
   return (
     <button
       type="button"
       className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-4 text-left transition-all hover:border-cyan-500/40 hover:bg-zinc-900"
     >
-      <div className="font-medium text-white">
-        {title}
-      </div>
-
-      <div className="mt-1 text-sm text-zinc-500">
-        {description}
-      </div>
+      <div className="font-medium text-white">{title}</div>
+      <div className="mt-1 text-sm text-zinc-500">{description}</div>
     </button>
   )
 }
