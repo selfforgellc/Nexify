@@ -97,3 +97,52 @@ def read_project_file(project_id: str, path: str) -> dict[str, Any]:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
     except WorkspaceError as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+from pydantic import BaseModel
+
+
+class FileWriteRequest(BaseModel):
+    path: str
+    content: str
+
+
+@workspace_router.post("/projects/{project_id}/files/write")
+def write_project_file(
+    project_id: str,
+    request: FileWriteRequest,
+) -> dict[str, Any]:
+    try:
+        registry = WorkspaceRegistry()
+        project = registry.load_project(project_id)
+
+        browser = WorkspaceFileBrowser(
+            project.local_path
+        )
+
+        result = browser.write_file(
+            request.path,
+            request.content,
+        )
+
+        return {
+            "projectId": project.id,
+            "file": result,
+        }
+
+    except ProjectNotFoundError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail=str(exc),
+        ) from exc
+
+    except WorkspaceFileBrowserError as exc:
+        raise HTTPException(
+            status_code=400,
+            detail=str(exc),
+        ) from exc
+
+    except WorkspaceError as exc:
+        raise HTTPException(
+            status_code=500,
+            detail=str(exc),
+        ) from exc

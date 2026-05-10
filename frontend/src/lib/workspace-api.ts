@@ -95,3 +95,41 @@ export async function readProjectFile(
     `/api/workspace/projects/${encodeURIComponent(projectId)}/files/read?${query.toString()}`,
   )
 }
+
+export type WorkspaceFileWriteResponse = {
+  projectId: string
+  file: {
+    name: string
+    relativePath: string
+    sizeBytes: number
+    previousSizeBytes: number
+    updated: boolean
+  }
+}
+
+export async function writeProjectFile(
+  projectId: string,
+  path: string,
+  content: string,
+): Promise<WorkspaceFileWriteResponse> {
+  const response = await fetch(
+    `${API_BASE}/api/workspace/projects/${encodeURIComponent(projectId)}/files/write`,
+    {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        path,
+        content,
+      }),
+    },
+  )
+
+  if (!response.ok) {
+    throw new Error(`Nexify file write failed: ${response.status} ${response.statusText}`)
+  }
+
+  return response.json() as Promise<WorkspaceFileWriteResponse>
+}

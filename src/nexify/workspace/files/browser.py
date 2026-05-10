@@ -18,6 +18,7 @@ IGNORED_DIRS = {
 
 MAX_FILES = 500
 MAX_READ_BYTES = 250_000
+MAX_WRITE_BYTES = 250_000
 
 ALLOWED_TEXT_EXTENSIONS = {
     ".py",
@@ -132,10 +133,72 @@ class WorkspaceFileBrowser:
             "content": target.read_text(encoding="utf-8", errors="replace"),
         }
 
+    def write_file(
+        self,
+        relative_path: str,
+        content: str,
+    ) -> dict[str, object]:
+        target = (self.project_root / relative_path).resolve()
+
+        if not self._is_inside_project(target):
+            raise WorkspaceFileBrowserError(
+                "Requested file escapes project root."
+            )
+
+        if not target.exists():
+            raise WorkspaceFileBrowserError(
+                f"File does not exist: {relative_path}"
+            )
+
+        if not target.is_file():
+            raise WorkspaceFileBrowserError(
+                f"Path is not a file: {relative_path}"
+            )
+
+        suffix = target.suffix.lower()
+
+        if (
+            suffix not in ALLOWED_TEXT_EXTENSIONS
+            and target.name not in ALLOWED_TEXT_EXTENSIONS
+        ):
+            raise WorkspaceFileBrowserError(
+                f"File type is not allowed for editing: {suffix or target.name}"
+            )
+
+        encoded = content.encode("utf-8")
+
+        if len(encoded) > MAX_WRITE_BYTES:
+            raise WorkspaceFileBrowserError(
+                f"Edited file exceeds safe limit: {len(encoded)} bytes"
+            )
+
+        original_content = target.read_text(
+            encoding="utf-8",
+            errors="replace",
+        )
+
+        target.write_text(
+            content,
+            encoding="utf-8",
+        )
+
+        return {
+            "name": target.name,
+            "relativePath": target.relative_to(
+                self.project_root
+            ).as_posix(),
+            "sizeBytes": len(encoded),
+            "previousSizeBytes": len(
+                original_content.encode("utf-8")
+            ),
+            "updated": True,
+        }
+
     def _is_inside_project(self, path: Path) -> bool:
         try:
             path.relative_to(self.project_root)
             return True
         except ValueError:
             return False
+
 
