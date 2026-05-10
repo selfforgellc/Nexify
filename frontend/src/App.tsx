@@ -14,6 +14,8 @@ import { Toaster } from './components/ui/sonner';
 import { useAppStore } from './lib/store';
 import { fetchModels, fetchServerInfo, fetchSavings, submitSavings, isTauri } from './lib/api';
 import { OptInModal } from './components/OptInModal';
+import { ProjectsPage } from './pages/ProjectsPage';
+import { ProjectDetailPage } from './pages/ProjectDetailPage';
 
 export default function App() {
   const [setupDone, setSetupDone] = useState(!isTauri());
@@ -178,6 +180,8 @@ export default function App() {
           <Route path="data-sources" element={<DataSourcesPage />} />
           <Route path="agents" element={<AgentsPage />} />
           <Route path="logs" element={<LogsPage />} />
+	  <Route path="projects" element={<ProjectsPage />} />
+	  <Route path="projects/:projectId" element={<ProjectDetailPage />} />
         </Route>
       </Routes>
       <Toaster position="bottom-right" />
